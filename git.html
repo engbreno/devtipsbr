@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git - DevTipsBR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container-fluid bg-modern min-vh-100 py-4">
+        <div class="container">
+            <a href="index.html" class="btn btn-secondary mb-4">
+                <i class="bi bi-arrow-left"></i> Voltar
+            </a>
+            
+            <div class="content-card">
+                <div class="content-header">
+                    <h1>
+                        <img src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" alt="Git" style="width: 40px; height: auto;" class="me-2">
+                        Git - Comandos Essenciais 🔄
+                    </h1>
+                </div>
+                
+                <div class="content-body">
+                    <h2>Configuração Inicial 🛠️</h2>
+                    
+                    <h3>Configurações do usuário</h3>
+                    <pre><code>git config --global user.name "Seu Nome"
+git config --global user.email "seuemail@exemplo.com"
+git config --global core.editor "vscode"
+git config --list # Listar configurações</code></pre>
+                    
+                    <h2>Comandos Básicos 📋</h2>
+                    
+                    <h3>Iniciar e clonar repositórios</h3>
+                    <pre><code>git init                    # Inicializar repositório
+git clone url_do_repositorio # Clonar repositório remoto
+git clone url_do_repositorio pasta_destino # Clonar para pasta específica</code></pre>
+                    
+                    <h3>Fluxo básico de commits</h3>
+                    <pre><code>git status              # Ver estado do repositório
+git add arquivo.txt     # Adicionar arquivo específico
+git add .               # Adicionar todos os arquivos modificados
+git commit -m "Mensagem do commit"
+git commit -am "Mensagem" # Adicionar modificações e commitar</code></pre>
+                    
+                    <h2>Branches e Merges 🌿</h2>
+                    
+                    <h3>Gerenciar branches</h3>
+                    <pre><code>git branch                  # Listar branches
+git branch nome_branch      # Criar nova branch
+git checkout nome_branch    # Mudar para outra branch
+git checkout -b nome_branch # Criar e mudar para nova branch
+git branch -d nome_branch   # Deletar branch
+git branch -m novo_nome     # Renomear branch atual</code></pre>
+                    
+                    <h3>Merges e rebases</h3>
+                    <pre><code>git merge branch_origem     # Mesclar branch atual com outra
+git rebase branch_origem    # Rebase da branch atual
+git cherry-pick commit_hash # Aplicar commit específico na branch atual</code></pre>
+                    
+                    <h2>Repositórios Remotos 🌐</h2>
+                    
+                    <h3>Gerenciar remotos</h3>
+                    <pre><code>git remote -v                    # Listar repositórios remotos
+git remote add origin url_remote # Adicionar remoto
+git remote remove origin         # Remover remoto
+git fetch origin                 # Buscar alterações</code></pre>
+                    
+                    <h3>Push e pull</h3>
+                    <pre><code>git pull origin branch            # Buscar e integrar mudanças
+git push origin branch            # Enviar commits para o remoto
+git push -u origin branch         # Enviar e definir upstream
+git push --force                  # Forçar push (cuidado!)
+git pull --rebase                 # Pull com rebase</code></pre>
+                    
+                    <h2>Histórico e Diferenças 🔍</h2>
+                    
+                    <h3>Ver histórico</h3>
+                    <pre><code>git log                  # Ver histórico de commits
+git log --oneline         # Visualização compacta
+git log --graph --oneline # Visualização gráfica
+git blame arquivo.txt     # Ver quem mudou cada linha</code></pre>
+                    
+                    <h3>Comparar diferenças</h3>
+                    <pre><code>git diff                  # Diferenças não staged
+git diff --staged         # Diferenças staged (prontas para commit)
+git diff branch1 branch2  # Diferenças entre branches
+git diff commit1 commit2  # Diferenças entre commits</code></pre>
+                    
+                    <h2>Desfazer Alterações 🔄</h2>
+                    
+                    <h3>Reverter mudanças</h3>
+                    <pre><code>git checkout -- arquivo.txt    # Desfazer alterações não staged
+git restore arquivo.txt         # Desfazer alterações (Git moderno)
+git reset HEAD arquivo.txt      # Remover do stage
+git reset --soft HEAD~1         # Desfazer último commit mantendo alterações
+git reset --hard HEAD~1         # Desfazer último commit removendo alterações
+git revert commit_hash          # Criar commit que reverte outro commit</code></pre>
+                    
+                    <h2>Stash e Limpeza 🧹</h2>
+                    
+                    <h3>Salvar alterações temporárias</h3>
+                    <pre><code>git stash                   # Salvar alterações
+git stash list              # Listar stashes
+git stash apply             # Aplicar último stash
+git stash apply stash@{n}   # Aplicar stash específico
+git stash drop              # Remover último stash
+git stash pop               # Aplicar e remover último stash</code></pre>
+                    
+                    <h3>Limpar arquivos</h3>
+                    <pre><code>git clean -n                # Mostrar o que seria removido
+git clean -f                # Remover arquivos não rastreados
+git clean -fd               # Remover arquivos e diretórios não rastreados</code></pre>
+                    
+                    <h2>Dicas Úteis 💡</h2>
+                    
+                    <ol>
+                        <li>Use <code>git commit --amend</code> para alterar o último commit</li>
+                        <li>Crie aliases com <code>git config --global alias.co checkout</code></li>
+                        <li>Configure <code>.gitignore</code> para excluir arquivos desnecessários</li>
+                        <li>Use <code>git reflog</code> para recuperar operações recentes</li>
+                        <li>Pratique rebase interativo com <code>git rebase -i HEAD~3</code> para organizar commits</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

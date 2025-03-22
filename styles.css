@@ -1,0 +1,319 @@
+/* Fontes */
+body {
+    font-family: 'Inter', sans-serif;
+    color: #333;
+}
+
+/* Fundo moderno */
+.bg-modern {
+    background-color: #f8f9fa;
+}
+
+/* Container principal */
+.main-card {
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Cards de tecnologia */
+.tech-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    padding: 1rem;
+    height: 100%;
+    color: #333;
+    border: 1px solid #f0f0f0;
+}
+
+.tech-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    border-color: #e0e0e0;
+}
+
+/* Ícones */
+.tech-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0.5rem;
+    object-fit: contain;
+}
+
+/* Definições específicas para os ícones quando usados como divs */
+.docker-icon {
+    width: 56px;
+    height: 56px;
+    background: url('https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png') no-repeat center center;
+    background-size: contain;
+    margin: 0 auto;
+}
+
+.dotnet-icon {
+    width: 50px;
+    height: 50px;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/7/7d/Microsoft_.NET_logo.svg') no-repeat center center;
+    background-size: contain;
+    margin: 0 auto;
+}
+
+.linux-icon {
+    width: 46px;
+    height: 46px;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg') no-repeat center center;
+    background-size: contain;
+    margin: 0 auto;
+}
+
+.windows-icon {
+    width: 46px;
+    height: 46px;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2012.svg') no-repeat center center;
+    background-size: contain;
+    margin: 0 auto;
+}
+
+.git-icon {
+    width: 46px;
+    height: 46px;
+    background: url('https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png') no-repeat center center;
+    background-size: contain;
+    margin: 0 auto;
+}
+
+.python-icon {
+    width: 46px;
+    height: 46px;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg') no-repeat center center;
+    background-size: contain;
+    margin: 0 auto;
+}
+
+.powershell-icon {
+    width: 46px;
+    height: 46px;
+    background: url('https://raw.githubusercontent.com/PowerShell/PowerShell/master/assets/ps_black_64.svg') no-repeat center center;
+    background-size: contain;
+    margin: 0 auto;
+}
+
+.nodejs-icon {
+    width: 50px;
+    height: 50px;
+    background: url('https://cdn.iconscout.com/icon/free/png-256/free-nodejs-2-226035.png') no-repeat center center;
+    background-size: contain;
+    margin: 0 auto;
+}
+
+.sql-icon {
+    width: 46px;
+    height: 46px;
+    background: url('https://www.svgrepo.com/show/331760/sql-database-generic.svg') no-repeat center center;
+    background-size: contain;
+    margin: 0 auto;
+}
+
+.aws-icon {
+    width: 52px;
+    height: 52px;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg') no-repeat center center;
+    background-size: contain;
+    margin: 0 auto;
+}
+
+.docker-compose-icon {
+    width: 48px;
+    height: 48px;
+    background: url('https://raw.githubusercontent.com/docker/compose/master/logo.png') no-repeat center center;
+    background-size: contain;
+    margin: 0 auto;
+}
+
+.kubernetes-icon {
+    width: 48px;
+    height: 48px;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg') no-repeat center center;
+    background-size: contain;
+    margin: 0 auto;
+}
+
+/* Texto BR */
+.br-text {
+    font-size: 0.5em;
+    font-weight: 700;
+    color: #009c3b; /* Verde da bandeira brasileira */
+    position: relative;
+    top: -10px;
+}
+
+/* Títulos */
+h1 {
+    font-weight: 700;
+    color: #2d3748;
+}
+
+h3 {
+    font-weight: 600;
+    color: #2d3748;
+    font-size: 1.2rem;
+}
+
+/* Conteúdo das páginas individuais */
+.content-card {
+    background-color: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.content-header {
+    background-color: #f8fafc;
+    color: #2d3748;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.content-header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.content-body {
+    padding: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.content-body h2 {
+    margin-top: 2rem;
+    margin-bottom: 1.2rem;
+    font-size: 1.5rem;
+    color: #3b82f6;
+    font-weight: 600;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+}
+
+.content-body h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    color: #4b5563;
+    font-weight: 500;
+}
+
+/* Estilo para código */
+pre {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+}
+
+code {
+    font-family: 'Consolas', 'Monaco', monospace;
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #334155;
+}
+
+pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+}
+
+/* Botão voltar */
+.btn-secondary {
+    background-color: #e2e8f0;
+    color: #334155;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1.25rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #cbd5e1;
+    color: #1e293b;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .tech-card {
+        margin-bottom: 1rem;
+    }
+    
+    .content-body {
+        padding: 1.25rem;
+    }
+}
+
+/* Cards título */
+.tech-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+}
+
+.tech-card p.small {
+    font-size: 0.8rem;
+    margin-bottom: 0;
+    line-height: 1.3;
+}
+
+/* Bandeira BR */
+.br-flag {
+    position: relative;
+    font-size: 0.45em;
+    top: -8px;
+    margin-left: 1px;
+    background: linear-gradient(135deg, #009c3b 0%, #009c3b 50%, #ffdf00 50%, #ffdf00 100%);
+    color: #002776;
+    padding: 1px 3px;
+    border-radius: 3px;
+    font-weight: 700;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+}
+
+/* Título do site */
+.site-title {
+    background-color: rgba(66, 153, 225, 0.85); /* Azul mais vivo e com transparência */
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 6px;
+    color: white;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(2px);
+}
+
+/* Letras BR */
+.br-letters {
+    position: relative;
+    font-size: 0.6em;
+    top: -8px;
+    margin-left: 1px;
+    font-weight: 700;
+}
+
+.b-letter {
+    color: #009c3b; /* Verde */
+}
+
+.r-letter {
+    color: #ffdf00; /* Amarelo */
+} 

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>.NET - DevTipsBR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container-fluid bg-modern min-vh-100 py-4">
+        <div class="container">
+            <a href="index.html" class="btn btn-secondary mb-4">
+                <i class="bi bi-arrow-left"></i> Voltar
+            </a>
+            
+            <div class="content-card">
+                <div class="content-header">
+                    <h1>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Microsoft_.NET_logo.svg" alt=".NET" style="width: 40px; height: auto;" class="me-2">
+                        .NET - Guia Rápido 🎯
+                    </h1>
+                </div>
+                
+                <div class="content-body">
+                    <h2>Criar Projetos 🆕</h2>
+                    
+                    <h3>Tipos de Projetos</h3>
+                    <pre><code>dotnet new console # Aplicação console
+dotnet new webapi # API Web
+dotnet new mvc # Aplicação MVC
+dotnet new classlib # Biblioteca de classes</code></pre>
+                    
+                    <h3>Opções comuns</h3>
+                    <pre><code>dotnet new console -n MeuProjeto # Define nome
+dotnet new webapi -o MinhaPasta # Define pasta</code></pre>
+                    
+                    <h2>Gerenciar Projetos 🛠️</h2>
+                    
+                    <h3>Comandos básicos</h3>
+                    <pre><code>dotnet build # Compilar projeto
+dotnet run # Executar projeto
+dotnet test # Executar testes
+dotnet watch run # Executar com hot-reload</code></pre>
+                    
+                    <h3>Gerenciar pacotes</h3>
+                    <pre><code>dotnet add package NomePacote
+dotnet remove package NomePacote
+dotnet restore # Restaurar dependências</code></pre>
+                    
+                    <h2>Soluções (.sln) 📁</h2>
+                    
+                    <h3>Gerenciar soluções</h3>
+                    <pre><code>dotnet new sln # Criar solução
+dotnet sln add Projeto.csproj # Adicionar projeto
+dotnet sln remove Projeto.csproj # Remover projeto</code></pre>
+                    
+                    <h2>Entity Framework Core 🗃️</h2>
+                    
+                    <h3>Comandos principais</h3>
+                    <pre><code>dotnet ef migrations add NomeMigracao
+dotnet ef database update
+dotnet ef migrations remove</code></pre>
+                    
+                    <h2>Dicas Úteis 💡</h2>
+                    
+                    <ol>
+                        <li>Use <code>dotnet new gitignore</code> para criar .gitignore</li>
+                        <li>Configure <code>launchSettings.json</code> para perfis diferentes</li>
+                        <li>Use <code>dotnet tool install</code> para ferramentas globais</li>
+                        <li>Mantenha o SDK atualizado</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

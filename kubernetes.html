@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comandos Kubernetes - DevTipsBR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container-fluid bg-modern min-vh-100 py-4">
+        <div class="container">
+            <a href="index.html" class="btn btn-secondary mb-4">
+                <i class="bi bi-arrow-left"></i> Voltar
+            </a>
+            
+            <div class="main-card p-4 p-md-5 mb-5">
+                <div class="d-flex align-items-center mb-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg" alt="Kubernetes" style="width: 46px; height: 46px;" class="me-3">
+                    <h1 class="mb-0">Comandos Kubernetes</h1>
+                </div>
+                
+                <div class="content-card">
+                    <div class="content-header">
+                        <h2><i class="bi bi-check-circle-fill"></i> Configuração Inicial</h2>
+                    </div>
+                    <div class="content-body">
+                        <p>Instalação e configuração do kubectl e acesso a clusters.</p>
+                        
+                        <pre><code># Instalar kubectl no Linux
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+# Instalar kubectl no macOS (via Homebrew)
+brew install kubectl
+
+# Verificar versão instalada
+kubectl version --client
+
+# Configurar acesso a um cluster usando arquivo kubeconfig
+kubectl --kubeconfig=/path/to/kubeconfig.yaml get nodes
+
+# Visualizar configuração atual
+kubectl config view
+
+# Mudar contexto (trocar entre clusters)
+kubectl config use-context nome-do-contexto
+
+# Verificar conexão com o cluster
+kubectl cluster-info</code></pre>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="content-header">
+                        <h2><i class="bi bi-boxes"></i> Gerenciamento de Recursos</h2>
+                    </div>
+                    <div class="content-body">
+                        <p>Comandos para gerenciar namespaces, pods, deployments e outros recursos.</p>
+                        
+                        <pre><code># Listar namespaces
+kubectl get namespaces
+
+# Criar um namespace
+kubectl create namespace meu-namespace
+
+# Listar pods em um namespace específico
+kubectl get pods -n meu-namespace
+
+# Listar deployments
+kubectl get deployments -n meu-namespace
+
+# Listar services
+kubectl get services -n meu-namespace
+
+# Listar todos os recursos em um namespace
+kubectl get all -n meu-namespace
+
+# Descrever um pod (visualizar detalhes)
+kubectl describe pod nome-do-pod -n meu-namespace
+
+# Deletar um recurso
+kubectl delete pod nome-do-pod -n meu-namespace
+kubectl delete deployment nome-do-deployment -n meu-namespace
+
+# Aplicar configuração a partir de um arquivo YAML
+kubectl apply -f meu-arquivo.yaml
+
+# Excluir configuração de um arquivo YAML
+kubectl delete -f meu-arquivo.yaml</code></pre>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="content-header">
+                        <h2><i class="bi bi-terminal"></i> Depuração e Acesso</h2>
+                    </div>
+                    <div class="content-body">
+                        <p>Comandos para logs, execução de comandos em pods e encaminhamento de portas.</p>
+                        
+                        <pre><code># Ver logs de um pod
+kubectl logs nome-do-pod -n meu-namespace
+
+# Ver logs continuamente (-f de follow)
+kubectl logs -f nome-do-pod -n meu-namespace
+
+# Ver logs de um container específico em um pod com múltiplos containers
+kubectl logs nome-do-pod -c nome-do-container -n meu-namespace
+
+# Executar comando em um pod
+kubectl exec -it nome-do-pod -n meu-namespace -- /bin/bash
+
+# Executar comando em um container específico de um pod
+kubectl exec -it nome-do-pod -c nome-do-container -n meu-namespace -- /bin/bash
+
+# Encaminhar porta local para um pod (port-forward)
+kubectl port-forward pod/nome-do-pod 8080:80 -n meu-namespace
+
+# Encaminhar porta para um serviço
+kubectl port-forward svc/nome-do-service 8080:80 -n meu-namespace
+
+# Copiar arquivo do/para o pod
+kubectl cp nome-do-pod:/caminho/arquivo.txt ./local/arquivo.txt -n meu-namespace
+kubectl cp ./local/arquivo.txt nome-do-pod:/caminho/arquivo.txt -n meu-namespace</code></pre>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="content-header">
+                        <h2><i class="bi bi-arrow-repeat"></i> Escalabilidade e Atualização</h2>
+                    </div>
+                    <div class="content-body">
+                        <p>Comandos para escalar, atualizar e reverter deployments.</p>
+                        
+                        <pre><code># Escalar um deployment
+kubectl scale deployment nome-do-deployment --replicas=3 -n meu-namespace
+
+# Atualizar imagem de um deployment
+kubectl set image deployment/nome-do-deployment container-name=nova-imagem:tag -n meu-namespace
+
+# Verificar status de rollout
+kubectl rollout status deployment/nome-do-deployment -n meu-namespace
+
+# Histórico de rollouts
+kubectl rollout history deployment/nome-do-deployment -n meu-namespace
+
+# Reverter para versão anterior
+kubectl rollout undo deployment/nome-do-deployment -n meu-namespace
+
+# Reverter para uma versão específica
+kubectl rollout undo deployment/nome-do-deployment --to-revision=2 -n meu-namespace
+
+# Pausar um rollout
+kubectl rollout pause deployment/nome-do-deployment -n meu-namespace
+
+# Retomar um rollout
+kubectl rollout resume deployment/nome-do-deployment -n meu-namespace</code></pre>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="content-header">
+                        <h2><i class="bi bi-shield-lock"></i> RBAC e Segurança</h2>
+                    </div>
+                    <div class="content-body">
+                        <p>Comandos para gerenciar permissões e papéis no cluster.</p>
+                        
+                        <pre><code># Listar roles
+kubectl get roles -n meu-namespace
+kubectl get clusterroles
+
+# Listar roleBindings
+kubectl get rolebindings -n meu-namespace
+kubectl get clusterrolebindings
+
+# Ver detalhes de uma role
+kubectl describe role nome-da-role -n meu-namespace
+
+# Criar uma serviceAccount
+kubectl create serviceaccount minha-service-account -n meu-namespace
+
+# Listar serviceAccounts
+kubectl get serviceaccounts -n meu-namespace
+
+# Criar uma role
+kubectl create role nome-da-role --verb=get,list,watch --resource=pods -n meu-namespace
+
+# Criar um roleBinding
+kubectl create rolebinding nome-do-rolebinding --role=nome-da-role --serviceaccount=meu-namespace:minha-service-account -n meu-namespace</code></pre>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="content-header">
+                        <h2><i class="bi bi-speedometer"></i> Monitoramento e Diagnóstico</h2>
+                    </div>
+                    <div class="content-body">
+                        <p>Comandos para monitorar a saúde do cluster e recursos.</p>
+                        
+                        <pre><code># Verificar uso de recursos dos nodes
+kubectl top nodes
+
+# Verificar uso de recursos dos pods
+kubectl top pods -n meu-namespace
+
+# Verificar eventos do cluster
+kubectl get events -n meu-namespace
+
+# Verificar eventos ordenados por timestamp
+kubectl get events --sort-by=.metadata.creationTimestamp -n meu-namespace
+
+# Verificar status dos componentes do cluster
+kubectl get componentstatuses
+
+# Verificar status dos nodes
+kubectl get nodes
+kubectl describe node nome-do-node
+
+# Executar diagnóstico para depuração de rede
+kubectl run test-network --image=busybox:1.28 --rm -it -- wget -O- http://service-name.namespace</code></pre>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="content-header">
+                        <h2><i class="bi bi-lightbulb"></i> Dicas Úteis</h2>
+                    </div>
+                    <div class="content-body">
+                        <p>Truques e atalhos para aumentar a produtividade com kubectl.</p>
+                        
+                        <pre><code># Usar alias para kubectl (adicione ao seu .bashrc ou .zshrc)
+alias k='kubectl'
+
+# Configurar autocomplete
+source <(kubectl completion bash) # Para bash
+source <(kubectl completion zsh) # Para zsh
+
+# Obter ajuda para comandos
+kubectl -h
+kubectl get -h
+kubectl describe -h
+
+# Usar contextos nomeados de forma mais fácil
+kubectl config set-context dev --namespace=desenvolvimento --cluster=meu-cluster --user=dev-user
+kubectl config use-context dev
+
+# Saída em formato amplo (para mais informações)
+kubectl get pods -o wide
+
+# Saída em formato YAML ou JSON
+kubectl get pod nome-do-pod -o yaml
+kubectl get pod nome-do-pod -o json
+
+# Obter apenas informações específicas usando jsonpath
+kubectl get pods -o jsonpath='{.items[*].metadata.name}'
+
+# Usar grep para filtrar resultados
+kubectl get pods | grep "string-busca"
+
+# Explicar recurso (Documentação)
+kubectl explain pods
+kubectl explain pods.spec.containers</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

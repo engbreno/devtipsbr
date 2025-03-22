@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerShell - DevTipsBR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container-fluid bg-modern min-vh-100 py-4">
+        <div class="container">
+            <a href="index.html" class="btn btn-secondary mb-4">
+                <i class="bi bi-arrow-left"></i> Voltar
+            </a>
+            
+            <div class="content-card">
+                <div class="content-header">
+                    <h1>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/PowerShell_5.0_icon.png" alt="PowerShell" style="width: 40px; height: auto;" class="me-2">
+                        PowerShell - Comandos Essenciais ⚡
+                    </h1>
+                </div>
+                
+                <div class="content-body">
+                    <h2>Conceitos Básicos 🚀</h2>
+                    
+                    <h3>Cmdlets e aliases</h3>
+                    <pre><code># Formato padrão de comandos
+Verbo-Substantivo
+
+# Exemplos de cmdlets comuns
+Get-Process
+Set-Location
+New-Item
+Remove-Item
+
+# Aliases comuns (semelhantes a comandos Linux)
+ls, dir         # Get-ChildItem
+cd              # Set-Location
+mkdir           # New-Item -ItemType Directory
+rm              # Remove-Item
+cat, type       # Get-Content</code></pre>
+                    
+                    <h3>Ajuda e descoberta</h3>
+                    <pre><code># Atualizar a documentação de ajuda
+Update-Help
+
+# Obter ajuda sobre um cmdlet
+Get-Help Get-Process
+Get-Help Get-Process -Examples
+Get-Help Get-Process -Detailed
+Get-Help Get-Process -Full
+
+# Descobrir cmdlets
+Get-Command *process*
+Get-Command -Verb Get
+Get-Command -Noun Item</code></pre>
+                    
+                    <h2>Sistema de Arquivos 📂</h2>
+                    
+                    <h3>Navegação e gerenciamento</h3>
+                    <pre><code># Listar diretório atual
+Get-ChildItem
+ls
+
+# Navegar entre pastas
+Set-Location C:\Users
+cd C:\Users
+
+# Criar pasta
+New-Item -ItemType Directory -Name "NovaPasta"
+mkdir NovaPasta
+
+# Criar arquivo
+New-Item -ItemType File -Name "arquivo.txt"
+New-Item -ItemType File -Name "arquivo.txt" -Value "Conteúdo"
+
+# Copiar arquivos/pastas
+Copy-Item arquivo.txt destino/
+Copy-Item pasta -Destination destino/ -Recurse
+
+# Mover arquivos/pastas
+Move-Item arquivo.txt destino/
+
+# Remover arquivos/pastas
+Remove-Item arquivo.txt
+Remove-Item pasta -Recurse</code></pre>
+                    
+                    <h3>Conteúdo de arquivos</h3>
+                    <pre><code># Ler arquivo
+Get-Content arquivo.txt
+cat arquivo.txt
+
+# Ler as primeiras linhas
+Get-Content arquivo.txt -Head 10
+
+# Ler as últimas linhas
+Get-Content arquivo.txt -Tail 10
+
+# Adicionar conteúdo a um arquivo
+Add-Content -Path arquivo.txt -Value "Novo conteúdo"
+
+# Sobrescrever arquivo
+Set-Content -Path arquivo.txt -Value "Novo conteúdo"</code></pre>
+                    
+                    <h2>Processos e Serviços 🖥️</h2>
+                    
+                    <h3>Gerenciar processos</h3>
+                    <pre><code># Listar processos
+Get-Process
+
+# Encontrar processo específico
+Get-Process -Name chrome
+
+# Obter detalhes de um processo
+Get-Process -Name chrome | Format-List *
+
+# Iniciar processo
+Start-Process notepad
+
+# Parar processo
+Stop-Process -Name notepad
+Stop-Process -Id 1234</code></pre>
+                    
+                    <h3>Gerenciar serviços</h3>
+                    <pre><code># Listar todos os serviços
+Get-Service
+
+# Encontrar serviço específico
+Get-Service -Name "wuauserv"  # Windows Update
+
+# Iniciar serviço
+Start-Service -Name "wuauserv"
+
+# Parar serviço
+Stop-Service -Name "wuauserv"
+
+# Verificar status
+Get-Service -Name "wuauserv" | Select-Object Name, Status</code></pre>
+                    
+                    <h2>Scripts e Funções 📝</h2>
+                    
+                    <h3>Funções básicas</h3>
+                    <pre><code># Definir função
+function Get-Saudacao {
+    param (
+        [string]$Nome = "Usuário"
+    )
+    return "Olá, $Nome!"
+}
+
+# Chamar função
+Get-Saudacao
+Get-Saudacao -Nome "Maria"</code></pre>
+                    
+                    <h3>Scripts e segurança</h3>
+                    <pre><code># Verificar política de execução
+Get-ExecutionPolicy
+
+# Alterar política de execução (requer Admin)
+Set-ExecutionPolicy RemoteSigned
+
+# Executar script
+.\MeuScript.ps1
+
+# Executar script com parâmetros
+.\MeuScript.ps1 -Parametro1 "Valor1"</code></pre>
+                    
+                    <h2>Manipulação de Dados 🧩</h2>
+                    
+                    <h3>Pipeline e formatação</h3>
+                    <pre><code># Pipeline básico
+Get-Process | Sort-Object CPU -Descending | Select-Object -First 5
+
+# Formatação de saída
+Get-Process | Format-Table Name, CPU, WorkingSet -AutoSize
+Get-Process | Format-List Name, CPU, WorkingSet
+Get-Process | Format-Wide Name -Column 4
+
+# Exportar para CSV
+Get-Process | Export-Csv -Path processos.csv
+Get-Process | Export-Csv -Path processos.csv -NoTypeInformation
+
+# Exportar para JSON
+Get-Process | ConvertTo-Json | Out-File processos.json</code></pre>
+                    
+                    <h3>Filtragem e seleção</h3>
+                    <pre><code># Filtrar objetos
+Get-Process | Where-Object { $_.CPU -gt 10 }
+Get-Service | Where-Object { $_.Status -eq "Running" }
+
+# Selecionar propriedades
+Get-Process | Select-Object Name, Id, CPU
+
+# Ordenar resultados
+Get-Process | Sort-Object CPU -Descending
+
+# Agrupar resultados
+Get-Process | Group-Object -Property Company
+
+# Medir objetos
+Get-Process | Measure-Object -Property WorkingSet -Sum -Average</code></pre>
+                    
+                    <h2>Rede e Sistema 🌐</h2>
+                    
+                    <h3>Informações de rede</h3>
+                    <pre><code># Obter configuração de IP
+Get-NetIPConfiguration
+Get-NetIPAddress
+
+# Testar conectividade
+Test-Connection google.com
+Test-NetConnection google.com -Port 443
+
+# Verificar portas abertas
+Get-NetTCPConnection | Where-Object State -eq "Established"
+
+# Obter informações de adaptador
+Get-NetAdapter</code></pre>
+                    
+                    <h3>Informações do sistema</h3>
+                    <pre><code># Obter informações do sistema
+Get-ComputerInfo
+
+# Obter versão do sistema
+$PSVersionTable
+
+# Obter informações de disco
+Get-PSDrive
+Get-Volume
+
+# Obter estatísticas de hardware
+Get-CimInstance Win32_ComputerSystem
+Get-CimInstance Win32_Processor
+Get-CimInstance Win32_OperatingSystem</code></pre>
+                    
+                    <h2>Dicas Úteis 💡</h2>
+                    
+                    <ol>
+                        <li>Use <code>$_</code> ou <code>$PSItem</code> para referenciar o objeto atual em um pipeline</li>
+                        <li>O operador <code>|</code> (pipe) conecta comandos, passando objetos, não apenas texto</li>
+                        <li>Use <code>Tab</code> para autocompletar comandos, nomes de arquivos e parâmetros</li>
+                        <li>Instale o módulo <code>PSReadLine</code> para melhorar a experiência do console</li>
+                        <li>Execute <code>$Profile</code> para ver o caminho do seu perfil de personalização</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

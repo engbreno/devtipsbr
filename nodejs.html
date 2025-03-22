@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node.js - DevTipsBR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container-fluid bg-modern min-vh-100 py-4">
+        <div class="container">
+            <a href="index.html" class="btn btn-secondary mb-4">
+                <i class="bi bi-arrow-left"></i> Voltar
+            </a>
+            
+            <div class="content-card">
+                <div class="content-header">
+                    <h1>
+                        <img src="https://nodejs.org/static/images/logo.svg" alt="Node.js" style="width: 40px; height: auto;" class="me-2">
+                        Node.js - Comandos Essenciais 🚀
+                    </h1>
+                </div>
+                
+                <div class="content-body">
+                    <h2>Instalação e Versões 📦</h2>
+                    
+                    <h3>NVM (Node Version Manager)</h3>
+                    <pre><code># Instalar NVM (Windows)
+winget install nvm-windows
+
+# Instalar NVM (Linux/Mac)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+
+# Listar versões disponíveis
+nvm list available
+
+# Instalar uma versão específica
+nvm install 20.10.0
+nvm install lts
+
+# Alternar entre versões
+nvm use 18.18.0
+nvm use lts
+
+# Exibir versão atual
+nvm current</code></pre>
+                    
+                    <h3>Node e npm</h3>
+                    <pre><code># Verificar versão do Node.js
+node -v
+
+# Verificar versão do npm
+npm -v
+
+# Atualizar npm
+npm install -g npm@latest
+
+# Executar script JavaScript
+node app.js
+node -e "console.log('Olá, Mundo!')"</code></pre>
+                    
+                    <h2>Gerenciamento de Pacotes (npm) 📚</h2>
+                    
+                    <h3>Inicialização e configuração</h3>
+                    <pre><code># Iniciar novo projeto
+npm init
+npm init -y  # Aceitar configurações padrão
+
+# Configurar npm
+npm config set init-author-name "Seu Nome"
+npm config set init-license "MIT"
+
+# Listar configurações
+npm config list</code></pre>
+                    
+                    <h3>Instalação de pacotes</h3>
+                    <pre><code># Instalar pacote como dependência
+npm install express
+npm i express
+
+# Instalar como dependência de desenvolvimento
+npm install jest --save-dev
+npm i jest -D
+
+# Instalar globalmente
+npm install -g nodemon
+
+# Instalar versão específica
+npm install express@4.18.2
+
+# Instalar todas as dependências do projeto
+npm install</code></pre>
+                    
+                    <h3>Atualização e remoção</h3>
+                    <pre><code># Verificar pacotes desatualizados
+npm outdated
+
+# Atualizar pacotes
+npm update
+npm update express
+
+# Remover pacote
+npm uninstall express
+npm un express
+
+# Remover pacote global
+npm uninstall -g nodemon</code></pre>
+                    
+                    <h3>Scripts e pacotes</h3>
+                    <pre><code># Executar script definido no package.json
+npm run dev
+npm run build
+npm start
+
+# Listar pacotes instalados
+npm list
+npm list --depth=0
+
+# Verificar vulnerabilidades
+npm audit
+npm audit fix</code></pre>
+                    
+                    <h2>Gerenciamento de Pacotes (yarn) 🧶</h2>
+                    
+                    <h3>Instalação e uso básico</h3>
+                    <pre><code># Instalar Yarn
+npm install -g yarn
+
+# Iniciar projeto
+yarn init
+yarn init -y
+
+# Instalar dependências
+yarn add express
+yarn add jest --dev
+yarn global add nodemon
+
+# Instalar todas as dependências
+yarn
+yarn install</code></pre>
+                    
+                    <h3>Atualização e remoção</h3>
+                    <pre><code># Atualizar pacotes
+yarn upgrade
+yarn upgrade express
+
+# Remover pacote
+yarn remove express
+
+# Executar scripts
+yarn dev
+yarn build
+yarn start</code></pre>
+                    
+                    <h2>Express e Desenvolvimento Web 🌐</h2>
+                    
+                    <h3>Iniciar projeto Express</h3>
+                    <pre><code># Instalar Express
+npm install express
+
+# Instalar gerador Express (opcional)
+npm install -g express-generator
+express --view=ejs meu-projeto
+
+# Dependências comuns para projetos web
+npm install express cors dotenv morgan body-parser
+npm install mongoose  # Para MongoDB
+npm install sequelize # Para SQL</code></pre>
+                    
+                    <h3>Desenvolvimento</h3>
+                    <pre><code># Instalar Nodemon (reinicia servidor automaticamente)
+npm install nodemon --save-dev
+
+# Adicionar script no package.json
+# "dev": "nodemon app.js"
+
+# Executar em desenvolvimento
+npm run dev
+
+# Instalação de template engines
+npm install ejs
+npm install pug
+npm install handlebars</code></pre>
+                    
+                    <h2>Testes e Qualidade de Código ✅</h2>
+                    
+                    <h3>Jest</h3>
+                    <pre><code># Instalar Jest
+npm install jest --save-dev
+
+# Configurar script no package.json
+# "test": "jest"
+
+# Executar testes
+npm test
+npm test -- --watch  # Modo observação
+
+# Verificar cobertura de testes
+npm test -- --coverage</code></pre>
+                    
+                    <h3>ESLint e Prettier</h3>
+                    <pre><code># Instalar ESLint
+npm install eslint --save-dev
+npx eslint --init
+
+# Instalar Prettier
+npm install prettier --save-dev
+
+# Executar verificação
+npx eslint .
+npx prettier --check .
+
+# Corrigir problemas
+npx eslint . --fix
+npx prettier --write .</code></pre>
+                    
+                    <h2>Deploy e Produção 🚀</h2>
+                    
+                    <h3>PM2 (Process Manager)</h3>
+                    <pre><code># Instalar PM2
+npm install -g pm2
+
+# Iniciar aplicação
+pm2 start app.js
+pm2 start app.js --name "api" --watch
+
+# Listar processos
+pm2 list
+
+# Monitorar processos
+pm2 monit
+
+# Reiniciar, parar e excluir
+pm2 restart app.js
+pm2 stop app.js
+pm2 delete app.js
+
+# Configurar inicialização com o sistema
+pm2 startup
+pm2 save</code></pre>
+                    
+                    <h3>Configuração de ambiente</h3>
+                    <pre><code># Instalar dotenv
+npm install dotenv
+
+# Definir variáveis de ambiente
+# Criar arquivo .env:
+# PORT=3000
+# NODE_ENV=production
+# DB_CONNECTION=mongodb://localhost:27017/meudb
+
+# Uso no código
+require('dotenv').config()
+const port = process.env.PORT || 3000</code></pre>
+                    
+                    <h2>Dicas Úteis 💡</h2>
+                    
+                    <ol>
+                        <li>Use <code>npm ci</code> em vez de <code>npm install</code> em ambientes de CI/CD para instalações mais rápidas e consistentes</li>
+                        <li>Mantenha o <code>package-lock.json</code> no controle de versão para garantir dependências consistentes</li>
+                        <li>Utilize <code>.npmrc</code> para configurações específicas do projeto</li>
+                        <li>Prefira uso de <code>const</code> e <code>let</code> em vez de <code>var</code> em JavaScript moderno</li>
+                        <li>Aplique o princípio de "uma responsabilidade por arquivo" para manter o código organizado</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

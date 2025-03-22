@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python - DevTipsBR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container-fluid bg-modern min-vh-100 py-4">
+        <div class="container">
+            <a href="index.html" class="btn btn-secondary mb-4">
+                <i class="bi bi-arrow-left"></i> Voltar
+            </a>
+            
+            <div class="content-card">
+                <div class="content-header">
+                    <h1>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python" style="width: 40px; height: auto;" class="me-2">
+                        Python - Comandos Essenciais 🐍
+                    </h1>
+                </div>
+                
+                <div class="content-body">
+                    <h2>Ambiente Virtual 🏗️</h2>
+                    
+                    <h3>Criar e ativar ambientes</h3>
+                    <pre><code># Criar ambiente virtual
+python -m venv venv
+
+# Ativar ambiente (Windows)
+venv\Scripts\activate
+
+# Ativar ambiente (Linux/MacOS)
+source venv/bin/activate
+
+# Desativar ambiente
+deactivate</code></pre>
+                    
+                    <h3>Gerenciar pacotes</h3>
+                    <pre><code># Instalar pacote
+pip install pacote
+
+# Instalar versão específica
+pip install pacote==1.0.0
+
+# Instalar múltiplos pacotes
+pip install pacote1 pacote2
+
+# Instalar a partir de requirements.txt
+pip install -r requirements.txt
+
+# Listar pacotes instalados
+pip list
+
+# Exportar para requirements.txt
+pip freeze > requirements.txt</code></pre>
+                    
+                    <h2>Linha de Comando 💻</h2>
+                    
+                    <h3>Executar scripts</h3>
+                    <pre><code># Executar script
+python script.py
+
+# Executar módulo
+python -m nome_modulo
+
+# Modo interativo
+python
+
+# Executar comando Python
+python -c "print('Hello World')"</code></pre>
+                    
+                    <h3>Opções úteis</h3>
+                    <pre><code># Verificar sintaxe sem executar
+python -m py_compile script.py
+
+# Compilar para bytecode otimizado
+python -O -m py_compile script.py
+
+# Ajuda sobre comandos
+python --help
+
+# Verificar a versão
+python --version</code></pre>
+                    
+                    <h2>IPython & Jupyter 📊</h2>
+                    
+                    <h3>Jupyter Notebook</h3>
+                    <pre><code># Instalar Jupyter
+pip install jupyter
+
+# Iniciar Jupyter Notebook
+jupyter notebook
+
+# Iniciar JupyterLab
+jupyter lab
+
+# Converter notebook para outros formatos
+jupyter nbconvert --to html notebook.ipynb</code></pre>
+                    
+                    <h3>IPython</h3>
+                    <pre><code># Instalar IPython
+pip install ipython
+
+# Iniciar IPython
+ipython
+
+# Comandos mágicos
+%time comando  # Medir tempo de execução
+%cd diretorio  # Mudar diretório
+%env           # Listar variáveis de ambiente
+%history       # Mostrar histórico de comandos</code></pre>
+                    
+                    <h2>Ferramentas Básicas 🧰</h2>
+                    
+                    <h3>pytest - Testes</h3>
+                    <pre><code># Instalar pytest
+pip install pytest
+
+# Executar todos os testes
+pytest
+
+# Executar arquivo específico
+pytest test_arquivo.py
+
+# Executar com verbose
+pytest -v
+
+# Executar com cobertura
+pytest --cov=meu_pacote</code></pre>
+                    
+                    <h3>pylint, flake8, black - Linting/Formatação</h3>
+                    <pre><code># Instalar ferramentas
+pip install pylint flake8 black
+
+# Verificar com pylint
+pylint arquivo.py
+
+# Verificar com flake8
+flake8 arquivo.py
+
+# Formatar com black
+black arquivo.py
+
+# Verificar formatação sem alterar
+black --check arquivo.py</code></pre>
+                    
+                    <h2>Django 🌐</h2>
+                    
+                    <h3>Iniciar projeto</h3>
+                    <pre><code># Instalar Django
+pip install django
+
+# Criar projeto
+django-admin startproject projeto
+
+# Criar aplicação
+python manage.py startapp aplicacao
+
+# Executar servidor de desenvolvimento
+python manage.py runserver
+
+# Criar superusuário
+python manage.py createsuperuser</code></pre>
+                    
+                    <h3>Migrações</h3>
+                    <pre><code># Criar migrações
+python manage.py makemigrations
+
+# Aplicar migrações
+python manage.py migrate
+
+# Ver SQL para migração
+python manage.py sqlmigrate app_name 0001
+
+# Verificar migrações
+python manage.py showmigrations</code></pre>
+                    
+                    <h2>Flask 🧪</h2>
+                    
+                    <h3>Iniciar aplicação</h3>
+                    <pre><code># Instalar Flask
+pip install flask
+
+# Executar aplicação em modo desenvolvimento
+export FLASK_APP=app.py
+export FLASK_ENV=development
+flask run
+
+# Windows (PowerShell)
+$env:FLASK_APP = "app.py"
+$env:FLASK_ENV = "development"
+flask run
+
+# Executar em porta específica
+flask run --port=8080</code></pre>
+                    
+                    <h2>Dicas Úteis 💡</h2>
+                    
+                    <ol>
+                        <li>Use <code>__name__ == "__main__"</code> para código executável direto</li>
+                        <li>Prefira <code>pathlib</code> ao invés de <code>os.path</code> para manipulação de caminhos</li>
+                        <li>Use <code>with</code> para gerenciar recursos (arquivos, conexões)</li>
+                        <li>Prefira List/Dict Comprehensions a loops tradicionais quando possível</li>
+                        <li>Instale <code>python-dotenv</code> para gerenciar variáveis de ambiente</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

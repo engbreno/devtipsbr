@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker - DevTipsBR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container-fluid bg-modern min-vh-100 py-4">
+        <div class="container">
+            <a href="index.html" class="btn btn-secondary mb-4">
+                <i class="bi bi-arrow-left"></i> Voltar
+            </a>
+            
+            <div class="content-card">
+                <div class="content-header">
+                    <h1>
+                        <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker" style="width: 40px; height: auto;" class="me-2">
+                        Docker - Comandos Essenciais 🐳
+                    </h1>
+                </div>
+                
+                <div class="content-body">
+                    <h2>Gerenciamento de Containers 📦</h2>
+                    
+                    <h3>Executar um container</h3>
+                    <pre><code>docker run [opções] imagem</code></pre>
+                    <ul>
+                        <li><code>-d</code>: Executar em background</li>
+                        <li><code>-p 8080:80</code>: Mapear porta 8080 do host para 80 do container</li>
+                        <li><code>--name meu-container</code>: Definir nome do container</li>
+                    </ul>
+                    
+                    <h3>Listar containers</h3>
+                    <pre><code>docker ps # containers ativos
+docker ps -a # todos os containers</code></pre>
+                    
+                    <h3>Gerenciar containers</h3>
+                    <pre><code>docker start container_id
+docker stop container_id
+docker restart container_id
+docker rm container_id # remover container</code></pre>
+                    
+                    <h2>Imagens 🖼️</h2>
+                    
+                    <h3>Gerenciar imagens</h3>
+                    <pre><code>docker images # listar imagens
+docker pull imagem # baixar imagem
+docker rmi imagem # remover imagem</code></pre>
+                    
+                    <h3>Construir imagem</h3>
+                    <pre><code>docker build -t nome-imagem .</code></pre>
+                    
+                    <h2>Docker Compose 🔧</h2>
+                    
+                    <h3>Comandos básicos</h3>
+                    <pre><code>docker-compose up -d # iniciar serviços
+docker-compose down # parar e remover
+docker-compose logs # ver logs</code></pre>
+                    
+                    <h2>Dicas Úteis 💡</h2>
+                    
+                    <ol>
+                        <li>Use <code>docker system prune</code> para limpar recursos não utilizados</li>
+                        <li>Utilize <code>docker-compose</code> para múltiplos containers</li>
+                        <li>Sempre defina tags específicas para imagens</li>
+                        <li>Use <code>.dockerignore</code> para excluir arquivos desnecessários</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

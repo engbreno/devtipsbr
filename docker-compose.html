@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Compose - DevTipsBR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container-fluid bg-modern min-vh-100 py-4">
+        <div class="container">
+            <a href="index.html" class="btn btn-secondary mb-4">
+                <i class="bi bi-arrow-left"></i> Voltar
+            </a>
+            
+            <div class="content-card">
+                <div class="content-header">
+                    <h1>
+                        <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker Compose" style="width: 40px; height: auto;" class="me-2">
+                        Docker Compose - Comandos Essenciais 🐳
+                    </h1>
+                </div>
+                
+                <div class="content-body">
+                    <h2>Conceitos Básicos 📚</h2>
+                    
+                    <h3>Instalação e verificação</h3>
+                    <pre><code># Verificar versão do Docker Compose
+docker compose version
+
+# Docker Compose V1 (legado)
+docker-compose version
+
+# Instalação no Linux (se necessário)
+sudo curl -L "https://github.com/docker/compose/releases/download/v2.20.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose</code></pre>
+                    
+                    <h3>Estrutura do arquivo Compose</h3>
+                    <pre><code># Arquivo docker-compose.yml
+version: '3.9'  # Versão da sintaxe do Docker Compose
+
+services:       # Define os serviços (contêineres)
+  web:          # Nome do serviço
+    image: nginx:latest  # Imagem a ser usada
+    ports:      # Mapeamento de portas
+      - "80:80"
+    volumes:    # Montagem de volumes
+      - ./html:/usr/share/nginx/html
+    networks:   # Redes a serem conectadas
+      - frontend
+    depends_on: # Dependências
+      - db
+  
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_PASSWORD: exemplo
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+networks:       # Define as redes
+  frontend:
+  backend:
+
+volumes:        # Define os volumes
+  db_data:</code></pre>
+                    
+                    <h2>Comandos Básicos 🛠️</h2>
+                    
+                    <h3>Iniciar e parar serviços</h3>
+                    <pre><code># Iniciar todos os serviços (primeiro plano)
+docker compose up
+
+# Iniciar todos os serviços (segundo plano)
+docker compose up -d
+
+# Iniciar serviço específico
+docker compose up -d web
+
+# Parar todos os serviços
+docker compose down
+
+# Parar e remover volumes
+docker compose down -v
+
+# Parar, remover volumes e redes
+docker compose down -v --remove-orphans
+
+# Reiniciar serviços
+docker compose restart
+
+# Reiniciar serviço específico
+docker compose restart web</code></pre>
+                    
+                    <h3>Verificar status</h3>
+                    <pre><code># Listar serviços e status
+docker compose ps
+
+# Ver logs de todos os serviços
+docker compose logs
+
+# Ver logs em tempo real
+docker compose logs -f
+
+# Ver logs de serviço específico
+docker compose logs web
+
+# Ver uso de recursos
+docker compose top</code></pre>
+                    
+                    <h2>Gerenciamento de Serviços 🔄</h2>
+                    
+                    <h3>Execução de comandos</h3>
+                    <pre><code># Executar comando em um serviço
+docker compose exec web ls -la
+
+# Executar comando com usuário específico
+docker compose exec -u root web bash
+
+# Executar comando em nova instância do serviço
+docker compose run web npm test
+
+# Executar comando sem iniciar dependências
+docker compose run --no-deps web npm lint</code></pre>
+                    
+                    <h3>Escalar serviços</h3>
+                    <pre><code># Escalar serviço para múltiplas instâncias
+docker compose up -d --scale web=3
+
+# Verificar serviços escalados
+docker compose ps</code></pre>
+                    
+                    <h2>Construção e Imagens 🏗️</h2>
+                    
+                    <h3>Construir imagens</h3>
+                    <pre><code># Construir todas as imagens
+docker compose build
+
+# Construir imagem específica
+docker compose build web
+
+# Construir sem cache
+docker compose build --no-cache
+
+# Construir e iniciar
+docker compose up --build -d</code></pre>
+                    
+                    <h3>Gerenciar imagens</h3>
+                    <pre><code># Listar imagens utilizadas
+docker compose images
+
+# Forçar recreação de contêineres
+docker compose up -d --force-recreate
+
+# Remover imagens órfãs
+docker compose down --rmi local</code></pre>
+                    
+                    <h2>Configuração Avançada 🔧</h2>
+                    
+                    <h3>Múltiplos arquivos Compose</h3>
+                    <pre><code># Usando múltiplos arquivos
+docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+
+# Sobrescrever configurações específicas do ambiente
+docker compose -f docker-compose.yml -f docker-compose.override.yml up -d</code></pre>
+                    
+                    <h3>Variáveis de ambiente</h3>
+                    <pre><code># Definir variáveis de ambiente
+docker compose -f docker-compose.yml -e POSTGRES_VERSION=13 up -d
+
+# Usar arquivo .env
+# Criar arquivo .env na mesma pasta do docker-compose.yml
+# DB_VERSION=13
+# WEB_PORT=8080
+# 
+# No docker-compose.yml:
+# services:
+#   db:
+#     image: postgres:${DB_VERSION}
+#   web:
+#     ports:
+#       - "${WEB_PORT}:80"</code></pre>
+                    
+                    <h2>Redes e Volumes 🌐</h2>
+                    
+                    <h3>Gerenciamento de redes</h3>
+                    <pre><code># Listar redes
+docker compose network ls
+
+# Inspecionar rede
+docker compose network inspect frontend
+
+# Criar redes externas (no arquivo docker-compose.yml)
+# networks:
+#   frontend:
+#     external: true
+#     name: existing_network</code></pre>
+                    
+                    <h3>Gerenciamento de volumes</h3>
+                    <pre><code># Listar volumes
+docker compose volume ls
+
+# Inspecionar volume
+docker compose volume inspect db_data
+
+# Remover volumes não utilizados
+docker volume prune
+
+# Configurar volumes externos (no arquivo docker-compose.yml)
+# volumes:
+#   db_data:
+#     external: true
+#     name: existing_volume</code></pre>
+                    
+                    <h2>Casos de Uso Comuns 🚀</h2>
+                    
+                    <h3>Stack de desenvolvimento web</h3>
+                    <pre><code># Exemplo de stack LEMP (Linux, Nginx, MySQL, PHP)
+version: '3.9'
+
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./app:/var/www/html
+    depends_on:
+      - php
+    networks:
+      - frontend
+
+  php:
+    build: ./php
+    volumes:
+      - ./app:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - frontend
+      - backend
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: secretpassword
+      MYSQL_DATABASE: myapp
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - backend
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+    depends_on:
+      - db
+    networks:
+      - backend
+
+networks:
+  frontend:
+  backend:
+
+volumes:
+  db_data:</code></pre>
+                    
+                    <h3>Stack de aplicação com proxy reverso</h3>
+                    <pre><code># Exemplo de aplicação com Traefik como proxy reverso
+version: '3.9'
+
+services:
+  traefik:
+    image: traefik:v2.9
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.yml:/etc/traefik/traefik.yml
+      - ./acme.json:/acme.json
+    networks:
+      - traefik-net
+
+  app1:
+    image: nginx
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.app1.rule=Host(`app1.localhost`)"
+    networks:
+      - traefik-net
+
+  app2:
+    image: nginx
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.app2.rule=Host(`app2.localhost`)"
+    networks:
+      - traefik-net
+
+networks:
+  traefik-net:</code></pre>
+                    
+                    <h2>Boas Práticas 💡</h2>
+                    
+                    <ol>
+                        <li>Utilize <code>healthchecks</code> para garantir que os serviços estejam prontos:</li>
+                    </ol>
+                    
+                    <pre><code>services:
+  web:
+    image: nginx
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s</code></pre>
+                    
+                    <ol start="2">
+                        <li>Separe configurações de desenvolvimento e produção:</li>
+                    </ol>
+                    
+                    <pre><code># Base (docker-compose.yml)
+version: '3.9'
+services:
+  app:
+    build: .
+    restart: unless-stopped
+
+# Desenvolvimento (docker-compose.override.yml - aplicado automaticamente)
+services:
+  app:
+    volumes:
+      - ./app:/app
+    environment:
+      - DEBUG=true
+
+# Produção (docker-compose.prod.yml)
+services:
+  app:
+    environment:
+      - DEBUG=false</code></pre>
+                    
+                    <ol start="3">
+                        <li>Defina limites de recursos para evitar problemas de desempenho:</li>
+                    </ol>
+                    
+                    <pre><code>services:
+  app:
+    image: myapp
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M</code></pre>
+                    
+                    <ol start="4">
+                        <li>Use secrets para dados sensíveis (Docker Swarm):</li>
+                    </ol>
+                    
+                    <pre><code>services:
+  db:
+    image: postgres
+    secrets:
+      - db_password
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+
+secrets:
+  db_password:
+    file: ./secrets/db_password.txt</code></pre>
+                    
+                    <ol start="5">
+                        <li>Configure políticas de reinicialização para serviços essenciais:</li>
+                    </ol>
+                    
+                    <pre><code>services:
+  db:
+    image: postgres
+    restart: always  # Outras opções: no, on-failure, unless-stopped</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
