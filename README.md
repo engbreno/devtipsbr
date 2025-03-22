@@ -44,14 +44,6 @@ DevTipsBR é uma aplicação web simples que agrupa dicas e comandos úteis para
 4. Coloque o arquivo `config.json` na pasta raiz do projeto
 5. Recarregue a página inicial para ver apenas as tecnologias selecionadas
 
-## Configurações de Imagens
-
-As imagens das tecnologias estão armazenadas na pasta `img/`. Se você precisar baixar as imagens novamente, execute o script PowerShell fornecido:
-
-```powershell
-.\download-images.ps1
-```
-
 ## Contribuindo
 
 Contribuições são bem-vindas! Sinta-se à vontade para:
