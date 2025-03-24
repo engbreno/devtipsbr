@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="section-filter.css">
 </head>
 <body>
     <div class="container-fluid bg-modern min-vh-100 py-4">
@@ -21,227 +22,203 @@
             <div class="content-card">
                 <div class="content-header">
                     <h1>
-                        <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker Compose" style="width: 40px; height: auto;" class="me-2">
-                        Docker Compose - Comandos Essenciais 🐳
+                        <img src="https://raw.githubusercontent.com/docker/compose/master/logo.png" alt="Docker Compose" style="width: 40px; height: auto;" class="me-2">
+                        Docker Compose - Comandos Essenciais 🐙
                     </h1>
                 </div>
                 
+                <div class="filter-box">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <label for="sectionSelector" class="form-label">Selecione uma seção:</label>
+                            <select class="form-select" id="sectionSelector">
+                                <option value="all">Todas as seções</option>
+                                <option value="comandos">Comandos Básicos</option>
+                                <option value="configuracao">Configuração do Docker Compose</option>
+                                <option value="redes">Redes e Comunicação</option>
+                                <option value="volumes">Volumes e Dados</option>
+                                <option value="exemplos">Exemplos Práticos</option>
+                                <option value="dicas">Dicas Úteis</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="content-body">
-                    <h2>Conceitos Básicos 📚</h2>
-                    
-                    <h3>Instalação e verificação</h3>
-                    <pre><code># Verificar versão do Docker Compose
-docker compose version
+                    <!-- Seção: Comandos Básicos -->
+                    <div id="comandos" class="section-content active">
+                        <h2>Comandos Básicos 🔄</h2>
+                        
+                        <h3>Gerenciamento de Serviços</h3>
+                        <pre><code># Criar e iniciar containers
+docker-compose up
 
-# Docker Compose V1 (legado)
-docker-compose version
+# Iniciar em segundo plano
+docker-compose up -d
 
-# Instalação no Linux (se necessário)
-sudo curl -L "https://github.com/docker/compose/releases/download/v2.20.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose</code></pre>
-                    
-                    <h3>Estrutura do arquivo Compose</h3>
-                    <pre><code># Arquivo docker-compose.yml
-version: '3.9'  # Versão da sintaxe do Docker Compose
+# Parar serviços
+docker-compose stop
 
-services:       # Define os serviços (contêineres)
-  web:          # Nome do serviço
-    image: nginx:latest  # Imagem a ser usada
-    ports:      # Mapeamento de portas
-      - "80:80"
-    volumes:    # Montagem de volumes
-      - ./html:/usr/share/nginx/html
-    networks:   # Redes a serem conectadas
-      - frontend
-    depends_on: # Dependências
-      - db
-  
-  db:
-    image: postgres:14
-    environment:
-      POSTGRES_PASSWORD: exemplo
-    volumes:
-      - db_data:/var/lib/postgresql/data
-    networks:
-      - backend
+# Parar e remover containers, redes e volumes
+docker-compose down
 
-networks:       # Define as redes
-  frontend:
-  backend:
+# Parar e remover tudo, incluindo imagens
+docker-compose down --rmi all
 
-volumes:        # Define os volumes
-  db_data:</code></pre>
-                    
-                    <h2>Comandos Básicos 🛠️</h2>
-                    
-                    <h3>Iniciar e parar serviços</h3>
-                    <pre><code># Iniciar todos os serviços (primeiro plano)
-docker compose up
+# Reconstruir serviços
+docker-compose up --build
 
-# Iniciar todos os serviços (segundo plano)
-docker compose up -d
-
-# Iniciar serviço específico
-docker compose up -d web
-
-# Parar todos os serviços
-docker compose down
-
-# Parar e remover volumes
-docker compose down -v
-
-# Parar, remover volumes e redes
-docker compose down -v --remove-orphans
-
-# Reiniciar serviços
-docker compose restart
-
-# Reiniciar serviço específico
-docker compose restart web</code></pre>
-                    
-                    <h3>Verificar status</h3>
-                    <pre><code># Listar serviços e status
-docker compose ps
-
-# Ver logs de todos os serviços
-docker compose logs
+# Iniciar serviços específicos
+docker-compose up -d nginx mysql</code></pre>
+                        
+                        <h3>Logs e Monitoramento</h3>
+                        <pre><code># Ver logs de todos os serviços
+docker-compose logs
 
 # Ver logs em tempo real
-docker compose logs -f
+docker-compose logs -f
 
-# Ver logs de serviço específico
-docker compose logs web
+# Ver logs de serviços específicos
+docker-compose logs nginx
 
-# Ver uso de recursos
-docker compose top</code></pre>
+# Ver logs com timestamps
+docker-compose logs --timestamps
+
+# Limitar quantidade de linhas
+docker-compose logs --tail=100</code></pre>
+                    </div>
                     
-                    <h2>Gerenciamento de Serviços 🔄</h2>
+                    <!-- Seção: Configuração do Docker Compose -->
+                    <div id="configuracao" class="section-content active">
+                        <h2>Configuração do Docker Compose 📝</h2>
+                        
+                        <h3>Estrutura do arquivo docker-compose.yml</h3>
+                        <pre><code>version: '3'  # Versão do formato
+
+services:      # Definição dos serviços
+  webapp:      # Nome do serviço
+    image: nginx:latest  # Imagem a ser usada
+    container_name: meu-webapp  # Nome do container
+    ports:
+      - "80:80"  # Mapeamento de portas (host:container)
+    volumes:
+      - ./html:/usr/share/nginx/html  # Mapeamento de volume
+    environment:  # Variáveis de ambiente
+      - NGINX_HOST=example.com
+    restart: always  # Política de reinício</code></pre>
+                        
+                        <h3>Opções comuns de serviços</h3>
+                        <pre><code># Construir a partir de um Dockerfile
+build:
+  context: ./app  # Contexto do build
+  dockerfile: Dockerfile.dev  # Dockerfile personalizado
+  args:  # Argumentos de build
+    APP_VERSION: v1.0
+
+# Dependências entre serviços
+depends_on:
+  - db
+  - redis
+
+# Restrições de recursos
+deploy:
+  resources:
+    limits:
+      cpus: '0.5'
+      memory: 512M</code></pre>
+                    </div>
                     
-                    <h3>Execução de comandos</h3>
-                    <pre><code># Executar comando em um serviço
-docker compose exec web ls -la
+                    <!-- Seção: Redes e Comunicação -->
+                    <div id="redes" class="section-content active">
+                        <h2>Redes e Comunicação 🌐</h2>
+                        
+                        <h3>Configuração de redes</h3>
+                        <pre><code># Definir redes personalizadas
+networks:
+  frontend:
+    driver: bridge  # Driver de rede
+  backend:
+    driver: bridge
 
-# Executar comando com usuário específico
-docker compose exec -u root web bash
-
-# Executar comando em nova instância do serviço
-docker compose run web npm test
-
-# Executar comando sem iniciar dependências
-docker compose run --no-deps web npm lint</code></pre>
+# Conectar serviços a redes
+services:
+  webapp:
+    networks:
+      - frontend
+  api:
+    networks:
+      - frontend
+      - backend
+  db:
+    networks:
+      - backend</code></pre>
+                        
+                        <h3>Comunicação entre serviços</h3>
+                        <pre><code># Serviços podem se comunicar usando o nome do serviço
+# Exemplos:
+# - No serviço api, pode-se conectar ao db usando "db" como hostname
+# - URL de conexão: "postgres://user:pass@db:5432/dbname"</code></pre>
+                    </div>
                     
-                    <h3>Escalar serviços</h3>
-                    <pre><code># Escalar serviço para múltiplas instâncias
-docker compose up -d --scale web=3
+                    <!-- Seção: Volumes e Dados -->
+                    <div id="volumes" class="section-content active">
+                        <h2>Volumes e Dados 💾</h2>
+                        
+                        <h3>Definição de volumes</h3>
+                        <pre><code># Declaração de volumes nomeados
+volumes:
+  db-data:  # Volume nomeado
+    external: false  # Se é externo ou não
+  cache:
+    driver: local
 
-# Verificar serviços escalados
-docker compose ps</code></pre>
+# Uso em serviços
+services:
+  db:
+    volumes:
+      - db-data:/var/lib/postgresql/data  # Volume nomeado
+      - ./init:/docker-entrypoint-initdb.d  # Bind mount
+      - /tmp/data:/tmp/data  # Caminho absoluto</code></pre>
+                        
+                        <h3>Tipos de montagem</h3>
+                        <pre><code># Bind mounts (mapeia diretório do host)
+volumes:
+  - ./config:/app/config
+
+# Volumes nomeados (gerenciados pelo Docker)
+volumes:
+  - data-volume:/app/data
+
+# Volume temporário (anonymous volume)
+volumes:
+  - /app/temp</code></pre>
+                    </div>
                     
-                    <h2>Construção e Imagens 🏗️</h2>
-                    
-                    <h3>Construir imagens</h3>
-                    <pre><code># Construir todas as imagens
-docker compose build
-
-# Construir imagem específica
-docker compose build web
-
-# Construir sem cache
-docker compose build --no-cache
-
-# Construir e iniciar
-docker compose up --build -d</code></pre>
-                    
-                    <h3>Gerenciar imagens</h3>
-                    <pre><code># Listar imagens utilizadas
-docker compose images
-
-# Forçar recreação de contêineres
-docker compose up -d --force-recreate
-
-# Remover imagens órfãs
-docker compose down --rmi local</code></pre>
-                    
-                    <h2>Configuração Avançada 🔧</h2>
-                    
-                    <h3>Múltiplos arquivos Compose</h3>
-                    <pre><code># Usando múltiplos arquivos
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
-
-# Sobrescrever configurações específicas do ambiente
-docker compose -f docker-compose.yml -f docker-compose.override.yml up -d</code></pre>
-                    
-                    <h3>Variáveis de ambiente</h3>
-                    <pre><code># Definir variáveis de ambiente
-docker compose -f docker-compose.yml -e POSTGRES_VERSION=13 up -d
-
-# Usar arquivo .env
-# Criar arquivo .env na mesma pasta do docker-compose.yml
-# DB_VERSION=13
-# WEB_PORT=8080
-# 
-# No docker-compose.yml:
-# services:
-#   db:
-#     image: postgres:${DB_VERSION}
-#   web:
-#     ports:
-#       - "${WEB_PORT}:80"</code></pre>
-                    
-                    <h2>Redes e Volumes 🌐</h2>
-                    
-                    <h3>Gerenciamento de redes</h3>
-                    <pre><code># Listar redes
-docker compose network ls
-
-# Inspecionar rede
-docker compose network inspect frontend
-
-# Criar redes externas (no arquivo docker-compose.yml)
-# networks:
-#   frontend:
-#     external: true
-#     name: existing_network</code></pre>
-                    
-                    <h3>Gerenciamento de volumes</h3>
-                    <pre><code># Listar volumes
-docker compose volume ls
-
-# Inspecionar volume
-docker compose volume inspect db_data
-
-# Remover volumes não utilizados
-docker volume prune
-
-# Configurar volumes externos (no arquivo docker-compose.yml)
-# volumes:
-#   db_data:
-#     external: true
-#     name: existing_volume</code></pre>
-                    
-                    <h2>Casos de Uso Comuns 🚀</h2>
-                    
-                    <h3>Stack de desenvolvimento web</h3>
-                    <pre><code># Exemplo de stack LEMP (Linux, Nginx, MySQL, PHP)
-version: '3.9'
+                    <!-- Seção: Exemplos Práticos -->
+                    <div id="exemplos" class="section-content active">
+                        <h2>Exemplos Práticos 🧪</h2>
+                        
+                        <h3>Aplicação Web com Banco de Dados</h3>
+                        <pre><code>version: '3'
 
 services:
   web:
-    image: nginx:latest
+    image: nginx:alpine
     ports:
       - "80:80"
     volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
-      - ./app:/var/www/html
+      - ./www:/usr/share/nginx/html
     depends_on:
-      - php
+      - app
     networks:
       - frontend
 
-  php:
-    build: ./php
-    volumes:
-      - ./app:/var/www/html
+  app:
+    build: ./app
+    environment:
+      - DB_HOST=db
+      - DB_USER=myuser
+      - DB_PASSWORD=mypassword
     depends_on:
       - db
     networks:
@@ -249,25 +226,14 @@ services:
       - backend
 
   db:
-    image: mysql:8.0
+    image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: secretpassword
-      MYSQL_DATABASE: myapp
-      MYSQL_USER: myuser
-      MYSQL_PASSWORD: mypassword
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=mydb
+      - MYSQL_USER=myuser
+      - MYSQL_PASSWORD=mypassword
     volumes:
-      - db_data:/var/lib/mysql
-    networks:
-      - backend
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    ports:
-      - "8080:80"
-    environment:
-      PMA_HOST: db
-    depends_on:
-      - db
+      - db-data:/var/lib/mysql
     networks:
       - backend
 
@@ -276,131 +242,71 @@ networks:
   backend:
 
 volumes:
-  db_data:</code></pre>
-                    
-                    <h3>Stack de aplicação com proxy reverso</h3>
-                    <pre><code># Exemplo de aplicação com Traefik como proxy reverso
-version: '3.9'
+  db-data:</code></pre>
+                        
+                        <h3>Stack de Monitoramento</h3>
+                        <pre><code>version: '3'
 
 services:
-  traefik:
-    image: traefik:v2.9
+  prometheus:
+    image: prom/prometheus
     ports:
-      - "80:80"
-      - "443:443"
-      - "8080:8080"
+      - "9090:9090"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./traefik.yml:/etc/traefik/traefik.yml
-      - ./acme.json:/acme.json
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
     networks:
-      - traefik-net
+      - monitoring
 
-  app1:
-    image: nginx
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.app1.rule=Host(`app1.localhost`)"
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - prometheus
     networks:
-      - traefik-net
-
-  app2:
-    image: nginx
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.app2.rule=Host(`app2.localhost`)"
-    networks:
-      - traefik-net
+      - monitoring
 
 networks:
-  traefik-net:</code></pre>
+  monitoring:
+
+volumes:
+  grafana-data:</code></pre>
+                    </div>
                     
-                    <h2>Boas Práticas 💡</h2>
-                    
-                    <ol>
-                        <li>Utilize <code>healthchecks</code> para garantir que os serviços estejam prontos:</li>
-                    </ol>
-                    
-                    <pre><code>services:
-  web:
+                    <!-- Seção: Dicas Úteis -->
+                    <div id="dicas" class="section-content active">
+                        <h2>Dicas Úteis 💡</h2>
+                        
+                        <ol>
+                            <li>Use variáveis de ambiente com arquivo <code>.env</code> para configurações específicas do ambiente</li>
+                            <li>Utilize <code>docker-compose.override.yml</code> para sobrescrever configurações em ambientes de desenvolvimento</li>
+                            <li>Separe redes frontend e backend para melhor isolamento dos serviços</li>
+                            <li>Use a flag <code>--scale</code> para escalar serviços horizontalmente (<code>docker-compose up -d --scale worker=3</code>)</li>
+                            <li>Mantenha volumes de dados para persistência entre recriações de containers</li>
+                            <li>Defina <code>healthcheck</code> para verificar o status dos serviços</li>
+                        </ol>
+                        
+                        <h3>Exemplo de healthcheck</h3>
+                        <pre><code>services:
+  webapp:
     image: nginx
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 10s</code></pre>
-                    
-                    <ol start="2">
-                        <li>Separe configurações de desenvolvimento e produção:</li>
-                    </ol>
-                    
-                    <pre><code># Base (docker-compose.yml)
-version: '3.9'
-services:
-  app:
-    build: .
-    restart: unless-stopped
-
-# Desenvolvimento (docker-compose.override.yml - aplicado automaticamente)
-services:
-  app:
-    volumes:
-      - ./app:/app
-    environment:
-      - DEBUG=true
-
-# Produção (docker-compose.prod.yml)
-services:
-  app:
-    environment:
-      - DEBUG=false</code></pre>
-                    
-                    <ol start="3">
-                        <li>Defina limites de recursos para evitar problemas de desempenho:</li>
-                    </ol>
-                    
-                    <pre><code>services:
-  app:
-    image: myapp
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.25'
-          memory: 256M</code></pre>
-                    
-                    <ol start="4">
-                        <li>Use secrets para dados sensíveis (Docker Swarm):</li>
-                    </ol>
-                    
-                    <pre><code>services:
-  db:
-    image: postgres
-    secrets:
-      - db_password
-    environment:
-      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
-
-secrets:
-  db_password:
-    file: ./secrets/db_password.txt</code></pre>
-                    
-                    <ol start="5">
-                        <li>Configure políticas de reinicialização para serviços essenciais:</li>
-                    </ol>
-                    
-                    <pre><code>services:
-  db:
-    image: postgres
-    restart: always  # Outras opções: no, on-failure, unless-stopped</code></pre>
+      start_period: 40s</code></pre>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="section-filter.js"></script>
 </body>
 </html> 

@@ -29,6 +29,7 @@ DevTipsBR é uma aplicação web simples que agrupa dicas e comandos úteis para
 - AWS
 - Docker Compose
 - Kubernetes
+- Etc
 
 ## Como Usar
 
@@ -36,13 +37,6 @@ DevTipsBR é uma aplicação web simples que agrupa dicas e comandos úteis para
 2. Clique em qualquer card para acessar os comandos específicos daquela tecnologia
 3. Utilize o botão de configurações para personalizar quais tecnologias serão exibidas
 
-### Configurando Tecnologias Visíveis
-
-1. Clique no ícone de engrenagem no canto superior direito
-2. Marque ou desmarque as tecnologias que você deseja ver na página principal
-3. Clique em "Salvar Configurações" para baixar o arquivo `config.json`
-4. Coloque o arquivo `config.json` na pasta raiz do projeto
-5. Recarregue a página inicial para ver apenas as tecnologias selecionadas
 
 ## Contribuindo
 

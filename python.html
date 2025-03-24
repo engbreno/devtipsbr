@@ -10,6 +10,52 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="section-filter.css">
+    <style>
+        .comando-container {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .comando-descricao {
+            font-size: 0.9rem;
+            color: #495057;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .comando-descricao::before {
+            content: "💡";
+            margin-right: 6px;
+            flex-shrink: 0;
+        }
+        
+        .comando-container pre {
+            margin-bottom: 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .comandos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 15px;
+            grid-auto-rows: minmax(min-content, auto);
+        }
+        
+        @media (max-width: 768px) {
+            .comandos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container-fluid bg-modern min-vh-100 py-4">
@@ -26,195 +72,540 @@
                     </h1>
                 </div>
                 
+                <div class="filter-box">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <label for="sectionSelector" class="form-label">Selecione uma seção:</label>
+                            <select class="form-select" id="sectionSelector">
+                                <option value="all">Todas as seções</option>
+                                <option value="ambiente-virtual">Ambiente Virtual</option>
+                                <option value="linha-de-comando">Linha de Comando</option>
+                                <option value="ipython-jupyter">IPython & Jupyter</option>
+                                <option value="ferramentas-basicas">Ferramentas Básicas</option>
+                                <option value="django">Django</option>
+                                <option value="flask">Flask</option>
+                                <option value="dicas-uteis">Dicas Úteis</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="content-body">
-                    <h2>Ambiente Virtual 🏗️</h2>
+                    <!-- Seção: Ambiente Virtual -->
+                    <div id="ambiente-virtual" class="section-content active">
+                        <h2>Ambiente Virtual 🏗️</h2>
+                        
+                        <h3>Criar e ativar ambientes</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Criar ambiente virtual</div>
+                                <pre><code>python -m venv venv</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Ativar ambiente (Windows)</div>
+                                <pre><code>venv\Scripts\activate</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Ativar ambiente (Linux/MacOS)</div>
+                                <pre><code>source venv/bin/activate</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Desativar ambiente</div>
+                                <pre><code>deactivate</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Gerenciar pacotes</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Instalar pacote</div>
+                                <pre><code>pip install pacote</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Instalar versão específica</div>
+                                <pre><code>pip install pacote==1.0.0</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Instalar múltiplos pacotes</div>
+                                <pre><code>pip install pacote1 pacote2</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Atualizar pacote</div>
+                                <pre><code>pip install --upgrade pacote</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Listar pacotes instalados</div>
+                                <pre><code>pip list</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Instalar pacotes de um arquivo</div>
+                                <pre><code>pip install -r requirements.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Salvar pacotes em arquivo</div>
+                                <pre><code>pip freeze > requirements.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Desinstalar pacote</div>
+                                <pre><code>pip uninstall pacote</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h3>Criar e ativar ambientes</h3>
-                    <pre><code># Criar ambiente virtual
-python -m venv venv
-
-# Ativar ambiente (Windows)
-venv\Scripts\activate
-
-# Ativar ambiente (Linux/MacOS)
-source venv/bin/activate
-
-# Desativar ambiente
-deactivate</code></pre>
+                    <!-- Seção: Linha de Comando -->
+                    <div id="linha-de-comando" class="section-content active">
+                        <h2>Linha de Comando 💻</h2>
+                        
+                        <h3>Executar scripts</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar script</div>
+                                <pre><code>python script.py</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar módulo</div>
+                                <pre><code>python -m nome_modulo</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Modo interativo</div>
+                                <pre><code>python</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar comando Python</div>
+                                <pre><code>python -c "print('Hello World')"</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Opções úteis</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Verificar sintaxe sem executar</div>
+                                <pre><code>python -m py_compile script.py</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Compilar para bytecode otimizado</div>
+                                <pre><code>python -O -m py_compile script.py</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Ajuda sobre comandos</div>
+                                <pre><code>python --help</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Verificar a versão</div>
+                                <pre><code>python --version</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar com warnings</div>
+                                <pre><code>python -W all script.py</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Depuração com pdb</div>
+                                <pre><code>python -m pdb script.py</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h3>Gerenciar pacotes</h3>
-                    <pre><code># Instalar pacote
-pip install pacote
-
-# Instalar versão específica
-pip install pacote==1.0.0
-
-# Instalar múltiplos pacotes
-pip install pacote1 pacote2
-
-# Instalar a partir de requirements.txt
-pip install -r requirements.txt
-
-# Listar pacotes instalados
-pip list
-
-# Exportar para requirements.txt
-pip freeze > requirements.txt</code></pre>
+                    <!-- Seção: IPython & Jupyter -->
+                    <div id="ipython-jupyter" class="section-content active">
+                        <h2>IPython & Jupyter 📊</h2>
+                        
+                        <h3>Jupyter Notebook</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Instalar Jupyter</div>
+                                <pre><code>pip install jupyter</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Iniciar Jupyter Notebook</div>
+                                <pre><code>jupyter notebook</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Iniciar JupyterLab</div>
+                                <pre><code>jupyter lab</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Converter notebook para HTML</div>
+                                <pre><code>jupyter nbconvert --to html notebook.ipynb</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Converter notebook para PDF</div>
+                                <pre><code>jupyter nbconvert --to pdf notebook.ipynb</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar notebooks em batch</div>
+                                <pre><code>jupyter nbconvert --execute notebook.ipynb</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>IPython</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Instalar IPython</div>
+                                <pre><code>pip install ipython</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Iniciar IPython</div>
+                                <pre><code>ipython</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Listar funções mágicas</div>
+                                <pre><code>%lsmagic</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Medir tempo de execução</div>
+                                <pre><code>%timeit [código]</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar script externo</div>
+                                <pre><code>%run script.py</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Mostrar histórico de comandos</div>
+                                <pre><code>%history</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h2>Linha de Comando 💻</h2>
+                    <!-- Seção: Ferramentas Básicas -->
+                    <div id="ferramentas-basicas" class="section-content active">
+                        <h2>Ferramentas Básicas 🧰</h2>
+                        
+                        <h3>pytest - Testes</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Instalar pytest</div>
+                                <pre><code>pip install pytest</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar todos os testes</div>
+                                <pre><code>pytest</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar arquivo específico</div>
+                                <pre><code>pytest test_arquivo.py</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar com verbose</div>
+                                <pre><code>pytest -v</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar com cobertura</div>
+                                <pre><code>pytest --cov=meu_pacote</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar apenas testes marcados</div>
+                                <pre><code>pytest -m "marca"</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>pylint, flake8, black - Linting/Formatação</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Instalar ferramentas</div>
+                                <pre><code>pip install pylint flake8 black</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Verificar com pylint</div>
+                                <pre><code>pylint arquivo.py</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Verificar com flake8</div>
+                                <pre><code>flake8 arquivo.py</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Formatar com black</div>
+                                <pre><code>black arquivo.py</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Verificar formatação sem alterar</div>
+                                <pre><code>black --check arquivo.py</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Formatar diretório inteiro</div>
+                                <pre><code>black diretorio/</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h3>Executar scripts</h3>
-                    <pre><code># Executar script
-python script.py
-
-# Executar módulo
-python -m nome_modulo
-
-# Modo interativo
-python
-
-# Executar comando Python
-python -c "print('Hello World')"</code></pre>
+                    <!-- Seção: Django -->
+                    <div id="django" class="section-content active">
+                        <h2>Django 🌐</h2>
+                        
+                        <h3>Iniciar projeto</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Instalar Django</div>
+                                <pre><code>pip install django</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Criar projeto</div>
+                                <pre><code>django-admin startproject projeto</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Criar aplicação</div>
+                                <pre><code>python manage.py startapp aplicacao</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar servidor de desenvolvimento</div>
+                                <pre><code>python manage.py runserver</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar servidor em outra porta</div>
+                                <pre><code>python manage.py runserver 8080</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Banco de Dados e Migrações</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Criar migrações</div>
+                                <pre><code>python manage.py makemigrations</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Aplicar migrações</div>
+                                <pre><code>python manage.py migrate</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Listar migrações</div>
+                                <pre><code>python manage.py showmigrations</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Abrir shell do Django</div>
+                                <pre><code>python manage.py shell</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Gerar SQL de migração</div>
+                                <pre><code>python manage.py sqlmigrate app_name 0001</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Criar superusuário</div>
+                                <pre><code>python manage.py createsuperuser</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Testes e Manutenção</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar testes</div>
+                                <pre><code>python manage.py test</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Coletar arquivos estáticos</div>
+                                <pre><code>python manage.py collectstatic</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Verificar problemas no projeto</div>
+                                <pre><code>python manage.py check</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Limpar cache</div>
+                                <pre><code>python manage.py clearcache</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Limpar sessões expiradas</div>
+                                <pre><code>python manage.py clearsessions</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h3>Opções úteis</h3>
-                    <pre><code># Verificar sintaxe sem executar
-python -m py_compile script.py
-
-# Compilar para bytecode otimizado
-python -O -m py_compile script.py
-
-# Ajuda sobre comandos
-python --help
-
-# Verificar a versão
-python --version</code></pre>
+                    <!-- Seção: Flask -->
+                    <div id="flask" class="section-content active">
+                        <h2>Flask 🧪</h2>
+                        
+                        <h3>Iniciar aplicação</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Instalar Flask</div>
+                                <pre><code>pip install flask</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Configurar ambiente (Linux/MacOS)</div>
+                                <pre><code>export FLASK_APP=app.py
+export FLASK_ENV=development</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Configurar ambiente (Windows CMD)</div>
+                                <pre><code>set FLASK_APP=app.py
+set FLASK_ENV=development</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Configurar ambiente (Windows PowerShell)</div>
+                                <pre><code>$env:FLASK_APP = "app.py"
+$env:FLASK_ENV = "development"</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar servidor de desenvolvimento</div>
+                                <pre><code>flask run</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar em porta específica</div>
+                                <pre><code>flask run --port=8080</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar visível na rede</div>
+                                <pre><code>flask run --host=0.0.0.0</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Extensões e Ferramentas</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Instalar Flask-SQLAlchemy</div>
+                                <pre><code>pip install Flask-SQLAlchemy</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Instalar Flask-Migrate</div>
+                                <pre><code>pip install Flask-Migrate</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Inicializar banco de dados</div>
+                                <pre><code>flask db init</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Criar migração</div>
+                                <pre><code>flask db migrate -m "migracao inicial"</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Aplicar migração</div>
+                                <pre><code>flask db upgrade</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Instalar Flask-WTF (formulários)</div>
+                                <pre><code>pip install Flask-WTF</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h2>IPython & Jupyter 📊</h2>
-                    
-                    <h3>Jupyter Notebook</h3>
-                    <pre><code># Instalar Jupyter
-pip install jupyter
+                    <!-- Seção: Dicas Úteis -->
+                    <div id="dicas-uteis" class="section-content active">
+                        <h2>Dicas Úteis 💡</h2>
+                        
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Ponto de entrada de script</div>
+                                <pre><code>if __name__ == "__main__":
+    main()</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Manipulação moderna de caminhos</div>
+                                <pre><code>from pathlib import Path
 
-# Iniciar Jupyter Notebook
-jupyter notebook
+caminho = Path("pasta/arquivo.txt")
+if caminho.exists():
+    conteudo = caminho.read_text()</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Gerenciamento de contexto</div>
+                                <pre><code>with open("arquivo.txt", "r") as f:
+    conteudo = f.read()</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">List Comprehension</div>
+                                <pre><code>numeros = [1, 2, 3, 4, 5]
+quadrados = [x**2 for x in numeros if x % 2 == 0]</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Dict Comprehension</div>
+                                <pre><code>numeros = [1, 2, 3, 4, 5]
+quadrados = {x: x**2 for x in numeros}</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Variáveis de ambiente</div>
+                                <pre><code>from dotenv import load_dotenv
+import os
 
-# Iniciar JupyterLab
-jupyter lab
-
-# Converter notebook para outros formatos
-jupyter nbconvert --to html notebook.ipynb</code></pre>
-                    
-                    <h3>IPython</h3>
-                    <pre><code># Instalar IPython
-pip install ipython
-
-# Iniciar IPython
-ipython
-
-# Comandos mágicos
-%time comando  # Medir tempo de execução
-%cd diretorio  # Mudar diretório
-%env           # Listar variáveis de ambiente
-%history       # Mostrar histórico de comandos</code></pre>
-                    
-                    <h2>Ferramentas Básicas 🧰</h2>
-                    
-                    <h3>pytest - Testes</h3>
-                    <pre><code># Instalar pytest
-pip install pytest
-
-# Executar todos os testes
-pytest
-
-# Executar arquivo específico
-pytest test_arquivo.py
-
-# Executar com verbose
-pytest -v
-
-# Executar com cobertura
-pytest --cov=meu_pacote</code></pre>
-                    
-                    <h3>pylint, flake8, black - Linting/Formatação</h3>
-                    <pre><code># Instalar ferramentas
-pip install pylint flake8 black
-
-# Verificar com pylint
-pylint arquivo.py
-
-# Verificar com flake8
-flake8 arquivo.py
-
-# Formatar com black
-black arquivo.py
-
-# Verificar formatação sem alterar
-black --check arquivo.py</code></pre>
-                    
-                    <h2>Django 🌐</h2>
-                    
-                    <h3>Iniciar projeto</h3>
-                    <pre><code># Instalar Django
-pip install django
-
-# Criar projeto
-django-admin startproject projeto
-
-# Criar aplicação
-python manage.py startapp aplicacao
-
-# Executar servidor de desenvolvimento
-python manage.py runserver
-
-# Criar superusuário
-python manage.py createsuperuser</code></pre>
-                    
-                    <h3>Migrações</h3>
-                    <pre><code># Criar migrações
-python manage.py makemigrations
-
-# Aplicar migrações
-python manage.py migrate
-
-# Ver SQL para migração
-python manage.py sqlmigrate app_name 0001
-
-# Verificar migrações
-python manage.py showmigrations</code></pre>
-                    
-                    <h2>Flask 🧪</h2>
-                    
-                    <h3>Iniciar aplicação</h3>
-                    <pre><code># Instalar Flask
-pip install flask
-
-# Executar aplicação em modo desenvolvimento
-export FLASK_APP=app.py
-export FLASK_ENV=development
-flask run
-
-# Windows (PowerShell)
-$env:FLASK_APP = "app.py"
-$env:FLASK_ENV = "development"
-flask run
-
-# Executar em porta específica
-flask run --port=8080</code></pre>
-                    
-                    <h2>Dicas Úteis 💡</h2>
-                    
-                    <ol>
-                        <li>Use <code>__name__ == "__main__"</code> para código executável direto</li>
-                        <li>Prefira <code>pathlib</code> ao invés de <code>os.path</code> para manipulação de caminhos</li>
-                        <li>Use <code>with</code> para gerenciar recursos (arquivos, conexões)</li>
-                        <li>Prefira List/Dict Comprehensions a loops tradicionais quando possível</li>
-                        <li>Instale <code>python-dotenv</code> para gerenciar variáveis de ambiente</li>
-                    </ol>
+load_dotenv()
+api_key = os.getenv("API_KEY")</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Formatação de strings</div>
+                                <pre><code># f-strings (Python 3.6+)
+nome = "Python"
+versao = 3.9
+print(f"{nome} {versao}")</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Desempacotamento</div>
+                                <pre><code>a, b, *resto = [1, 2, 3, 4, 5]
+# a = 1, b = 2, resto = [3, 4, 5]</code></pre>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="section-filter.js"></script>
 </body>
 </html> 

@@ -3,13 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Windows CMD - DevTipsBR</title>
+    <title>CMD - DevTipsBR</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="section-filter.css">
+    <style>
+        .comando-container {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .comando-descricao {
+            font-size: 0.9rem;
+            color: #495057;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .comando-descricao::before {
+            content: "💡";
+            margin-right: 6px;
+            flex-shrink: 0;
+        }
+        
+        .comando-container pre {
+            margin-bottom: 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .comandos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 15px;
+            grid-auto-rows: minmax(min-content, auto);
+        }
+        
+        @media (max-width: 768px) {
+            .comandos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container-fluid bg-modern min-vh-100 py-4">
@@ -21,91 +67,422 @@
             <div class="content-card">
                 <div class="content-header">
                     <h1>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2012.svg" alt="Windows CMD" style="width: 40px; height: auto;" class="me-2">
-                        Windows CMD - Comandos Essenciais 🖥️
+                        <i class="bi bi-terminal-fill me-2"></i>
+                        CMD - Comandos Essenciais 💻
                     </h1>
                 </div>
                 
+                <div class="filter-box">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <label for="sectionSelector" class="form-label">Selecione uma seção:</label>
+                            <select class="form-select" id="sectionSelector">
+                                <option value="all">Todas as seções</option>
+                                <option value="basicos">Comandos Básicos</option>
+                                <option value="arquivos">Gerenciamento de Arquivos</option>
+                                <option value="diretorios">Navegação de Diretórios</option>
+                                <option value="rede">Comandos de Rede</option>
+                                <option value="sistema">Informações do Sistema</option>
+                                <option value="usuarios">Usuários e Permissões</option>
+                                <option value="batch">Batch Scripting</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="content-body">
-                    <h2>Navegação e Arquivos 📂</h2>
+                    <!-- Seção: Comandos Básicos -->
+                    <div id="basicos" class="section-content active">
+                        <h2>Comandos Básicos 🔄</h2>
+                        
+                        <h3>Ajuda e Informações</h3>
+                        <pre><code># Obter ajuda para um comando
+help [comando]
+[comando] /?
+
+# Exibir data e hora
+date
+time
+
+# Limpar a tela
+cls
+
+# Pausar execução
+pause
+
+# Encerrar o prompt de comando
+exit</code></pre>
+                        
+                        <h3>Execução e Redirecionamento</h3>
+                        <pre><code># Executar vários comandos na mesma linha
+comando1 & comando2
+
+# Executar comando2 apenas se comando1 for bem-sucedido
+comando1 && comando2
+
+# Executar comando2 apenas se comando1 falhar
+comando1 || comando2
+
+# Redirecionar saída para arquivo (sobrescrever)
+comando > arquivo.txt
+
+# Redirecionar saída para arquivo (anexar)
+comando >> arquivo.txt
+
+# Redirecionar erro para arquivo
+comando 2> erro.txt
+
+# Redirecionar saída e erro para arquivo
+comando > arquivo.txt 2>&1</code></pre>
+                    </div>
                     
-                    <h3>Exibir e navegar diretórios</h3>
-                    <pre><code>dir               # Listar arquivos e pastas
-cd pasta          # Entrar em uma pasta
-cd ..             # Voltar um nível
-cd\               # Ir para raiz do drive atual
-cd /d D:          # Mudar para outro drive (D:)
-explorer .        # Abrir o Explorer na pasta atual</code></pre>
+                    <!-- Seção: Gerenciamento de Arquivos -->
+                    <div id="arquivos" class="section-content active">
+                        <h2>Gerenciamento de Arquivos 📄</h2>
+                        
+                        <h3>Exibir e Criar Arquivos</h3>
+                        <pre><code># Exibir conteúdo de arquivo
+type arquivo.txt
+
+# Criar arquivo de texto
+echo Conteúdo > arquivo.txt
+
+# Concatenar arquivos
+copy arquivo1.txt + arquivo2.txt resultado.txt
+
+# Criar arquivo vazio ou atualizar timestamp
+copy nul arquivo.txt</code></pre>
+                        
+                        <h3>Copiar, Mover e Excluir</h3>
+                        <pre><code># Copiar arquivo
+copy origem.txt destino.txt
+
+# Copiar com confirmação para sobrescrever
+copy origem.txt destino.txt /y
+
+# Copiar diretório com subdiretórios
+xcopy origem destino /e /i
+
+# Mover arquivo
+move origem.txt destino.txt
+
+# Renomear arquivo
+ren arquivo.txt novo_nome.txt
+
+# Excluir arquivo
+del arquivo.txt
+
+# Excluir vários arquivos com confirmação
+del *.txt /p
+
+# Excluir arquivos recursivamente
+del /s /q diretorio\*.*</code></pre>
+                        
+                        <h3>Comparar e Pesquisar</h3>
+                        <pre><code># Comparar arquivos
+fc arquivo1.txt arquivo2.txt
+
+# Pesquisar texto em arquivo
+find "texto" arquivo.txt
+
+# Pesquisar texto em vários arquivos
+findstr "texto" *.txt
+
+# Pesquisar texto recursivamente
+findstr /s "texto" *.*</code></pre>
+                    </div>
                     
-                    <h3>Gerenciar arquivos e pastas</h3>
-                    <pre><code>mkdir nome_pasta  # Criar pasta
-rmdir nome_pasta  # Remover pasta vazia
-rmdir /s /q pasta # Remover pasta e conteúdo sem confirmação
-copy origem dest  # Copiar arquivo
-move origem dest  # Mover arquivo
-del arquivo.txt   # Excluir arquivo
-rename arq1 arq2  # Renomear arquivo</code></pre>
+                    <!-- Seção: Navegação de Diretórios -->
+                    <div id="diretorios" class="section-content active">
+                        <h2>Navegação de Diretórios 📂</h2>
+                        
+                        <h3>Navegação Básica</h3>
+                        <pre><code># Mostrar diretório atual
+cd
+chdir
+
+# Mudar para outro diretório
+cd caminho\para\diretorio
+
+# Subir um nível
+cd ..
+
+# Ir para a raiz do drive
+cd \
+
+# Mudar de drive
+d:</code></pre>
+                        
+                        <h3>Listar e Gerenciar</h3>
+                        <pre><code># Listar arquivos e diretórios
+dir
+
+# Listar com formato específico
+dir /w    # formato amplo
+dir /b    # formato básico (apenas nomes)
+
+# Listar arquivos ocultos
+dir /a:h
+
+# Listar apenas diretórios
+dir /ad
+
+# Listar recursivamente
+dir /s
+
+# Criar diretório
+mkdir novo_diretorio
+md novo_diretorio
+
+# Remover diretório vazio
+rmdir diretorio
+rd diretorio
+
+# Remover diretório e conteúdo (cuidado!)
+rmdir /s diretorio
+rd /s /q diretorio</code></pre>
+                    </div>
                     
-                    <h2>Editores e Programas 📝</h2>
+                    <!-- Seção: Comandos de Rede -->
+                    <div id="rede" class="section-content active">
+                        <h2>Comandos de Rede 🌐</h2>
+                        
+                        <h3>Informações de Rede</h3>
+                        <pre><code># Exibir configurações de rede
+ipconfig
+
+# Exibir configurações detalhadas
+ipconfig /all
+
+# Renovar endereço IP (DHCP)
+ipconfig /renew
+
+# Liberar endereço IP
+ipconfig /release</code></pre>
+                        
+                        <h3>Diagnóstico</h3>
+                        <pre><code># Testar conexão com host
+ping google.com
+
+# Teste contínuo
+ping -t google.com
+
+# Rastrear rota até o destino
+tracert google.com
+
+# Exibir estatísticas de conexão
+netstat
+
+# Mostrar conexões ativas
+netstat -a
+
+# Mostrar estatísticas por protocolo
+netstat -s
+
+# Verificar nome do host local
+hostname</code></pre>
+                        
+                        <h3>Gerenciamento de Conexões</h3>
+                        <pre><code># Exibir informações de adaptadores de rede
+netsh interface show interface
+
+# Desativar/Ativar adaptador de rede
+netsh interface set interface "Wi-Fi" disable
+netsh interface set interface "Wi-Fi" enable
+
+# Limpar cache DNS
+ipconfig /flushdns
+
+# Exibir cache DNS
+ipconfig /displaydns</code></pre>
+                    </div>
                     
-                    <h3>Abrir aplicativos</h3>
-                    <pre><code>notepad arquivo.txt        # Abrir Bloco de Notas 
-code .                     # Abrir VS Code na pasta atual
-start chrome exemplo.com   # Abrir Chrome em um site específico
-"C:\Caminho\programa.exe"  # Executar programa especificando caminho completo</code></pre>
+                    <!-- Seção: Informações do Sistema -->
+                    <div id="sistema" class="section-content active">
+                        <h2>Informações do Sistema 🖥️</h2>
+                        
+                        <h3>Informações de Hardware e Software</h3>
+                        <pre><code># Exibir informações do sistema
+systeminfo
+
+# Exibir versão do Windows
+ver
+
+# Listar drivers
+driverquery
+
+# Listar drivers detalhados
+driverquery /v
+
+# Verificar integridade do sistema
+sfc /scannow</code></pre>
+                        
+                        <h3>Processos e Serviços</h3>
+                        <pre><code># Listar processos
+tasklist
+
+# Listar processos detalhados
+tasklist /v
+
+# Finalizar processo por nome
+taskkill /im notepad.exe
+
+# Finalizar processo por ID
+taskkill /pid 1234
+
+# Forçar finalização
+taskkill /f /im notepad.exe
+
+# Listar serviços
+sc query
+
+# Iniciar serviço
+sc start serviço
+
+# Parar serviço
+sc stop serviço</code></pre>
+                        
+                        <h3>Gerenciamento de Disco</h3>
+                        <pre><code># Verificar espaço em disco
+dir c:\
+
+# Verificar e reparar disco
+chkdsk c:
+
+# Reparar com correção de erros (requer reinicialização)
+chkdsk c: /f /r
+
+# Desfragmentar disco
+defrag c:</code></pre>
+                    </div>
                     
-                    <h3>VS Code direto da linha de comando</h3>
-                    <pre><code>code .             # Abrir pasta atual no VS Code
-code arquivo.txt  # Abrir arquivo específico
-code --new-window # Abrir em nova janela
-code --diff a.txt b.txt # Comparar arquivos</code></pre>
+                    <!-- Seção: Usuários e Permissões -->
+                    <div id="usuarios" class="section-content active">
+                        <h2>Usuários e Permissões 👥</h2>
+                        
+                        <h3>Gerenciamento de Usuários</h3>
+                        <pre><code># Listar usuários
+net user
+
+# Exibir informações de usuário
+net user nomeusuario
+
+# Adicionar usuário
+net user nomeusuario senha /add
+
+# Alterar senha
+net user nomeusuario novaSenha
+
+# Habilitar/Desabilitar usuário
+net user nomeusuario /active:yes
+net user nomeusuario /active:no
+
+# Excluir usuário
+net user nomeusuario /delete</code></pre>
+                        
+                        <h3>Grupos</h3>
+                        <pre><code># Listar grupos
+net localgroup
+
+# Mostrar membros de um grupo
+net localgroup Administradores
+
+# Criar grupo
+net localgroup NovoGrupo /add
+
+# Adicionar usuário a grupo
+net localgroup Administradores nomeusuario /add
+
+# Remover usuário de grupo
+net localgroup Administradores nomeusuario /delete
+
+# Excluir grupo
+net localgroup NovoGrupo /delete</code></pre>
+                        
+                        <h3>Permissões de Arquivos</h3>
+                        <pre><code># Alterar permissões (ACL)
+icacls arquivo.txt /grant Todos:(R)
+
+# Remover permissões
+icacls arquivo.txt /remove Todos
+
+# Alterar proprietário
+icacls arquivo.txt /setowner "Administradores"
+
+# Herdar permissões do diretório pai
+icacls arquivo.txt /inheritance:e
+
+# Desativar herança
+icacls arquivo.txt /inheritance:d</code></pre>
+                    </div>
                     
-                    <h2>Rede e Sistema 🌐</h2>
-                    
-                    <h3>Comandos de rede</h3>
-                    <pre><code>ipconfig          # Informações de IP
-ping site.com     # Testar conexão
-netstat -an       # Listar conexões de rede
-tracert site.com  # Traçar rota até host</code></pre>
-                    
-                    <h3>Comandos de sistema</h3>
-                    <pre><code>systeminfo        # Informações do sistema
-tasklist          # Listar processos em execução
-taskkill /PID 1234 /F  # Encerrar processo por ID
-sfc /scannow      # Verificar arquivos do sistema
-chkdsk c: /f      # Verificar/corrigir erros no disco</code></pre>
-                    
-                    <h2>Recursos Avançados 🚀</h2>
-                    
-                    <h3>Batch scripts e variáveis</h3>
-                    <pre><code>echo %USERPROFILE%  # Exibir caminho da pasta do usuário
-echo %PATH%         # Exibir a variável PATH
-set                 # Listar todas variáveis de ambiente
-set VAR=valor       # Definir variável de ambiente temporária
-setx VAR "valor" /M # Definir variável permanente (sistema)</code></pre>
-                    
-                    <h3>Truques e atalhos</h3>
-                    <pre><code>cls              # Limpar a tela
-doskey /history  # Histórico de comandos
-CTRL+C          # Cancelar comando atual
-ALT+F7          # Limpar histórico de comandos
-Tecla Tab       # Autocompletar nomes de arquivos e pastas
-F7              # Mostrar histórico de comandos em janela</code></pre>
-                    
-                    <h2>Dicas Úteis 💡</h2>
-                    
-                    <ol>
-                        <li>Use <code>help comando</code> para ver ajuda sobre um comando específico</li>
-                        <li>Comando <code>where</code> encontra a localização de executáveis no PATH</li>
-                        <li>Use <code>comando > arquivo.txt</code> para redirecionar saída para um arquivo</li>
-                        <li>Comando <code>runas /user:Admin cmd</code> executa o CMD como outro usuário</li>
-                        <li>Crie arquivos <code>.bat</code> ou <code>.cmd</code> para automatizar tarefas repetitivas</li>
-                    </ol>
+                    <!-- Seção: Batch Scripting -->
+                    <div id="batch" class="section-content active">
+                        <h2>Batch Scripting 📜</h2>
+                        
+                        <h3>Fundamentos</h3>
+                        <pre><code># Comentários
+REM Este é um comentário
+:: Este também é um comentário
+
+# Variáveis
+SET variavel=valor
+echo %variavel%
+
+# Variáveis de ambiente
+echo %PATH%
+echo %USERPROFILE%
+
+# Variáveis de loop
+FOR %%i IN (1 2 3) DO echo %%i
+
+# Entrada de usuário
+SET /p resposta=Digite algo: 
+echo Você digitou: %resposta%</code></pre>
+                        
+                        <h3>Condicionais</h3>
+                        <pre><code># Estrutura IF
+IF EXIST arquivo.txt echo O arquivo existe
+
+# IF com ELSE
+IF EXIST arquivo.txt (
+    echo O arquivo existe
+) ELSE (
+    echo O arquivo não existe
+)
+
+# Comparar valores
+IF "%variavel%"=="valor" echo Iguais
+
+# Comparações numéricas
+IF %numero% GTR 10 echo Maior que 10
+IF %numero% LSS 10 echo Menor que 10
+IF %numero% EQU 10 echo Igual a 10</code></pre>
+                        
+                        <h3>Loops</h3>
+                        <pre><code># Loop FOR em arquivos
+FOR %%f IN (*.txt) DO echo %%f
+
+# Loop FOR em diretório
+FOR /D %%d IN (*) DO echo %%d
+
+# Loop recursivo
+FOR /R %%f IN (*.txt) DO echo %%f
+
+# Loop numérico
+FOR /L %%i IN (1,1,10) DO echo %%i
+
+# Loop infinito
+:LOOP
+echo Loop infinito
+goto LOOP</code></pre>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="section-filter.js"></script>
 </body>
 </html> 

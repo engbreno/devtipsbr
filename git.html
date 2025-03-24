@@ -10,6 +10,52 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="section-filter.css">
+    <style>
+        .comando-container {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .comando-descricao {
+            font-size: 0.9rem;
+            color: #495057;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .comando-descricao::before {
+            content: "💡";
+            margin-right: 6px;
+            flex-shrink: 0;
+        }
+        
+        .comando-container pre {
+            margin-bottom: 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .comandos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 15px;
+            grid-auto-rows: minmax(min-content, auto);
+        }
+        
+        @media (max-width: 768px) {
+            .comandos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container-fluid bg-modern min-vh-100 py-4">
@@ -26,112 +72,538 @@
                     </h1>
                 </div>
                 
+                <div class="filter-box">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <label for="sectionSelector" class="form-label">Selecione uma seção:</label>
+                            <select class="form-select" id="sectionSelector">
+                                <option value="all">Todas as seções</option>
+                                <option value="configuracao">Configuração Inicial</option>
+                                <option value="basicos">Comandos Básicos</option>
+                                <option value="branches">Branches e Merges</option>
+                                <option value="remotos">Repositórios Remotos</option>
+                                <option value="historico">Histórico e Diferenças</option>
+                                <option value="desfazer">Desfazer Alterações</option>
+                                <option value="stash">Stash e Limpeza</option>
+                                <option value="dicas">Dicas Úteis</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="content-body">
-                    <h2>Configuração Inicial 🛠️</h2>
+                    <!-- Seção: Configuração Inicial -->
+                    <div id="configuracao" class="section-content active">
+                        <h2>Configuração Inicial 🛠️</h2>
+                        
+                        <h3>Configurações do usuário</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Configurar nome de usuário global</div>
+                                <pre><code>git config --global user.name "Seu Nome"</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Configurar email global</div>
+                                <pre><code>git config --global user.email "seu.email@exemplo.com"</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Configurar editor padrão</div>
+                                <pre><code>git config --global core.editor "code --wait"</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Armazenar credenciais</div>
+                                <pre><code>git config --global credential.helper store</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Verificar configurações</div>
+                                <pre><code>git config --list</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Criação de Repositório</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Inicializar repositório Git</div>
+                                <pre><code>git init</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Clonar repositório existente</div>
+                                <pre><code>git clone https://github.com/usuario/repositorio.git</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Clonar branch específica</div>
+                                <pre><code>git clone -b nome-da-branch https://github.com/usuario/repositorio.git</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Clonar apenas commits recentes (shallow clone)</div>
+                                <pre><code>git clone --depth=1 https://github.com/usuario/repositorio.git</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h3>Configurações do usuário</h3>
-                    <pre><code>git config --global user.name "Seu Nome"
-git config --global user.email "seuemail@exemplo.com"
-git config --global core.editor "vscode"
-git config --list # Listar configurações</code></pre>
+                    <!-- Seção: Comandos Básicos -->
+                    <div id="basicos" class="section-content active">
+                        <h2>Comandos Básicos 📋</h2>
+                        
+                        <h3>Status e Alterações</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Ver estado do repositório</div>
+                                <pre><code>git status</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Adicionar arquivo específico</div>
+                                <pre><code>git add arquivo.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Adicionar todos os arquivos modificados</div>
+                                <pre><code>git add .</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Adicionar arquivos por padrão</div>
+                                <pre><code>git add *.js</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Commits</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Criar commit com mensagem</div>
+                                <pre><code>git commit -m "Mensagem do commit"</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Adicionar modificações e commitar</div>
+                                <pre><code>git commit -am "Mensagem"</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Modificar último commit</div>
+                                <pre><code>git commit --amend</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Modificar último commit sem editar mensagem</div>
+                                <pre><code>git commit --amend --no-edit</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h2>Comandos Básicos 📋</h2>
+                    <!-- Seção: Branches e Merges -->
+                    <div id="branches" class="section-content active">
+                        <h2>Branches e Merges 🌿</h2>
+                        
+                        <h3>Gerenciar branches</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Listar branches</div>
+                                <pre><code>git branch</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Listar branches remotas</div>
+                                <pre><code>git branch -r</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Criar nova branch</div>
+                                <pre><code>git branch nome_branch</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Mudar para outra branch</div>
+                                <pre><code>git checkout nome_branch</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Criar e mudar para nova branch</div>
+                                <pre><code>git checkout -b nome_branch</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Deletar branch</div>
+                                <pre><code>git branch -d nome_branch</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Forçar remoção de branch</div>
+                                <pre><code>git branch -D nome_branch</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Renomear branch atual</div>
+                                <pre><code>git branch -m novo_nome</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Merges e rebases</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Mesclar branch atual com outra</div>
+                                <pre><code>git merge branch_origem</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Mesclar sem criar commit de merge</div>
+                                <pre><code>git merge --ff-only branch_origem</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Rebase da branch atual</div>
+                                <pre><code>git rebase branch_origem</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Aplicar commit específico na branch atual</div>
+                                <pre><code>git cherry-pick commit_hash</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Abortar merge em andamento</div>
+                                <pre><code>git merge --abort</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Abortar rebase em andamento</div>
+                                <pre><code>git rebase --abort</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h3>Iniciar e clonar repositórios</h3>
-                    <pre><code>git init                    # Inicializar repositório
-git clone url_do_repositorio # Clonar repositório remoto
-git clone url_do_repositorio pasta_destino # Clonar para pasta específica</code></pre>
+                    <!-- Seção: Repositórios Remotos -->
+                    <div id="remotos" class="section-content active">
+                        <h2>Repositórios Remotos 🌐</h2>
+                        
+                        <h3>Clonar e gerenciar origens</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Clonar repositório</div>
+                                <pre><code>git clone url_repositorio</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Clonar apenas uma branch específica</div>
+                                <pre><code>git clone -b nome_branch --single-branch url_repositorio</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Listar repositórios remotos</div>
+                                <pre><code>git remote -v</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Adicionar origem remota</div>
+                                <pre><code>git remote add nome_origem url_origem</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Remover origem remota</div>
+                                <pre><code>git remote remove nome_origem</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Alterar URL da origem remota</div>
+                                <pre><code>git remote set-url nome_origem nova_url</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Sincronização com remoto</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Enviar alterações para remoto</div>
+                                <pre><code>git push origem nome_branch</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Enviar todas as branches locais</div>
+                                <pre><code>git push --all origem</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Forçar push (use com cuidado)</div>
+                                <pre><code>git push -f origem nome_branch</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Baixar alterações do remoto</div>
+                                <pre><code>git fetch origem</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Baixar e mesclar alterações do remoto</div>
+                                <pre><code>git pull origem nome_branch</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Baixar com rebase em vez de merge</div>
+                                <pre><code>git pull --rebase origem nome_branch</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h3>Fluxo básico de commits</h3>
-                    <pre><code>git status              # Ver estado do repositório
-git add arquivo.txt     # Adicionar arquivo específico
-git add .               # Adicionar todos os arquivos modificados
-git commit -m "Mensagem do commit"
-git commit -am "Mensagem" # Adicionar modificações e commitar</code></pre>
+                    <!-- Seção: Histórico e Diferenças -->
+                    <div id="historico" class="section-content active">
+                        <h2>Histórico e Diferenças 🔍</h2>
+                        
+                        <h3>Ver histórico</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Ver histórico de commits</div>
+                                <pre><code>git log</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Visualização compacta</div>
+                                <pre><code>git log --oneline</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Visualização gráfica</div>
+                                <pre><code>git log --graph --oneline</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Ver quem mudou cada linha</div>
+                                <pre><code>git blame arquivo.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Filtrar log por autor</div>
+                                <pre><code>git log --author="nome"</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Filtrar log por data</div>
+                                <pre><code>git log --since="2023-01-01" --until="2023-12-31"</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Comparar diferenças</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Diferenças não staged</div>
+                                <pre><code>git diff</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Diferenças staged (prontas para commit)</div>
+                                <pre><code>git diff --staged</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Diferenças entre branches</div>
+                                <pre><code>git diff branch1 branch2</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Diferenças entre commits</div>
+                                <pre><code>git diff commit1 commit2</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Diferenças em arquivo específico</div>
+                                <pre><code>git diff -- arquivo.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Mostrar estatísticas de alterações</div>
+                                <pre><code>git diff --stat</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h2>Branches e Merges 🌿</h2>
+                    <!-- Seção: Desfazer Alterações -->
+                    <div id="desfazer" class="section-content active">
+                        <h2>Desfazer Alterações 🔄</h2>
+                        
+                        <h3>Reverter mudanças</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Desfazer alterações não staged</div>
+                                <pre><code>git checkout -- arquivo.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Desfazer alterações (Git moderno)</div>
+                                <pre><code>git restore arquivo.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Remover do stage</div>
+                                <pre><code>git reset HEAD arquivo.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Remover do stage (Git moderno)</div>
+                                <pre><code>git restore --staged arquivo.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Desfazer último commit mantendo alterações</div>
+                                <pre><code>git reset --soft HEAD~1</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Desfazer último commit removendo alterações</div>
+                                <pre><code>git reset --hard HEAD~1</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Criar commit que reverte outro commit</div>
+                                <pre><code>git revert commit_hash</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Alterar mensagem/conteúdo do último commit</div>
+                                <pre><code>git commit --amend</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h3>Gerenciar branches</h3>
-                    <pre><code>git branch                  # Listar branches
-git branch nome_branch      # Criar nova branch
-git checkout nome_branch    # Mudar para outra branch
-git checkout -b nome_branch # Criar e mudar para nova branch
-git branch -d nome_branch   # Deletar branch
-git branch -m novo_nome     # Renomear branch atual</code></pre>
+                    <!-- Seção: Stash e Limpeza -->
+                    <div id="stash" class="section-content active">
+                        <h2>Stash e Limpeza 🧹</h2>
+                        
+                        <h3>Salvar alterações temporárias</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Salvar alterações</div>
+                                <pre><code>git stash</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Salvar alterações com mensagem</div>
+                                <pre><code>git stash save "mensagem descritiva"</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Listar stashes</div>
+                                <pre><code>git stash list</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Aplicar último stash</div>
+                                <pre><code>git stash apply</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Aplicar stash específico</div>
+                                <pre><code>git stash apply stash@{n}</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Remover último stash</div>
+                                <pre><code>git stash drop</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Aplicar e remover último stash</div>
+                                <pre><code>git stash pop</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Criar branch a partir do stash</div>
+                                <pre><code>git stash branch nova_branch</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Limpar arquivos</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Mostrar o que seria removido</div>
+                                <pre><code>git clean -n</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Remover arquivos não rastreados</div>
+                                <pre><code>git clean -f</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Remover arquivos e diretórios não rastreados</div>
+                                <pre><code>git clean -fd</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Limpar tudo (incluindo arquivos ignorados)</div>
+                                <pre><code>git clean -fdx</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h3>Merges e rebases</h3>
-                    <pre><code>git merge branch_origem     # Mesclar branch atual com outra
-git rebase branch_origem    # Rebase da branch atual
-git cherry-pick commit_hash # Aplicar commit específico na branch atual</code></pre>
-                    
-                    <h2>Repositórios Remotos 🌐</h2>
-                    
-                    <h3>Gerenciar remotos</h3>
-                    <pre><code>git remote -v                    # Listar repositórios remotos
-git remote add origin url_remote # Adicionar remoto
-git remote remove origin         # Remover remoto
-git fetch origin                 # Buscar alterações</code></pre>
-                    
-                    <h3>Push e pull</h3>
-                    <pre><code>git pull origin branch            # Buscar e integrar mudanças
-git push origin branch            # Enviar commits para o remoto
-git push -u origin branch         # Enviar e definir upstream
-git push --force                  # Forçar push (cuidado!)
-git pull --rebase                 # Pull com rebase</code></pre>
-                    
-                    <h2>Histórico e Diferenças 🔍</h2>
-                    
-                    <h3>Ver histórico</h3>
-                    <pre><code>git log                  # Ver histórico de commits
-git log --oneline         # Visualização compacta
-git log --graph --oneline # Visualização gráfica
-git blame arquivo.txt     # Ver quem mudou cada linha</code></pre>
-                    
-                    <h3>Comparar diferenças</h3>
-                    <pre><code>git diff                  # Diferenças não staged
-git diff --staged         # Diferenças staged (prontas para commit)
-git diff branch1 branch2  # Diferenças entre branches
-git diff commit1 commit2  # Diferenças entre commits</code></pre>
-                    
-                    <h2>Desfazer Alterações 🔄</h2>
-                    
-                    <h3>Reverter mudanças</h3>
-                    <pre><code>git checkout -- arquivo.txt    # Desfazer alterações não staged
-git restore arquivo.txt         # Desfazer alterações (Git moderno)
-git reset HEAD arquivo.txt      # Remover do stage
-git reset --soft HEAD~1         # Desfazer último commit mantendo alterações
-git reset --hard HEAD~1         # Desfazer último commit removendo alterações
-git revert commit_hash          # Criar commit que reverte outro commit</code></pre>
-                    
-                    <h2>Stash e Limpeza 🧹</h2>
-                    
-                    <h3>Salvar alterações temporárias</h3>
-                    <pre><code>git stash                   # Salvar alterações
-git stash list              # Listar stashes
-git stash apply             # Aplicar último stash
-git stash apply stash@{n}   # Aplicar stash específico
-git stash drop              # Remover último stash
-git stash pop               # Aplicar e remover último stash</code></pre>
-                    
-                    <h3>Limpar arquivos</h3>
-                    <pre><code>git clean -n                # Mostrar o que seria removido
-git clean -f                # Remover arquivos não rastreados
-git clean -fd               # Remover arquivos e diretórios não rastreados</code></pre>
-                    
-                    <h2>Dicas Úteis 💡</h2>
-                    
-                    <ol>
-                        <li>Use <code>git commit --amend</code> para alterar o último commit</li>
-                        <li>Crie aliases com <code>git config --global alias.co checkout</code></li>
-                        <li>Configure <code>.gitignore</code> para excluir arquivos desnecessários</li>
-                        <li>Use <code>git reflog</code> para recuperar operações recentes</li>
-                        <li>Pratique rebase interativo com <code>git rebase -i HEAD~3</code> para organizar commits</li>
-                    </ol>
+                    <!-- Seção: Dicas Úteis -->
+                    <div id="dicas" class="section-content active">
+                        <h2>Dicas Úteis 💡</h2>
+                        
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Alterar o último commit</div>
+                                <pre><code>git commit --amend</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Criar alias para comando git</div>
+                                <pre><code>git config --global alias.co checkout</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Recuperar operações recentes</div>
+                                <pre><code>git reflog</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Rebase interativo para organizar commits</div>
+                                <pre><code>git rebase -i HEAD~3</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Encontrar quem introduziu um bug</div>
+                                <pre><code>git bisect start
+git bisect bad  # commit atual tem o bug
+git bisect good [commit_hash]  # commit onde funcionava</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Verificar integridade do repositório</div>
+                                <pre><code>git fsck</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Procurar texto em todo o histórico</div>
+                                <pre><code>git grep "texto" $(git rev-list --all)</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Arquivar alterações para outro branch</div>
+                                <pre><code>git archive --format=zip HEAD > projeto.zip</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Melhores práticas</h3>
+                        <ul>
+                            <li>Configure <code>.gitignore</code> para excluir arquivos desnecessários (logs, builds, etc.)</li>
+                            <li>Faça commits pequenos e frequentes com mensagens claras e descritivas</li>
+                            <li>Use prefixos nas mensagens de commit: feat, fix, docs, style, refactor, test, chore</li>
+                            <li>Prefira rebase para manter o histórico limpo ao trabalhar em branches</li>
+                            <li>Use tags para marcar versões importantes: <code>git tag -a v1.0.0 -m "Versão 1.0.0"</code></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="section-filter.js"></script>
 </body>
 </html> 

@@ -3,13 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Shell - DevTipsBR</title>
+    <title>Linux - DevTipsBR</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="section-filter.css">
+    <style>
+        .comando-container {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .comando-descricao {
+            font-size: 0.9rem;
+            color: #495057;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .comando-descricao::before {
+            content: "💡";
+            margin-right: 6px;
+        }
+        
+        .comando-container pre {
+            margin-bottom: 0;
+        }
+        
+        .comandos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .comandos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container-fluid bg-modern min-vh-100 py-4">
@@ -22,67 +60,791 @@
                 <div class="content-header">
                     <h1>
                         <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg" alt="Linux" style="width: 40px; height: auto;" class="me-2">
-                        Linux Shell - Comandos Essenciais 🐧
+                        Linux - Comandos Essenciais 🐧
                     </h1>
                 </div>
                 
+                <div class="filter-box">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <label for="sectionSelector" class="form-label">Selecione uma seção:</label>
+                            <select class="form-select" id="sectionSelector">
+                                <option value="all">Todas as seções</option>
+                                <option value="basicos">Comandos Básicos</option>
+                                <option value="arquivos">Gerenciamento de Arquivos</option>
+                                <option value="diretorios">Navegação de Diretórios</option>
+                                <option value="permissoes">Permissões e Usuários</option>
+                                <option value="rede">Rede</option>
+                                <option value="sistema">Sistema</option>
+                                <option value="usuarios">Usuários</option>
+                                <option value="pacotes">Gerenciamento de Pacotes</option>
+                                <option value="processos">Processos</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="content-body">
-                    <h2>Navegação e Arquivos 📂</h2>
+                    <!-- Seção: Comandos Básicos -->
+                    <div id="basicos" class="section-content active">
+                        <h2>Comandos Básicos 🔄</h2>
+                        
+                        <h3>Terminal e Shell</h3>
+                        
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Exibir manual de comando</div>
+                                <pre><code>man comando</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Histórico de comandos</div>
+                                <pre><code>history</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Limpar terminal</div>
+                                <pre><code>clear</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Exibir diretório atual</div>
+                                <pre><code>pwd</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Mostrar data e hora</div>
+                                <pre><code>date</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Mostrar calendário</div>
+                                <pre><code>cal</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Sair do terminal</div>
+                                <pre><code>exit</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Navegação e Listagem</h3>
+                        
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Listar arquivos</div>
+                                <pre><code>ls</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Listar com detalhes</div>
+                                <pre><code>ls -l</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Listar incluindo ocultos</div>
+                                <pre><code>ls -la</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Mudar de diretório</div>
+                                <pre><code>cd /caminho/para/diretorio</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Subir um nível</div>
+                                <pre><code>cd ..</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Ir para o diretório home</div>
+                                <pre><code>cd ~</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Ir para o diretório anterior</div>
+                                <pre><code>cd -</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h3>Navegação básica</h3>
-                    <pre><code>pwd # Mostra diretório atual
-ls # Lista arquivos
-cd diretorio # Muda diretório
-cd .. # Volta um nível</code></pre>
+                    <!-- Seção: Gerenciamento de Arquivos -->
+                    <div id="arquivos" class="section-content active">
+                        <h2>Gerenciamento de Arquivos 📄</h2>
+                        
+                        <h3>Visualização de Arquivos</h3>
+                        
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Ver conteúdo completo</div>
+                                <pre><code>cat arquivo.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Ver primeiras linhas</div>
+                                <pre><code>head arquivo.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Ver primeiras 20 linhas</div>
+                                <pre><code>head -n 20 arquivo.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Ver últimas linhas</div>
+                                <pre><code>tail arquivo.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Ver últimas 20 linhas</div>
+                                <pre><code>tail -n 20 arquivo.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Acompanhar arquivo em tempo real</div>
+                                <pre><code>tail -f arquivo.log</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Visualizar com paginação</div>
+                                <pre><code>less arquivo.txt</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Manipulação de Arquivos</h3>
+                        
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Criar arquivo vazio</div>
+                                <pre><code>touch arquivo.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Copiar arquivo</div>
+                                <pre><code>cp arquivo.txt copia.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Copiar mantendo atributos</div>
+                                <pre><code>cp -a arquivo.txt copia.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Mover/renomear arquivo</div>
+                                <pre><code>mv arquivo.txt novo_nome.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Remover arquivo</div>
+                                <pre><code>rm arquivo.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Remover sem confirmação</div>
+                                <pre><code>rm -f arquivo.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Buscar texto em arquivo</div>
+                                <pre><code>grep "texto" arquivo.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Buscar recursivamente</div>
+                                <pre><code>grep -r "texto" /diretorio/</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Edição de Arquivos</h3>
+                        
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Editar com nano (simples)</div>
+                                <pre><code>nano arquivo.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Editar com vim (avançado)</div>
+                                <pre><code>vim arquivo.txt</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-secondary">
+                            <p><strong>Comandos básicos do Vim:</strong></p>
+                            <ul>
+                                <li><code>i</code> - entrar no modo de inserção</li>
+                                <li><code>Esc</code> - sair do modo de inserção</li>
+                                <li><code>:w</code> - salvar</li>
+                                <li><code>:q</code> - sair</li>
+                                <li><code>:wq</code> - salvar e sair</li>
+                                <li><code>:q!</code> - sair sem salvar</li>
+                            </ul>
+                        </div>
+                    </div>
                     
-                    <h3>Manipulação de arquivos</h3>
-                    <pre><code>touch arquivo.txt # Cria arquivo
-mkdir pasta # Cria pasta
-cp origem destino # Copia
-mv origem destino # Move/renomeia
-rm arquivo # Remove arquivo
-rm -r pasta # Remove pasta</code></pre>
+                    <!-- Seção: Navegação de Diretórios -->
+                    <div id="diretorios" class="section-content active">
+                        <h2>Navegação de Diretórios 📂</h2>
+                        
+                        <h3>Gerenciamento de Diretórios</h3>
+                        
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Criar diretório</div>
+                                <pre><code>mkdir nome_diretorio</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Criar estrutura de diretórios</div>
+                                <pre><code>mkdir -p dir1/dir2/dir3</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Remover diretório vazio</div>
+                                <pre><code>rmdir nome_diretorio</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Remover diretório e conteúdo</div>
+                                <pre><code>rm -r nome_diretorio</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Remover forçadamente</div>
+                                <pre><code>rm -rf nome_diretorio</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Copiar diretório e conteúdo</div>
+                                <pre><code>cp -r dir1 dir2</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Mover/renomear diretório</div>
+                                <pre><code>mv dir1 novo_nome</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Localizar Arquivos</h3>
+                        
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Localizar arquivos por nome</div>
+                                <pre><code>find /diretorio -name "nome_arquivo"</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Localizar ignorando maiúsculas/minúsculas</div>
+                                <pre><code>find /diretorio -iname "nome_arquivo"</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Localizar por tipo (f=arquivo, d=diretório)</div>
+                                <pre><code>find /diretorio -type f -name "*.txt"</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Localizar arquivos modificados nos últimos X dias</div>
+                                <pre><code>find /diretorio -mtime -X</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Localizar e executar comando</div>
+                                <pre><code>find /diretorio -name "*.txt" -exec rm {} \;</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h2>Visualização e Edição 👀</h2>
+                    <!-- Seção: Permissões e Usuários -->
+                    <div id="permissoes" class="section-content active">
+                        <h2>Permissões e Usuários 🔒</h2>
+                        
+                        <h3>Gerenciamento de Permissões</h3>
+                        
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Alterar permissões numéricas (rwx r-x r-x)</div>
+                                <pre><code>chmod 755 arquivo</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Adicionar permissão de execução para o dono</div>
+                                <pre><code>chmod u+x arquivo</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Remover permissão de escrita para todos</div>
+                                <pre><code>chmod a-w arquivo</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Alterar permissões recursivamente</div>
+                                <pre><code>chmod -R 755 diretorio</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Alterar proprietário e grupo</div>
+                                <pre><code>chown usuario:grupo arquivo</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Alterar proprietário recursivamente</div>
+                                <pre><code>chown -R usuario diretorio</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Gerenciamento de Usuários</h3>
+                        
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar comando como superusuário</div>
+                                <pre><code>sudo comando</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Trocar para outro usuário</div>
+                                <pre><code>su - usuario</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Criar novo usuário com diretório home</div>
+                                <pre><code>useradd -m usuario</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Remover usuário e seu diretório home</div>
+                                <pre><code>userdel -r usuario</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Definir/alterar senha do usuário</div>
+                                <pre><code>passwd usuario</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Listar grupos de um usuário</div>
+                                <pre><code>groups usuario</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Adicionar usuário a um grupo</div>
+                                <pre><code>usermod -aG grupo usuario</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h3>Ver conteúdo</h3>
-                    <pre><code>cat arquivo # Mostra conteúdo
-less arquivo # Visualização paginada
-head arquivo # Primeiras 10 linhas
-tail arquivo # Últimas 10 linhas</code></pre>
+                    <!-- Seção: Rede -->
+                    <div id="rede" class="section-content active">
+                        <h2>Rede 🌐</h2>
+                        
+                        <h3>Configuração e Diagnóstico</h3>
+                        
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Mostrar interfaces de rede</div>
+                                <pre><code>ifconfig</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Mostrar interfaces (versão mais recente)</div>
+                                <pre><code>ip addr show</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Testar conectividade</div>
+                                <pre><code>ping google.com</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Traçar rota</div>
+                                <pre><code>traceroute google.com</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Consultar DNS (detalhado)</div>
+                                <pre><code>dig google.com</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Consultar DNS (simples)</div>
+                                <pre><code>nslookup google.com</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Verificar portas abertas (netstat)</div>
+                                <pre><code>netstat -tuln</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Verificar portas abertas (ss)</div>
+                                <pre><code>ss -tuln</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Transferência de Arquivos</h3>
+                        
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Download via wget</div>
+                                <pre><code>wget https://exemplo.com/arquivo.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Download via curl</div>
+                                <pre><code>curl -O https://exemplo.com/arquivo.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Download com autenticação</div>
+                                <pre><code>curl -u usuario:senha -O https://exemplo.com/arquivo.txt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Enviar arquivo via SCP</div>
+                                <pre><code>scp arquivo.txt usuario@servidor:/diretorio/</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Baixar arquivo via SCP</div>
+                                <pre><code>scp usuario@servidor:/diretorio/arquivo.txt ./</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Sincronizar diretórios (rsync)</div>
+                                <pre><code>rsync -av diretorio/ usuario@servidor:/backup/</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Sincronizar e remover arquivos não existentes na origem</div>
+                                <pre><code>rsync -av --delete diretorio/ usuario@servidor:/backup/</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Firewall e Segurança</h3>
+                        
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Ver status do firewall UFW</div>
+                                <pre><code>ufw status</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Ativar firewall UFW</div>
+                                <pre><code>ufw enable</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Permitir porta SSH</div>
+                                <pre><code>ufw allow 22/tcp</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Bloquear porta telnet</div>
+                                <pre><code>ufw deny 23/tcp</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Listar regras do iptables</div>
+                                <pre><code>iptables -L</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Adicionar regra para SSH</div>
+                                <pre><code>iptables -A INPUT -p tcp --dport 22 -j ACCEPT</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Adicionar regra para HTTP</div>
+                                <pre><code>iptables -A INPUT -p tcp --dport 80 -j ACCEPT</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Bloquear todo tráfego de entrada (política default)</div>
+                                <pre><code>iptables -A INPUT -j DROP</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h3>Editores de texto</h3>
-                    <pre><code>nano arquivo # Editor simples
-vim arquivo # Editor avançado</code></pre>
+                    <!-- Seção: Sistema -->
+                    <div id="sistema" class="section-content active">
+                        <h2>Sistema 🖥️</h2>
+                        
+                        <h3>Informações do Sistema</h3>
+                        <pre><code># Informações do kernel
+uname -a
+
+# Versão da distribuição
+cat /etc/os-release
+lsb_release -a
+
+# Informações de hardware
+lshw
+lscpu
+lsblk
+lspci
+lsusb
+
+# Espaço em disco
+df -h
+du -sh /diretorio/
+
+# Uso de memória
+free -h
+
+# Tempo de atividade
+uptime
+
+# Informações de performance
+top
+htop</code></pre>
+                        
+                        <h3>Gerenciamento de Serviços</h3>
+                        <pre><code># systemd (usado na maioria das distribuições modernas)
+systemctl status serviço
+systemctl start serviço
+systemctl stop serviço
+systemctl restart serviço
+systemctl enable serviço  # iniciar na inicialização
+systemctl disable serviço
+
+# SysVinit (legado)
+service serviço status
+service serviço start
+service serviço stop
+service serviço restart</code></pre>
+                        
+                        <h3>Logs e Monitoramento</h3>
+                        <pre><code># Ver logs do sistema
+journalctl
+journalctl -u serviço  # logs de serviço específico
+journalctl -f          # acompanhar em tempo real
+
+# Logs antigos
+cat /var/log/syslog
+tail -f /var/log/auth.log</code></pre>
+                    </div>
                     
-                    <h2>Permissões 🔒</h2>
+                    <!-- Seção: Usuários -->
+                    <div id="usuarios" class="section-content active">
+                        <h2>Usuários 👥</h2>
+                        
+                        <h3>Gerenciamento de Usuários</h3>
+                        <pre><code># Listar usuários
+cat /etc/passwd
+getent passwd
+
+# Adicionar usuário
+sudo useradd -m usuario
+
+# Adicionar usuário interativamente
+sudo adduser usuario
+
+# Definir senha
+sudo passwd usuario
+
+# Modificar usuário
+sudo usermod -aG grupo usuario  # adicionar a grupo
+sudo usermod -s /bin/bash usuario  # alterar shell
+
+# Remover usuário
+sudo userdel usuario
+sudo userdel -r usuario  # remove diretório home também</code></pre>
+                        
+                        <h3>Gerenciamento de Grupos</h3>
+                        <pre><code># Listar grupos
+cat /etc/group
+getent group
+
+# Criar grupo
+sudo groupadd grupo
+
+# Adicionar usuário ao grupo
+sudo gpasswd -a usuario grupo
+
+# Remover usuário do grupo
+sudo gpasswd -d usuario grupo
+
+# Remover grupo
+sudo groupdel grupo</code></pre>
+                        
+                        <h3>Sudo e Permissões Elevadas</h3>
+                        <pre><code># Executar comando como root
+sudo comando
+
+# Editar configuração do sudo
+sudo visudo
+
+# Mudar para usuário root
+sudo -i
+su -
+
+# Executar como outro usuário
+sudo -u usuario comando</code></pre>
+                    </div>
                     
-                    <h3>Gerenciar permissões</h3>
-                    <pre><code>chmod 755 arquivo # Define permissões
-chown usuario arquivo # Muda proprietário
-chgrp grupo arquivo # Muda grupo</code></pre>
+                    <!-- Seção: Gerenciamento de Pacotes -->
+                    <div id="pacotes" class="section-content active">
+                        <h2>Gerenciamento de Pacotes 📦</h2>
+                        
+                        <h3>Debian/Ubuntu (apt)</h3>
+                        <pre><code># Atualizar lista de pacotes
+sudo apt update
+
+# Atualizar pacotes instalados
+sudo apt upgrade
+
+# Atualizar sistema completo
+sudo apt dist-upgrade
+
+# Buscar pacote
+apt search pacote
+
+# Instalar pacote
+sudo apt install pacote
+
+# Remover pacote
+sudo apt remove pacote
+
+# Remover pacote e configurações
+sudo apt purge pacote
+
+# Limpar pacotes não necessários
+sudo apt autoremove</code></pre>
+                        
+                        <h3>Red Hat/CentOS/Fedora (yum/dnf)</h3>
+                        <pre><code># Buscar pacote
+yum search pacote
+dnf search pacote
+
+# Instalar pacote
+sudo yum install pacote
+sudo dnf install pacote
+
+# Atualizar sistema
+sudo yum update
+sudo dnf update
+
+# Remover pacote
+sudo yum remove pacote
+sudo dnf remove pacote</code></pre>
+                        
+                        <h3>Arch Linux (pacman)</h3>
+                        <pre><code># Sincronizar banco de dados
+sudo pacman -Sy
+
+# Atualizar sistema
+sudo pacman -Syu
+
+# Buscar pacote
+pacman -Ss pacote
+
+# Instalar pacote
+sudo pacman -S pacote
+
+# Remover pacote
+sudo pacman -R pacote
+
+# Remover pacote e dependências
+sudo pacman -Rs pacote</code></pre>
+                    </div>
                     
-                    <h2>Processos e Sistema 🖥️</h2>
-                    
-                    <h3>Gerenciar processos</h3>
-                    <pre><code>ps aux # Lista processos
-top # Monitor de processos
-kill pid # Mata processo
-killall nome # Mata por nome</code></pre>
-                    
-                    <h2>Dicas Úteis 💡</h2>
-                    
-                    <ol>
-                        <li>Use <code>history</code> para ver comandos anteriores</li>
-                        <li><code>CTRL+R</code> para busca reversa no histórico</li>
-                        <li>Use <code>&&</code> para executar comandos em sequência</li>
-                        <li><code>|</code> (pipe) para conectar saída de comandos</li>
-                    </ol>
+                    <!-- Seção: Processos -->
+                    <div id="processos" class="section-content active">
+                        <h2>Gerenciamento de Processos 🔄</h2>
+                        
+                        <h3>Monitoramento</h3>
+                        
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Listar processos do usuário atual</div>
+                                <pre><code>ps</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Listar todos processos detalhadamente</div>
+                                <pre><code>ps aux</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Monitor de processos interativo</div>
+                                <pre><code>top</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Monitor de processos interativo aprimorado</div>
+                                <pre><code>htop</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Encontrar ID de processos por nome</div>
+                                <pre><code>pgrep nome_programa</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Controle de Processos</h3>
+                        
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Encerrar processo pelo ID</div>
+                                <pre><code>kill PID</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Forçar encerramento de processo</div>
+                                <pre><code>kill -9 PID</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Encerrar todos processos pelo nome</div>
+                                <pre><code>killall nome_programa</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Encerrar processos pelo nome</div>
+                                <pre><code>pkill nome_programa</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Alterar prioridade de processo</div>
+                                <pre><code>renice +10 PID</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Background e Foreground</h3>
+                        
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar comando em background</div>
+                                <pre><code>comando &</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar em background imune a SIGHUP</div>
+                                <pre><code>nohup comando &</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Colocar processo suspenso em background</div>
+                                <pre><code>bg</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Trazer processo de background para foreground</div>
+                                <pre><code>fg</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Listar processos em background</div>
+                                <pre><code>jobs</code></pre>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="section-filter.js"></script>
 </body>
 </html> 

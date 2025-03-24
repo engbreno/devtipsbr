@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="section-filter.css">
 </head>
 <body>
     <div class="container-fluid bg-modern min-vh-100 py-4">
@@ -26,11 +27,31 @@
                     </h1>
                 </div>
                 
+                <div class="filter-box">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <label for="sectionSelector" class="form-label">Selecione uma seção:</label>
+                            <select class="form-select" id="sectionSelector">
+                                <option value="all">Todas as seções</option>
+                                <option value="instalacao">Instalação e Versões</option>
+                                <option value="npm">Gerenciamento de Pacotes (npm)</option>
+                                <option value="yarn">Gerenciamento de Pacotes (yarn)</option>
+                                <option value="express">Express e Desenvolvimento Web</option>
+                                <option value="testes">Testes e Qualidade de Código</option>
+                                <option value="deploy">Deploy e Produção</option>
+                                <option value="dicas">Dicas Úteis</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="content-body">
-                    <h2>Instalação e Versões 📦</h2>
-                    
-                    <h3>NVM (Node Version Manager)</h3>
-                    <pre><code># Instalar NVM (Windows)
+                    <!-- Seção: Instalação e Versões -->
+                    <div id="instalacao" class="section-content active">
+                        <h2>Instalação e Versões 📦</h2>
+                        
+                        <h3>NVM (Node Version Manager)</h3>
+                        <pre><code># Instalar NVM (Windows)
 winget install nvm-windows
 
 # Instalar NVM (Linux/Mac)
@@ -49,9 +70,9 @@ nvm use lts
 
 # Exibir versão atual
 nvm current</code></pre>
-                    
-                    <h3>Node e npm</h3>
-                    <pre><code># Verificar versão do Node.js
+                        
+                        <h3>Node e npm</h3>
+                        <pre><code># Verificar versão do Node.js
 node -v
 
 # Verificar versão do npm
@@ -63,11 +84,14 @@ npm install -g npm@latest
 # Executar script JavaScript
 node app.js
 node -e "console.log('Olá, Mundo!')"</code></pre>
+                    </div>
                     
-                    <h2>Gerenciamento de Pacotes (npm) 📚</h2>
-                    
-                    <h3>Inicialização e configuração</h3>
-                    <pre><code># Iniciar novo projeto
+                    <!-- Seção: Gerenciamento de Pacotes (npm) -->
+                    <div id="npm" class="section-content active">
+                        <h2>Gerenciamento de Pacotes (npm) 📚</h2>
+                        
+                        <h3>Inicialização e configuração</h3>
+                        <pre><code># Iniciar novo projeto
 npm init
 npm init -y  # Aceitar configurações padrão
 
@@ -77,9 +101,9 @@ npm config set init-license "MIT"
 
 # Listar configurações
 npm config list</code></pre>
-                    
-                    <h3>Instalação de pacotes</h3>
-                    <pre><code># Instalar pacote como dependência
+                        
+                        <h3>Instalação de pacotes</h3>
+                        <pre><code># Instalar pacote como dependência
 npm install express
 npm i express
 
@@ -95,9 +119,9 @@ npm install express@4.18.2
 
 # Instalar todas as dependências do projeto
 npm install</code></pre>
-                    
-                    <h3>Atualização e remoção</h3>
-                    <pre><code># Verificar pacotes desatualizados
+                        
+                        <h3>Atualização e remoção</h3>
+                        <pre><code># Verificar pacotes desatualizados
 npm outdated
 
 # Atualizar pacotes
@@ -110,9 +134,9 @@ npm un express
 
 # Remover pacote global
 npm uninstall -g nodemon</code></pre>
-                    
-                    <h3>Scripts e pacotes</h3>
-                    <pre><code># Executar script definido no package.json
+                        
+                        <h3>Scripts e pacotes</h3>
+                        <pre><code># Executar script definido no package.json
 npm run dev
 npm run build
 npm start
@@ -124,11 +148,14 @@ npm list --depth=0
 # Verificar vulnerabilidades
 npm audit
 npm audit fix</code></pre>
+                    </div>
                     
-                    <h2>Gerenciamento de Pacotes (yarn) 🧶</h2>
-                    
-                    <h3>Instalação e uso básico</h3>
-                    <pre><code># Instalar Yarn
+                    <!-- Seção: Gerenciamento de Pacotes (yarn) -->
+                    <div id="yarn" class="section-content active">
+                        <h2>Gerenciamento de Pacotes (yarn) 🧶</h2>
+                        
+                        <h3>Instalação e uso básico</h3>
+                        <pre><code># Instalar Yarn
 npm install -g yarn
 
 # Iniciar projeto
@@ -143,9 +170,9 @@ yarn global add nodemon
 # Instalar todas as dependências
 yarn
 yarn install</code></pre>
-                    
-                    <h3>Atualização e remoção</h3>
-                    <pre><code># Atualizar pacotes
+                        
+                        <h3>Atualização e remoção</h3>
+                        <pre><code># Atualizar pacotes
 yarn upgrade
 yarn upgrade express
 
@@ -156,11 +183,14 @@ yarn remove express
 yarn dev
 yarn build
 yarn start</code></pre>
+                    </div>
                     
-                    <h2>Express e Desenvolvimento Web 🌐</h2>
-                    
-                    <h3>Iniciar projeto Express</h3>
-                    <pre><code># Instalar Express
+                    <!-- Seção: Express e Desenvolvimento Web -->
+                    <div id="express" class="section-content active">
+                        <h2>Express e Desenvolvimento Web 🌐</h2>
+                        
+                        <h3>Iniciar projeto Express</h3>
+                        <pre><code># Instalar Express
 npm install express
 
 # Instalar gerador Express (opcional)
@@ -171,9 +201,9 @@ express --view=ejs meu-projeto
 npm install express cors dotenv morgan body-parser
 npm install mongoose  # Para MongoDB
 npm install sequelize # Para SQL</code></pre>
-                    
-                    <h3>Desenvolvimento</h3>
-                    <pre><code># Instalar Nodemon (reinicia servidor automaticamente)
+                        
+                        <h3>Desenvolvimento</h3>
+                        <pre><code># Instalar Nodemon (reinicia servidor automaticamente)
 npm install nodemon --save-dev
 
 # Adicionar script no package.json
@@ -186,11 +216,14 @@ npm run dev
 npm install ejs
 npm install pug
 npm install handlebars</code></pre>
+                    </div>
                     
-                    <h2>Testes e Qualidade de Código ✅</h2>
-                    
-                    <h3>Jest</h3>
-                    <pre><code># Instalar Jest
+                    <!-- Seção: Testes e Qualidade de Código -->
+                    <div id="testes" class="section-content active">
+                        <h2>Testes e Qualidade de Código ✅</h2>
+                        
+                        <h3>Jest</h3>
+                        <pre><code># Instalar Jest
 npm install jest --save-dev
 
 # Configurar script no package.json
@@ -202,9 +235,9 @@ npm test -- --watch  # Modo observação
 
 # Verificar cobertura de testes
 npm test -- --coverage</code></pre>
-                    
-                    <h3>ESLint e Prettier</h3>
-                    <pre><code># Instalar ESLint
+                        
+                        <h3>ESLint e Prettier</h3>
+                        <pre><code># Instalar ESLint
 npm install eslint --save-dev
 npx eslint --init
 
@@ -218,11 +251,14 @@ npx prettier --check .
 # Corrigir problemas
 npx eslint . --fix
 npx prettier --write .</code></pre>
+                    </div>
                     
-                    <h2>Deploy e Produção 🚀</h2>
-                    
-                    <h3>PM2 (Process Manager)</h3>
-                    <pre><code># Instalar PM2
+                    <!-- Seção: Deploy e Produção -->
+                    <div id="deploy" class="section-content active">
+                        <h2>Deploy e Produção 🚀</h2>
+                        
+                        <h3>PM2 (Process Manager)</h3>
+                        <pre><code># Instalar PM2
 npm install -g pm2
 
 # Iniciar aplicação
@@ -243,35 +279,36 @@ pm2 delete app.js
 # Configurar inicialização com o sistema
 pm2 startup
 pm2 save</code></pre>
-                    
-                    <h3>Configuração de ambiente</h3>
-                    <pre><code># Instalar dotenv
+                        
+                        <h3>Configuração de ambiente</h3>
+                        <pre><code># Instalar dotenv
 npm install dotenv
 
-# Definir variáveis de ambiente
-# Criar arquivo .env:
-# PORT=3000
-# NODE_ENV=production
-# DB_CONNECTION=mongodb://localhost:27017/meudb
-
-# Uso no código
+# Carregar variáveis no código
 require('dotenv').config()
-const port = process.env.PORT || 3000</code></pre>
+
+# Definir ambiente
+NODE_ENV=production node app.js</code></pre>
+                    </div>
                     
-                    <h2>Dicas Úteis 💡</h2>
-                    
-                    <ol>
-                        <li>Use <code>npm ci</code> em vez de <code>npm install</code> em ambientes de CI/CD para instalações mais rápidas e consistentes</li>
-                        <li>Mantenha o <code>package-lock.json</code> no controle de versão para garantir dependências consistentes</li>
-                        <li>Utilize <code>.npmrc</code> para configurações específicas do projeto</li>
-                        <li>Prefira uso de <code>const</code> e <code>let</code> em vez de <code>var</code> em JavaScript moderno</li>
-                        <li>Aplique o princípio de "uma responsabilidade por arquivo" para manter o código organizado</li>
-                    </ol>
+                    <!-- Seção: Dicas Úteis -->
+                    <div id="dicas" class="section-content active">
+                        <h2>Dicas Úteis 💡</h2>
+                        
+                        <ol>
+                            <li>Use <code>npm ci</code> em vez de <code>npm install</code> em ambientes de CI/CD para instalações mais rápidas e consistentes</li>
+                            <li>Mantenha o <code>package-lock.json</code> no controle de versão para garantir dependências consistentes</li>
+                            <li>Utilize <code>.npmrc</code> para configurações específicas do projeto</li>
+                            <li>Prefira uso de <code>const</code> e <code>let</code> em vez de <code>var</code> em JavaScript moderno</li>
+                            <li>Aplique o princípio de "uma responsabilidade por arquivo" para manter o código organizado</li>
+                        </ol>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="section-filter.js"></script>
 </body>
 </html> 

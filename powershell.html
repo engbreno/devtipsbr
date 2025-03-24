@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="section-filter.css">
 </head>
 <body>
     <div class="container-fluid bg-modern min-vh-100 py-4">
@@ -26,11 +27,31 @@
                     </h1>
                 </div>
                 
+                <div class="filter-box">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <label for="sectionSelector" class="form-label">Selecione uma seção:</label>
+                            <select class="form-select" id="sectionSelector">
+                                <option value="all">Todas as seções</option>
+                                <option value="conceitos">Conceitos Básicos</option>
+                                <option value="arquivos">Sistema de Arquivos</option>
+                                <option value="processos">Processos e Serviços</option>
+                                <option value="scripts">Scripts e Funções</option>
+                                <option value="dados">Manipulação de Dados</option>
+                                <option value="rede">Rede e Sistema</option>
+                                <option value="dicas">Dicas Úteis</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="content-body">
-                    <h2>Conceitos Básicos 🚀</h2>
-                    
-                    <h3>Cmdlets e aliases</h3>
-                    <pre><code># Formato padrão de comandos
+                    <!-- Seção: Conceitos Básicos -->
+                    <div id="conceitos" class="section-content active">
+                        <h2>Conceitos Básicos 🚀</h2>
+                        
+                        <h3>Cmdlets e aliases</h3>
+                        <pre><code># Formato padrão de comandos
 Verbo-Substantivo
 
 # Exemplos de cmdlets comuns
@@ -45,9 +66,9 @@ cd              # Set-Location
 mkdir           # New-Item -ItemType Directory
 rm              # Remove-Item
 cat, type       # Get-Content</code></pre>
-                    
-                    <h3>Ajuda e descoberta</h3>
-                    <pre><code># Atualizar a documentação de ajuda
+                        
+                        <h3>Ajuda e descoberta</h3>
+                        <pre><code># Atualizar a documentação de ajuda
 Update-Help
 
 # Obter ajuda sobre um cmdlet
@@ -60,11 +81,14 @@ Get-Help Get-Process -Full
 Get-Command *process*
 Get-Command -Verb Get
 Get-Command -Noun Item</code></pre>
+                    </div>
                     
-                    <h2>Sistema de Arquivos 📂</h2>
-                    
-                    <h3>Navegação e gerenciamento</h3>
-                    <pre><code># Listar diretório atual
+                    <!-- Seção: Sistema de Arquivos -->
+                    <div id="arquivos" class="section-content active">
+                        <h2>Sistema de Arquivos 📂</h2>
+                        
+                        <h3>Navegação e gerenciamento</h3>
+                        <pre><code># Listar diretório atual
 Get-ChildItem
 ls
 
@@ -90,9 +114,9 @@ Move-Item arquivo.txt destino/
 # Remover arquivos/pastas
 Remove-Item arquivo.txt
 Remove-Item pasta -Recurse</code></pre>
-                    
-                    <h3>Conteúdo de arquivos</h3>
-                    <pre><code># Ler arquivo
+                        
+                        <h3>Conteúdo de arquivos</h3>
+                        <pre><code># Ler arquivo
 Get-Content arquivo.txt
 cat arquivo.txt
 
@@ -107,11 +131,14 @@ Add-Content -Path arquivo.txt -Value "Novo conteúdo"
 
 # Sobrescrever arquivo
 Set-Content -Path arquivo.txt -Value "Novo conteúdo"</code></pre>
+                    </div>
                     
-                    <h2>Processos e Serviços 🖥️</h2>
-                    
-                    <h3>Gerenciar processos</h3>
-                    <pre><code># Listar processos
+                    <!-- Seção: Processos e Serviços -->
+                    <div id="processos" class="section-content active">
+                        <h2>Processos e Serviços 🖥️</h2>
+                        
+                        <h3>Gerenciar processos</h3>
+                        <pre><code># Listar processos
 Get-Process
 
 # Encontrar processo específico
@@ -126,9 +153,9 @@ Start-Process notepad
 # Parar processo
 Stop-Process -Name notepad
 Stop-Process -Id 1234</code></pre>
-                    
-                    <h3>Gerenciar serviços</h3>
-                    <pre><code># Listar todos os serviços
+                        
+                        <h3>Gerenciar serviços</h3>
+                        <pre><code># Listar todos os serviços
 Get-Service
 
 # Encontrar serviço específico
@@ -142,11 +169,14 @@ Stop-Service -Name "wuauserv"
 
 # Verificar status
 Get-Service -Name "wuauserv" | Select-Object Name, Status</code></pre>
+                    </div>
                     
-                    <h2>Scripts e Funções 📝</h2>
-                    
-                    <h3>Funções básicas</h3>
-                    <pre><code># Definir função
+                    <!-- Seção: Scripts e Funções -->
+                    <div id="scripts" class="section-content active">
+                        <h2>Scripts e Funções 📝</h2>
+                        
+                        <h3>Funções básicas</h3>
+                        <pre><code># Definir função
 function Get-Saudacao {
     param (
         [string]$Nome = "Usuário"
@@ -157,9 +187,9 @@ function Get-Saudacao {
 # Chamar função
 Get-Saudacao
 Get-Saudacao -Nome "Maria"</code></pre>
-                    
-                    <h3>Scripts e segurança</h3>
-                    <pre><code># Verificar política de execução
+                        
+                        <h3>Scripts e segurança</h3>
+                        <pre><code># Verificar política de execução
 Get-ExecutionPolicy
 
 # Alterar política de execução (requer Admin)
@@ -170,11 +200,14 @@ Set-ExecutionPolicy RemoteSigned
 
 # Executar script com parâmetros
 .\MeuScript.ps1 -Parametro1 "Valor1"</code></pre>
+                    </div>
                     
-                    <h2>Manipulação de Dados 🧩</h2>
-                    
-                    <h3>Pipeline e formatação</h3>
-                    <pre><code># Pipeline básico
+                    <!-- Seção: Manipulação de Dados -->
+                    <div id="dados" class="section-content active">
+                        <h2>Manipulação de Dados 🧩</h2>
+                        
+                        <h3>Pipeline e formatação</h3>
+                        <pre><code># Pipeline básico
 Get-Process | Sort-Object CPU -Descending | Select-Object -First 5
 
 # Formatação de saída
@@ -188,9 +221,9 @@ Get-Process | Export-Csv -Path processos.csv -NoTypeInformation
 
 # Exportar para JSON
 Get-Process | ConvertTo-Json | Out-File processos.json</code></pre>
-                    
-                    <h3>Filtragem e seleção</h3>
-                    <pre><code># Filtrar objetos
+                        
+                        <h3>Filtragem e seleção</h3>
+                        <pre><code># Filtrar objetos
 Get-Process | Where-Object { $_.CPU -gt 10 }
 Get-Service | Where-Object { $_.Status -eq "Running" }
 
@@ -205,11 +238,14 @@ Get-Process | Group-Object -Property Company
 
 # Medir objetos
 Get-Process | Measure-Object -Property WorkingSet -Sum -Average</code></pre>
+                    </div>
                     
-                    <h2>Rede e Sistema 🌐</h2>
-                    
-                    <h3>Informações de rede</h3>
-                    <pre><code># Obter configuração de IP
+                    <!-- Seção: Rede e Sistema -->
+                    <div id="rede" class="section-content active">
+                        <h2>Rede e Sistema 🌐</h2>
+                        
+                        <h3>Informações de rede</h3>
+                        <pre><code># Obter configuração de IP
 Get-NetIPConfiguration
 Get-NetIPAddress
 
@@ -222,9 +258,9 @@ Get-NetTCPConnection | Where-Object State -eq "Established"
 
 # Obter informações de adaptador
 Get-NetAdapter</code></pre>
-                    
-                    <h3>Informações do sistema</h3>
-                    <pre><code># Obter informações do sistema
+                        
+                        <h3>Informações do sistema</h3>
+                        <pre><code># Obter informações do sistema
 Get-ComputerInfo
 
 # Obter versão do sistema
@@ -238,21 +274,26 @@ Get-Volume
 Get-CimInstance Win32_ComputerSystem
 Get-CimInstance Win32_Processor
 Get-CimInstance Win32_OperatingSystem</code></pre>
+                    </div>
                     
-                    <h2>Dicas Úteis 💡</h2>
-                    
-                    <ol>
-                        <li>Use <code>$_</code> ou <code>$PSItem</code> para referenciar o objeto atual em um pipeline</li>
-                        <li>O operador <code>|</code> (pipe) conecta comandos, passando objetos, não apenas texto</li>
-                        <li>Use <code>Tab</code> para autocompletar comandos, nomes de arquivos e parâmetros</li>
-                        <li>Instale o módulo <code>PSReadLine</code> para melhorar a experiência do console</li>
-                        <li>Execute <code>$Profile</code> para ver o caminho do seu perfil de personalização</li>
-                    </ol>
+                    <!-- Seção: Dicas Úteis -->
+                    <div id="dicas" class="section-content active">
+                        <h2>Dicas Úteis 💡</h2>
+                        
+                        <ol>
+                            <li>Use <code>$_</code> ou <code>$PSItem</code> para referenciar o objeto atual em um pipeline</li>
+                            <li>O operador <code>|</code> (pipe) conecta comandos, passando objetos, não apenas texto</li>
+                            <li>Use <code>Tab</code> para autocompletar comandos, nomes de arquivos e parâmetros</li>
+                            <li>Instale o módulo <code>PSReadLine</code> para melhorar a experiência do console</li>
+                            <li>Execute <code>$Profile</code> para ver o caminho do seu perfil de personalização</li>
+                        </ol>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="section-filter.js"></script>
 </body>
 </html> 

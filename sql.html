@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="section-filter.css">
 </head>
 <body>
     <div class="container-fluid bg-modern min-vh-100 py-4">
@@ -26,11 +27,33 @@
                     </h1>
                 </div>
                 
+                <div class="filter-box">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <label for="sectionSelector" class="form-label">Selecione uma seção:</label>
+                            <select class="form-select" id="sectionSelector">
+                                <option value="all">Todas as seções</option>
+                                <option value="fundamentos">Fundamentos</option>
+                                <option value="manipulacao">Manipulação de Dados</option>
+                                <option value="relacionamentos">Relacionamentos</option>
+                                <option value="funcoes">Funções e Cálculos</option>
+                                <option value="agrupamento">Agrupamento</option>
+                                <option value="subconsultas">Subconsultas</option>
+                                <option value="indices">Índices e Performance</option>
+                                <option value="estrutura">Estrutura do Banco</option>
+                                <option value="dicas">Dicas Úteis</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="content-body">
-                    <h2>Fundamentos 📊</h2>
-                    
-                    <h3>Consultas básicas</h3>
-                    <pre><code>-- Consulta básica
+                    <!-- Seção: Fundamentos -->
+                    <div id="fundamentos" class="section-content active">
+                        <h2>Fundamentos 📊</h2>
+                        
+                        <h3>Consultas básicas</h3>
+                        <pre><code>-- Consulta básica
 SELECT * FROM clientes;
 
 -- Selecionar colunas específicas
@@ -47,9 +70,9 @@ SELECT * FROM produtos ORDER BY preco DESC;
 SELECT * FROM produtos LIMIT 10;        -- MySQL, PostgreSQL, SQLite
 SELECT TOP 10 * FROM produtos;          -- SQL Server
 SELECT * FROM produtos FETCH FIRST 10 ROWS ONLY;  -- Oracle</code></pre>
-                    
-                    <h3>Filtragem</h3>
-                    <pre><code>-- Filtrar com WHERE
+                        
+                        <h3>Filtragem</h3>
+                        <pre><code>-- Filtrar com WHERE
 SELECT * FROM clientes WHERE cidade = 'São Paulo';
 
 -- Operadores de comparação
@@ -68,9 +91,9 @@ SELECT * FROM produtos WHERE NOT categoria = 'Alimentação';
 -- Verificar valores NULL
 SELECT * FROM clientes WHERE telefone IS NULL;
 SELECT * FROM clientes WHERE telefone IS NOT NULL;</code></pre>
-                    
-                    <h3>Filtros avançados</h3>
-                    <pre><code>-- Operador BETWEEN
+                        
+                        <h3>Filtros avançados</h3>
+                        <pre><code>-- Operador BETWEEN
 SELECT * FROM produtos WHERE preco BETWEEN 50 AND 100;
 
 -- Operador IN
@@ -84,11 +107,14 @@ SELECT * FROM produtos WHERE nome LIKE '_Phone';       -- Qualquer caractere seg
 -- Expressões regulares (MySQL)
 SELECT * FROM produtos WHERE nome REGEXP '^Celular';   -- Começa com "Celular"
 SELECT * FROM produtos WHERE nome REGEXP '[0-9]';      -- Contém algum número</code></pre>
+                    </div>
                     
-                    <h2>Manipulação de Dados 🔄</h2>
-                    
-                    <h3>Inserir dados</h3>
-                    <pre><code>-- Inserir um registro
+                    <!-- Seção: Manipulação de Dados -->
+                    <div id="manipulacao" class="section-content active">
+                        <h2>Manipulação de Dados 🔄</h2>
+                        
+                        <h3>Inserir dados</h3>
+                        <pre><code>-- Inserir um registro
 INSERT INTO clientes (nome, email, telefone)
 VALUES ('Ana Silva', 'ana@email.com', '(11) 98765-4321');
 
@@ -101,9 +127,9 @@ VALUES
 -- Inserir dados de outra tabela
 INSERT INTO clientes_vip (nome, email, telefone)
 SELECT nome, email, telefone FROM clientes WHERE total_compras > 10000;</code></pre>
-                    
-                    <h3>Atualizar dados</h3>
-                    <pre><code>-- Atualizar registros
+                        
+                        <h3>Atualizar dados</h3>
+                        <pre><code>-- Atualizar registros
 UPDATE clientes
 SET telefone = '(11) 99999-8888'
 WHERE id = 1;
@@ -118,9 +144,9 @@ UPDATE pedidos p
 JOIN clientes c ON p.cliente_id = c.id
 SET p.status = 'Premium'
 WHERE c.tipo = 'VIP';</code></pre>
-                    
-                    <h3>Excluir dados</h3>
-                    <pre><code>-- Excluir registros
+                        
+                        <h3>Excluir dados</h3>
+                        <pre><code>-- Excluir registros
 DELETE FROM pedidos
 WHERE data < '2022-01-01';
 
@@ -133,11 +159,14 @@ DELETE p
 FROM pedidos p
 JOIN clientes c ON p.cliente_id = c.id
 WHERE c.status = 'Inativo';</code></pre>
+                    </div>
                     
-                    <h2>Junções e Relacionamentos 🔄</h2>
-                    
-                    <h3>INNER JOIN</h3>
-                    <pre><code>-- INNER JOIN básico
+                    <!-- Seção: Junções e Relacionamentos -->
+                    <div id="relacionamentos" class="section-content active">
+                        <h2>Junções e Relacionamentos 🔄</h2>
+                        
+                        <h3>INNER JOIN</h3>
+                        <pre><code>-- INNER JOIN básico
 SELECT p.id, p.data, c.nome
 FROM pedidos p
 INNER JOIN clientes c ON p.cliente_id = c.id;
@@ -148,9 +177,9 @@ FROM pedidos p
 INNER JOIN clientes c ON p.cliente_id = c.id
 INNER JOIN itens_pedido i ON p.id = i.pedido_id
 INNER JOIN produtos pr ON i.produto_id = pr.id;</code></pre>
-                    
-                    <h3>OUTER JOINs</h3>
-                    <pre><code>-- LEFT JOIN (inclui todos os registros da tabela da esquerda)
+                        
+                        <h3>OUTER JOINs</h3>
+                        <pre><code>-- LEFT JOIN (inclui todos os registros da tabela da esquerda)
 SELECT c.nome, p.id
 FROM clientes c
 LEFT JOIN pedidos p ON c.id = p.cliente_id;
@@ -164,9 +193,9 @@ RIGHT JOIN faturas f ON p.id = f.pedido_id;
 SELECT c.nome, p.id
 FROM clientes c
 FULL JOIN pedidos p ON c.id = p.cliente_id;</code></pre>
-                    
-                    <h3>Outros tipos de JOINs</h3>
-                    <pre><code>-- CROSS JOIN (produto cartesiano)
+                        
+                        <h3>Outros tipos de JOINs</h3>
+                        <pre><code>-- CROSS JOIN (produto cartesiano)
 SELECT c.nome, p.nome AS produto
 FROM clientes c
 CROSS JOIN produtos p;
@@ -175,11 +204,14 @@ CROSS JOIN produtos p;
 SELECT e.nome AS funcionario, g.nome AS gerente
 FROM funcionarios e
 JOIN funcionarios g ON e.gerente_id = g.id;</code></pre>
+                    </div>
                     
-                    <h2>Funções Agregadas 📈</h2>
-                    
-                    <h3>Funções básicas</h3>
-                    <pre><code>-- Contar registros
+                    <!-- Seção: Funções Agregadas -->
+                    <div id="funcoes" class="section-content active">
+                        <h2>Funções Agregadas 📈</h2>
+                        
+                        <h3>Funções básicas</h3>
+                        <pre><code>-- Contar registros
 SELECT COUNT(*) FROM clientes;
 SELECT COUNT(email) FROM clientes;  -- Não conta valores NULL
 
@@ -197,9 +229,9 @@ SELECT
     MIN(valor) AS menor_valor,
     MAX(valor) AS maior_valor
 FROM pedidos;</code></pre>
-                    
-                    <h3>Agrupamento</h3>
-                    <pre><code>-- GROUP BY básico
+                        
+                        <h3>Agrupamento</h3>
+                        <pre><code>-- GROUP BY básico
 SELECT categoria, COUNT(*) AS total
 FROM produtos
 GROUP BY categoria;
@@ -221,11 +253,14 @@ FROM produtos
 GROUP BY categoria
 HAVING COUNT(*) > 5
 ORDER BY total DESC;</code></pre>
+                    </div>
                     
-                    <h2>Subconsultas e CTEs 🧩</h2>
-                    
-                    <h3>Subconsultas (subqueries)</h3>
-                    <pre><code>-- Subconsulta no WHERE
+                    <!-- Seção: Subconsultas e CTEs -->
+                    <div id="subconsultas" class="section-content active">
+                        <h2>Subconsultas e CTEs 🧩</h2>
+                        
+                        <h3>Subconsultas (subqueries)</h3>
+                        <pre><code>-- Subconsulta no WHERE
 SELECT nome
 FROM produtos
 WHERE categoria_id IN (SELECT id FROM categorias WHERE nome = 'Eletrônicos');
@@ -244,9 +279,9 @@ SELECT
     c.nome,
     (SELECT COUNT(*) FROM pedidos p WHERE p.cliente_id = c.id) AS total_pedidos
 FROM clientes c;</code></pre>
-                    
-                    <h3>Common Table Expressions (CTEs)</h3>
-                    <pre><code>-- CTE básica
+                        
+                        <h3>Common Table Expressions (CTEs)</h3>
+                        <pre><code>-- CTE básica
 WITH clientes_sp AS (
     SELECT * FROM clientes WHERE cidade = 'São Paulo'
 )
@@ -263,75 +298,72 @@ SELECT c.nome, COUNT(p.id) AS total_pedidos
 FROM clientes_ativos c
 JOIN pedidos_recentes p ON c.id = p.cliente_id
 GROUP BY c.nome;</code></pre>
+                    </div>
                     
-                    <h2>Estrutura do Banco de Dados 🏗️</h2>
-                    
-                    <h3>Criar e modificar tabelas</h3>
-                    <pre><code>-- Criar tabela
+                    <!-- Seção: Estrutura do Banco de Dados -->
+                    <div id="estrutura" class="section-content active">
+                        <h2>Estrutura do Banco de Dados 🏗️</h2>
+                        
+                        <h3>Criar e modificar tabelas</h3>
+                        <pre><code>-- Criar tabela
 CREATE TABLE clientes (
-    id INT PRIMARY KEY AUTO_INCREMENT,  -- MySQL
+    id INT PRIMARY KEY AUTO_INCREMENT,   -- MySQL
+    -- id INT PRIMARY KEY IDENTITY(1,1), -- SQL Server
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE,
     telefone VARCHAR(20),
     data_cadastro DATE DEFAULT CURRENT_DATE
 );
 
--- Modificar tabela (adicionar coluna)
-ALTER TABLE clientes ADD COLUMN idade INT;
-
--- Modificar tabela (alterar coluna)
-ALTER TABLE clientes MODIFY COLUMN nome VARCHAR(150);  -- MySQL
-ALTER TABLE clientes ALTER COLUMN nome VARCHAR(150);   -- SQL Server
-
--- Modificar tabela (remover coluna)
-ALTER TABLE clientes DROP COLUMN idade;
-
--- Excluir tabela
-DROP TABLE clientes;</code></pre>
-                    
-                    <h3>Índices e constraints</h3>
-                    <pre><code>-- Adicionar índice
+-- Modificar tabela
+ALTER TABLE clientes ADD COLUMN cidade VARCHAR(50);
+ALTER TABLE clientes DROP COLUMN telefone;
+ALTER TABLE clientes MODIFY COLUMN nome VARCHAR(150);   -- MySQL
+ALTER TABLE clientes ALTER COLUMN nome VARCHAR(150);    -- SQL Server, PostgreSQL</code></pre>
+                        
+                        <h3>Índices</h3>
+                        <pre><code>-- Criar índice
 CREATE INDEX idx_cliente_email ON clientes(email);
 
--- Adicionar índice composto
-CREATE INDEX idx_pedido_data_cliente ON pedidos(data, cliente_id);
-
--- Adicionar chave estrangeira
-ALTER TABLE pedidos
-ADD CONSTRAINT fk_pedidos_cliente
-FOREIGN KEY (cliente_id) REFERENCES clientes(id);
+-- Índice composto
+CREATE INDEX idx_produto_cat_preco ON produtos(categoria, preco);
 
 -- Remover índice
 DROP INDEX idx_cliente_email ON clientes;  -- MySQL
 DROP INDEX clientes.idx_cliente_email;     -- SQL Server</code></pre>
+                    </div>
                     
-                    <h2>Dicas Úteis 💡</h2>
-                    
-                    <ol>
-                        <li>Use <code>EXPLAIN</code> (MySQL/PostgreSQL) ou <code>EXPLAIN PLAN</code> (Oracle) para analisar a execução de consultas</li>
-                        <li>Prefira nomes de tabelas e colunas no singular (produto em vez de produtos)</li>
-                        <li>Evite usar <code>SELECT *</code> em produção, especifique as colunas necessárias</li>
-                        <li>Utilize transações para operações que precisam ser atômicas:</li>
-                    </ol>
-                    
-                    <pre><code>-- Transação manual
+                    <!-- Seção: Dicas Úteis -->
+                    <div id="dicas" class="section-content active">
+                        <h2>Dicas Úteis 💡</h2>
+                        
+                        <ol>
+                            <li>Use <code>EXPLAIN</code> (MySQL/PostgreSQL) ou <code>EXPLAIN PLAN</code> (Oracle) para analisar a execução de consultas</li>
+                            <li>Prefira nomes de tabelas e colunas no singular (produto em vez de produtos)</li>
+                            <li>Evite usar <code>SELECT *</code> em produção, especifique as colunas necessárias</li>
+                            <li>Utilize transações para operações que precisam ser atômicas:</li>
+                        </ol>
+                        
+                        <pre><code>-- Transação manual
 BEGIN TRANSACTION;  -- ou START TRANSACTION (MySQL)
     UPDATE contas SET saldo = saldo - 100 WHERE id = 1;
     UPDATE contas SET saldo = saldo + 100 WHERE id = 2;
 COMMIT;  -- ou ROLLBACK para desfazer</code></pre>
-                    
-                    <ol start="5">
-                        <li>Use <code>CREATE VIEW</code> para armazenar consultas complexas frequentemente utilizadas</li>
-                    </ol>
-                    
-                    <pre><code>-- Criar uma view
+                        
+                        <ol start="5">
+                            <li>Use <code>CREATE VIEW</code> para armazenar consultas complexas frequentemente utilizadas</li>
+                        </ol>
+                        
+                        <pre><code>-- Criar uma view
 CREATE VIEW produtos_caros AS
 SELECT * FROM produtos WHERE preco > 500;</code></pre>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="section-filter.js"></script>
 </body>
 </html> 

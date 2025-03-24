@@ -10,6 +10,52 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="section-filter.css">
+    <style>
+        .comando-container {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .comando-descricao {
+            font-size: 0.9rem;
+            color: #495057;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .comando-descricao::before {
+            content: "💡";
+            margin-right: 6px;
+            flex-shrink: 0;
+        }
+        
+        .comando-container pre {
+            margin-bottom: 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .comandos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 15px;
+            grid-auto-rows: minmax(min-content, auto);
+        }
+        
+        @media (max-width: 768px) {
+            .comandos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container-fluid bg-modern min-vh-100 py-4">
@@ -26,125 +72,302 @@
                     </h1>
                 </div>
                 
+                <div class="filter-box">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <label for="sectionSelector" class="form-label">Selecione uma seção:</label>
+                            <select class="form-select" id="sectionSelector">
+                                <option value="all">Todas as seções</option>
+                                <option value="instalacao">Instalação e Configuração</option>
+                                <option value="criar-projetos">Criar e Iniciar Projetos</option>
+                                <option value="comandos-basicos">Comandos Básicos</option>
+                                <option value="ferramentas">Ferramentas Úteis</option>
+                                <option value="sintaxe">Sintaxe Básica de Go</option>
+                                <option value="dicas">Dicas Úteis</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="content-body">
-                    <h2>Instalação e Configuração 🛠️</h2>
-                    
-                    <h3>Instalação</h3>
-                    <pre><code># Download da versão oficial (https://go.dev/dl/)
-# Windows: Usar instalador MSI
-# Linux/MacOS:
-
-# Linux (usando apt)
-sudo apt update
-sudo apt install golang-go
-
-# MacOS (usando Homebrew)
-brew install go
-
-# Verificar instalação
-go version</code></pre>
-                    
-                    <h3>Configuração do ambiente</h3>
-                    <pre><code># Variáveis de ambiente (adicionar ao .bashrc, .zshrc ou perfil do Windows)
-export GOPATH=$HOME/go
+                    <!-- Seção: Instalação e Configuração -->
+                    <div id="instalacao" class="section-content active">
+                        <h2>Instalação e Configuração 🛠️</h2>
+                        
+                        <h3>Instalação</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Linux (usando apt)</div>
+                                <pre><code>sudo apt update
+sudo apt install golang-go</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">MacOS (usando Homebrew)</div>
+                                <pre><code>brew install go</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Windows</div>
+                                <pre><code># Baixar e executar o instalador MSI de go.dev/dl/</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Verificar instalação</div>
+                                <pre><code>go version</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Configuração do ambiente</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Configurar variáveis de ambiente (Linux/MacOS)</div>
+                                <pre><code>export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOBIN
-
-# Verificar configuração
-go env</code></pre>
+export PATH=$PATH:$GOBIN</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Configurar variáveis de ambiente (Windows PowerShell)</div>
+                                <pre><code>$env:GOPATH = "$HOME\go"
+$env:GOBIN = "$env:GOPATH\bin"
+$env:Path += ";$env:GOBIN"</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Verificar configuração</div>
+                                <pre><code>go env</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Verificar variáveis específicas</div>
+                                <pre><code>go env GOPATH GOBIN</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h2>Criar e Iniciar Projetos 🏗️</h2>
+                    <!-- Seção: Criar e Iniciar Projetos -->
+                    <div id="criar-projetos" class="section-content active">
+                        <h2>Criar e Iniciar Projetos 🏗️</h2>
+                        
+                        <h3>Inicializar um módulo</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Criar diretório para o projeto</div>
+                                <pre><code>mkdir meu-projeto
+cd meu-projeto</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Inicializar um módulo Go</div>
+                                <pre><code>go mod init github.com/seuusuario/meu-projeto</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Criar arquivo principal</div>
+                                <pre><code>touch main.go</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Estrutura básica de main.go</div>
+                                <pre><code>package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, Go!")
+}</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Gerenciamento de dependências</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Adicionar uma dependência</div>
+                                <pre><code>go get github.com/pacote/desejado</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Adicionar versão específica</div>
+                                <pre><code>go get github.com/pacote/desejado@v1.2.3</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Atualizar todas as dependências</div>
+                                <pre><code>go get -u ./...</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Remover dependências não utilizadas</div>
+                                <pre><code>go mod tidy</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Verificar dependências</div>
+                                <pre><code>go list -m all</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Baixar todas as dependências</div>
+                                <pre><code>go mod download</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h3>Inicializar um módulo</h3>
-                    <pre><code># Criar diretório para o projeto
-mkdir meu-projeto
-cd meu-projeto
-
-# Inicializar um módulo Go
-go mod init github.com/seuusuario/meu-projeto
-
-# Editar o arquivo go.mod manualmente
-# Ele rastreia dependências e define o nome do módulo</code></pre>
+                    <!-- Seção: Comandos Básicos -->
+                    <div id="comandos-basicos" class="section-content active">
+                        <h2>Comandos Básicos 💻</h2>
+                        
+                        <h3>Compilação e execução</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Compilar e executar</div>
+                                <pre><code>go run main.go</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Compilar um pacote ou programa</div>
+                                <pre><code>go build</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Compilar para um arquivo específico</div>
+                                <pre><code>go build -o meuapp</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Compilar para outra plataforma</div>
+                                <pre><code>GOOS=windows GOARCH=amd64 go build -o app.exe</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Instalar o pacote atual</div>
+                                <pre><code>go install</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Compilar e instalar uma aplicação específica</div>
+                                <pre><code>go install github.com/seuusuario/meu-projeto/cmd/app</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Testes</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar todos os testes</div>
+                                <pre><code>go test ./...</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar testes com cobertura</div>
+                                <pre><code>go test -cover ./...</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Gerar relatório de cobertura</div>
+                                <pre><code>go test -coverprofile=coverage.out ./...
+go tool cover -html=coverage.out</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar testes com benchmark</div>
+                                <pre><code>go test -bench=.</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar testes verbose</div>
+                                <pre><code>go test -v ./...</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Executar testes específicos</div>
+                                <pre><code>go test -run=TestMinhaFuncao</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h3>Gerenciamento de dependências</h3>
-                    <pre><code># Adicionar uma dependência
-go get github.com/pacote/desejado
-
-# Adicionar versão específica
-go get github.com/pacote/desejado@v1.2.3
-
-# Atualizar todas as dependências
-go get -u ./...
-
-# Remover dependências não utilizadas
-go mod tidy
-
-# Verificar dependências
-go list -m all</code></pre>
-                    
-                    <h2>Comandos Básicos 💻</h2>
-                    
-                    <h3>Compilação e execução</h3>
-                    <pre><code># Compilar e executar
-go run main.go
-
-# Compilar um pacote ou programa
-go build
-
-# Compilar para um arquivo específico
-go build -o meuapp
-
-# Compilar para outra plataforma
-GOOS=windows GOARCH=amd64 go build -o app.exe
-
-# Instalar o pacote atual
-go install</code></pre>
-                    
-                    <h3>Testes</h3>
-                    <pre><code># Executar todos os testes
-go test ./...
-
-# Executar testes com cobertura
-go test -cover ./...
-
-# Gerar relatório de cobertura
-go test -coverprofile=coverage.out ./...
-go tool cover -html=coverage.out
-
-# Executar testes com benchmark
-go test -bench=.</code></pre>
-                    
-                    <h2>Ferramentas Úteis 🧰</h2>
-                    
-                    <h3>Formatação e linting</h3>
-                    <pre><code># Formatar código (gofmt)
-gofmt -w arquivo.go
-
-# Formatar diretório inteiro
-gofmt -w .
-
-# Análise estática (Go Vet)
-go vet ./...
-
-# Instalar e usar golint
-go install golang.org/x/lint/golint@latest
+                    <!-- Seção: Ferramentas Úteis -->
+                    <div id="ferramentas" class="section-content active">
+                        <h2>Ferramentas Úteis 🧰</h2>
+                        
+                        <h3>Formatação e linting</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Formatar código (gofmt)</div>
+                                <pre><code>gofmt -w arquivo.go</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Formatar diretório inteiro</div>
+                                <pre><code>gofmt -w .</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Análise estática (Go Vet)</div>
+                                <pre><code>go vet ./...</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Instalar e usar golint</div>
+                                <pre><code>go install golang.org/x/lint/golint@latest
 golint ./...</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Formatar e simplificar código (gofmt -s)</div>
+                                <pre><code>gofmt -s -w .</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Instalar e usar staticcheck</div>
+                                <pre><code>go install honnef.co/go/tools/cmd/staticcheck@latest
+staticcheck ./...</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Documentação</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Visualizar documentação local</div>
+                                <pre><code>go doc fmt.Println</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Iniciar servidor de documentação</div>
+                                <pre><code>godoc -http=:6060</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Gerar documentação em HTML</div>
+                                <pre><code>go doc -all -html ./...</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Explorar pacotes padrão</div>
+                                <pre><code>go doc -src fmt</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Visualizar documentação de tipos</div>
+                                <pre><code>go doc net/http.Request</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Abrir documentação no navegador</div>
+                                <pre><code>go doc -html fmt</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h3>Documentação</h3>
-                    <pre><code># Visualizar documentação local
-go doc fmt.Println
-
-# Iniciar servidor de documentação
-godoc -http=:6060
-
-# Gerar documentação em HTML
-go doc -all -html ./...</code></pre>
-                    
-                    <h2>Sintaxe Básica de Go 📝</h2>
-                    
-                    <h3>Estrutura básica de um programa</h3>
-                    <pre><code>// main.go
-package main
+                    <!-- Seção: Sintaxe Básica de Go -->
+                    <div id="sintaxe" class="section-content active">
+                        <h2>Sintaxe Básica de Go 📝</h2>
+                        
+                        <h3>Estrutura básica de um programa</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Arquivo main.go</div>
+                                <pre><code>package main
 
 import (
     "fmt"
@@ -153,15 +376,52 @@ import (
 func main() {
     fmt.Println("Olá, Mundo!")
 }</code></pre>
-                    
-                    <h3>Tipos de dados fundamentais</h3>
-                    <pre><code>// Declaração de variáveis
-var nome string = "Go"
-idade := 13  // Inferência de tipo
-const PI = 3.14159
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Criar um pacote reutilizável</div>
+                                <pre><code>// Em utils/math.go
+package utils
 
-// Tipos básicos
-var (
+// Soma retorna a soma de dois inteiros
+func Soma(a, b int) int {
+    return a + b
+}</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Importar um pacote local</div>
+                                <pre><code>package main
+
+import (
+    "fmt"
+    "meu-projeto/utils"
+)
+
+func main() {
+    resultado := utils.Soma(5, 3)
+    fmt.Println(resultado)
+}</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Tipos de dados fundamentais</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Declaração de variáveis</div>
+                                <pre><code>// Declaração explícita
+var nome string = "Go"
+
+// Inferência de tipo
+idade := 13  
+
+// Constantes
+const PI = 3.14159</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Tipos básicos</div>
+                                <pre><code>var (
     inteiro    int     = 42
     flutuante  float64 = 3.14
     booleano   bool    = true
@@ -169,150 +429,227 @@ var (
     b          byte    = 'a'
     r          rune    = '世'
 )</code></pre>
-                    
-                    <h3>Estruturas de controle</h3>
-                    <pre><code>// Condicionais
-if x > 0 {
-    // código
-} else if x < 0 {
-    // código
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Arrays e Slices</div>
+                                <pre><code>// Array com tamanho fixo
+var arr [5]int = [5]int{1, 2, 3, 4, 5}
+
+// Slice (tamanho dinâmico)
+slice := []int{1, 2, 3}
+slice = append(slice, 4) // Adiciona elemento</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Maps</div>
+                                <pre><code>// Criar um map
+m := make(map[string]int)
+
+// Inicializar com valores
+m := map[string]int{
+    "um": 1,
+    "dois": 2,
+}
+
+// Adicionar ou atualizar
+m["três"] = 3
+
+// Verificar existência
+valor, existe := m["chave"]</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Estruturas de controle</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Condicionais (if/else)</div>
+                                <pre><code>if x > 10 {
+    fmt.Println("x é maior que 10")
+} else if x == 10 {
+    fmt.Println("x é igual a 10")
 } else {
-    // código
+    fmt.Println("x é menor que 10")
 }
 
-// Switch
-switch os := runtime.GOOS; os {
-case "darwin":
-    fmt.Println("MacOS")
-case "linux":
-    fmt.Println("Linux")
-default:
-    fmt.Printf("%s.\n", os)
-}
-
-// Loops
+// With statement
+if valor, ok := m["chave"]; ok {
+    fmt.Println("Valor:", valor)
+}</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Loops (for)</div>
+                                <pre><code>// Loop tradicional
 for i := 0; i < 10; i++ {
     fmt.Println(i)
 }
 
-// Equivalente a while
-for condicao {
-    // código
+// Loop tipo "while"
+i := 0
+for i < 10 {
+    fmt.Println(i)
+    i++
 }
 
 // Loop infinito
 for {
-    // código
+    // Algo infinito (use break para sair)
 }</code></pre>
-                    
-                    <h3>Coleções de dados</h3>
-                    <pre><code>// Arrays (tamanho fixo)
-var arr [5]int = [5]int{1, 2, 3, 4, 5}
-
-// Slices (dinâmicos)
-slice := []int{1, 2, 3}
-slice = append(slice, 4, 5)
-
-// Maps
-mapa := map[string]int{
-    "um": 1,
-    "dois": 2,
-}
-mapa["três"] = 3</code></pre>
-                    
-                    <h3>Funções</h3>
-                    <pre><code>// Função básica
-func soma(a, b int) int {
-    return a + b
-}
-
-// Múltiplos retornos
-func divMod(a, b int) (int, int) {
-    return a / b, a % b
-}
-
-// Retornos nomeados
-func retornoNomeado() (x, y int) {
-    x = 1
-    y = 2
-    return  // retorna x e y
-}
-
-// Funções como valores
-f := func(x int) int {
-    return x * x
-}
-</code></pre>
-                    
-                    <h3>Structs e métodos</h3>
-                    <pre><code>// Definição de struct
-type Pessoa struct {
-    Nome  string
-    Idade int
-}
-
-// Métodos para structs
-func (p Pessoa) Apresentar() string {
-    return fmt.Sprintf("Olá, meu nome é %s e tenho %d anos", p.Nome, p.Idade)
-}
-
-// Método com ponteiro (para modificar o receptor)
-func (p *Pessoa) Envelhecer() {
-    p.Idade++
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Switch</div>
+                                <pre><code>switch dia {
+case "segunda":
+    fmt.Println("Início da semana")
+case "terça", "quarta", "quinta":
+    fmt.Println("Meio da semana")
+case "sexta":
+    fmt.Println("Quase fim de semana")
+default:
+    fmt.Println("Fim de semana")
 }</code></pre>
-                    
-                    <h3>Interfaces</h3>
-                    <pre><code>// Definição de interface
-type Saudador interface {
-    Saudar() string
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Iteração em coleções (range)</div>
+                                <pre><code>// Iterar sobre slice
+for indice, valor := range slice {
+    fmt.Printf("slice[%d] = %d\n", indice, valor)
 }
 
-// Implementação implícita
-type Brasileiro struct {
+// Iterar sobre map
+for chave, valor := range m {
+    fmt.Printf("%s -> %d\n", chave, valor)
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Seção: Dicas Úteis -->
+                    <div id="dicas" class="section-content active">
+                        <h2>Dicas Úteis 💡</h2>
+                        
+                        <h3>Boas práticas</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Uso de defer para liberação de recursos</div>
+                                <pre><code>file, err := os.Open("arquivo.txt")
+if err != nil {
+    log.Fatal(err)
+}
+defer file.Close() // Executado ao final da função
+
+// Resto do código que usa o arquivo...</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Composição ao invés de herança</div>
+                                <pre><code>type Base struct {
+    Valor int
+}
+
+// Embedding (composição)
+type Derivada struct {
+    Base  // Composição
     Nome string
+}</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Tratamento de erros explícito</div>
+                                <pre><code>// Ao invés de exceções, Go usa retorno de erro
+resultado, err := funcaoQuePodeErrar()
+if err != nil {
+    // Lidar com o erro
+    return err
+}
+// Usar resultado</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Interfaces pequenas e focadas</div>
+                                <pre><code>// Interface com apenas um método
+type Writer interface {
+    Write(p []byte) (n int, err error)
 }
 
-func (b Brasileiro) Saudar() string {
-    return "Olá, " + b.Nome + "!"
-}
+// Interface com apenas um método
+type Reader interface {
+    Read(p []byte) (n int, err error)
+}</code></pre>
+                            </div>
+                        </div>
+                        
+                        <h3>Concorrência</h3>
+                        <div class="comandos-grid">
+                            <div class="comando-container">
+                                <div class="comando-descricao">Goroutines básicas</div>
+                                <pre><code>// Inicia uma goroutine
+go func() {
+    // Código executado concorrentemente
+    fmt.Println("Executando em paralelo")
+}()</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Comunicação via channels</div>
+                                <pre><code>// Canal para comunicação
+ch := make(chan string)
 
-// Uso de interface
-func DizerOi(s Saudador) {
-    fmt.Println(s.Saudar())
+// Inicia goroutine
+go func() {
+    ch <- "Mensagem da goroutine"
+}()
+
+// Recebe do canal
+msg := <-ch
+fmt.Println(msg)</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Sincronização com WaitGroup</div>
+                                <pre><code>var wg sync.WaitGroup
+
+// Adiciona 2 ao contador
+wg.Add(2)
+
+go func() {
+    defer wg.Done() // Decrementa contador
+    // Código da goroutine 1
+}()
+
+go func() {
+    defer wg.Done() // Decrementa contador
+    // Código da goroutine 2
+}()
+
+// Espera as goroutines terminarem
+wg.Wait()</code></pre>
+                            </div>
+                            
+                            <div class="comando-container">
+                                <div class="comando-descricao">Mutex para exclusão mútua</div>
+                                <pre><code>var (
+    mu      sync.Mutex
+    balance int
+)
+
+func Deposit(amount int) {
+    mu.Lock()
+    defer mu.Unlock()
+    balance += amount
 }</code></pre>
-                    
-                    <h2>Dicas Úteis 💡</h2>
-                    
-                    <ol>
-                        <li>Use <code>defer</code> para garantir que recursos sejam liberados (ex: <code>defer file.Close()</code>)</li>
-                        <li>Prefira composição (embedding) a herança, Go não tem herança de classes</li>
-                        <li>Use <code>go fmt</code> regularmente para manter o código padronizado</li>
-                        <li>Aproveite o paralelismo com goroutines e channels</li>
-                        <li>Trate erros explicitamente em vez de usar exceções</li>
-                        <li>Projete interfaces pequenas e focadas</li>
-                        <li>Use ponteiros com sabedoria - apenas quando precisar modificar ou evitar cópias grandes</li>
-                    </ol>
-                    
-                    <h3>Um exemplo de concorrência</h3>
-                    <pre><code>// Goroutines e channels
-func main() {
-    // Canal para comunicação
-    ch := make(chan string)
-    
-    // Inicia goroutine
-    go func() {
-        ch <- "Mensagem da goroutine"
-    }()
-    
-    // Recebe do canal
-    msg := <-ch
-    fmt.Println(msg)
-}</code></pre>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="section-filter.js"></script>
 </body>
 </html> 

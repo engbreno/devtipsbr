@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AWS CLI - DevTipsBR</title>
+    <title>AWS - DevTipsBR</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="section-filter.css">
 </head>
 <body>
     <div class="container-fluid bg-modern min-vh-100 py-4">
@@ -21,435 +22,470 @@
             <div class="content-card">
                 <div class="content-header">
                     <h1>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS CLI" style="width: 40px; height: auto;" class="me-2">
-                        AWS CLI - Comandos Essenciais ☁️
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" style="width: 40px; height: auto;" class="me-2">
+                        AWS - Comandos Essenciais ☁️
                     </h1>
                 </div>
                 
+                <div class="filter-box">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <label for="sectionSelector" class="form-label">Selecione uma seção:</label>
+                            <select class="form-select" id="sectionSelector">
+                                <option value="all">Todas as seções</option>
+                                <option value="cli">AWS CLI</option>
+                                <option value="ec2">EC2</option>
+                                <option value="s3">S3</option>
+                                <option value="rds">RDS</option>
+                                <option value="lambda">Lambda</option>
+                                <option value="networking">VPC e Networking</option>
+                                <option value="iam">IAM</option>
+                                <option value="outras">Outros Serviços</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="content-body">
-                    <h2>Configuração Inicial 🔧</h2>
-                    
-                    <h3>Instalação e configuração</h3>
-                    <pre><code># Instalar AWS CLI no Windows
+                    <!-- Seção: AWS CLI -->
+                    <div id="cli" class="section-content active">
+                        <h2>AWS CLI 🛠️</h2>
+                        
+                        <h3>Instalação e Configuração</h3>
+                        <pre><code># Instalar AWS CLI (Linux/macOS)
+pip install awscli
+
+# Instalar AWS CLI (Windows)
 msiexec.exe /i https://awscli.amazonaws.com/AWSCLIV2.msi
 
-# Instalar AWS CLI no Linux
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-sudo ./aws/install
-
-# Instalar AWS CLI no macOS
-curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
-sudo installer -pkg AWSCLIV2.pkg -target /
-
-# Verificar instalação
-aws --version</code></pre>
-                    
-                    <h3>Configuração de credenciais</h3>
-                    <pre><code># Configuração básica
+# Configurar AWS CLI
 aws configure
+# Fornece: AWS Access Key ID, Secret Access Key, region, output format
 
-# Configuração com perfil específico
-aws configure --profile projeto1
+# Verificar versão
+aws --version
 
 # Listar configurações
+aws configure list</code></pre>
+                        
+                        <h3>Perfis e credenciais</h3>
+                        <pre><code># Configurar um perfil específico
+aws configure --profile myprofile
+
+# Usar um perfil específico
+aws s3 ls --profile myprofile
+
+# Definir variáveis de ambiente
+export AWS_PROFILE=myprofile
+
+# Exibir configurações
 aws configure list
-aws configure list --profile projeto1
 
-# Verificar credenciais configuradas
-aws sts get-caller-identity
-
-# Usando AWS SSO
-aws configure sso
-aws sso login</code></pre>
+# Validar credenciais
+aws sts get-caller-identity</code></pre>
+                    </div>
                     
-                    <h2>EC2 (Elastic Compute Cloud) 🖥️</h2>
-                    
-                    <h3>Gerenciamento de instâncias</h3>
-                    <pre><code># Listar instâncias
+                    <!-- Seção: EC2 -->
+                    <div id="ec2" class="section-content active">
+                        <h2>EC2 - Elastic Compute Cloud 💻</h2>
+                        
+                        <h3>Gerenciamento de instâncias</h3>
+                        <pre><code># Listar instâncias
 aws ec2 describe-instances
 
 # Filtrar instâncias
 aws ec2 describe-instances --filters "Name=instance-type,Values=t2.micro"
 
-# Formatando a saída
-aws ec2 describe-instances --query "Reservations[*].Instances[*].{ID:InstanceId,Type:InstanceType,State:State.Name,Name:Tags[?Key=='Name']|[0].Value}" --output table
+# Iniciar uma instância
+aws ec2 run-instances --image-id ami-0abcdef1234567890 --instance-type t2.micro --key-name MyKeyPair
 
-# Iniciar instância
-aws ec2 start-instances --instance-ids i-1234567890abcdef0
-
-# Parar instância
+# Parar uma instância
 aws ec2 stop-instances --instance-ids i-1234567890abcdef0
 
-# Reiniciar instância
-aws ec2 reboot-instances --instance-ids i-1234567890abcdef0
+# Iniciar uma instância parada
+aws ec2 start-instances --instance-ids i-1234567890abcdef0
 
-# Encerrar instância (permanentemente)
+# Terminar uma instância
 aws ec2 terminate-instances --instance-ids i-1234567890abcdef0</code></pre>
-                    
-                    <h3>Criação de instâncias</h3>
-                    <pre><code># Criar uma instância EC2
-aws ec2 run-instances \
-    --image-id ami-12345678 \
-    --count 1 \
-    --instance-type t2.micro \
-    --key-name minha-chave \
-    --security-group-ids sg-12345678 \
-    --subnet-id subnet-12345678
+                        
+                        <h3>Gerenciamento de AMIs e EBS</h3>
+                        <pre><code># Listar AMIs
+aws ec2 describe-images --owners self
 
-# Criar com script de inicialização
-aws ec2 run-instances \
-    --image-id ami-12345678 \
-    --instance-type t2.micro \
-    --key-name minha-chave \
-    --user-data file://script-inicializacao.sh
+# Criar snapshot de um volume
+aws ec2 create-snapshot --volume-id vol-1234567890abcdef0 --description "Snapshot de volume"
 
-# Adicionar tag (nome) à instância
-aws ec2 create-tags \
-    --resources i-1234567890abcdef0 \
-    --tags Key=Name,Value=ServidorWeb</code></pre>
-                    
-                    <h3>Security Groups</h3>
-                    <pre><code># Listar grupos de segurança
+# Listar snapshots
+aws ec2 describe-snapshots --owner-ids self
+
+# Criar volume a partir de snapshot
+aws ec2 create-volume --snapshot-id snap-1234567890abcdef0 --availability-zone us-east-1a
+
+# Listar volumes
+aws ec2 describe-volumes</code></pre>
+                        
+                        <h3>Security Groups</h3>
+                        <pre><code># Listar security groups
 aws ec2 describe-security-groups
 
-# Criar grupo de segurança
-aws ec2 create-security-group \
-    --group-name web-server \
-    --description "Regras para servidor web" \
-    --vpc-id vpc-12345678
+# Criar security group
+aws ec2 create-security-group --group-name MySecurityGroup --description "Meu security group" --vpc-id vpc-1234567890abcdef0
 
-# Adicionar regra para HTTP
-aws ec2 authorize-security-group-ingress \
-    --group-id sg-12345678 \
-    --protocol tcp \
-    --port 80 \
-    --cidr 0.0.0.0/0
+# Adicionar regra de entrada
+aws ec2 authorize-security-group-ingress --group-id sg-1234567890abcdef0 --protocol tcp --port 22 --cidr 203.0.113.0/24
 
-# Adicionar regra para SSH
-aws ec2 authorize-security-group-ingress \
-    --group-id sg-12345678 \
-    --protocol tcp \
-    --port 22 \
-    --cidr 192.168.1.0/24</code></pre>
+# Remover regra de entrada
+aws ec2 revoke-security-group-ingress --group-id sg-1234567890abcdef0 --protocol tcp --port 22 --cidr 203.0.113.0/24</code></pre>
+                    </div>
                     
-                    <h2>S3 (Simple Storage Service) 📦</h2>
-                    
-                    <h3>Gerenciamento de buckets</h3>
-                    <pre><code># Listar todos os buckets
+                    <!-- Seção: S3 -->
+                    <div id="s3" class="section-content active">
+                        <h2>S3 - Simple Storage Service 📦</h2>
+                        
+                        <h3>Gerenciamento de buckets</h3>
+                        <pre><code># Listar buckets
 aws s3 ls
 
-# Criar um bucket
+# Criar bucket
 aws s3 mb s3://meu-bucket-unico
 
-# Habilitar versionamento
-aws s3api put-bucket-versioning \
-    --bucket meu-bucket-unico \
-    --versioning-configuration Status=Enabled
-
-# Configurar política de ciclo de vida
-aws s3api put-bucket-lifecycle-configuration \
-    --bucket meu-bucket-unico \
-    --lifecycle-configuration file://lifecycle.json
-
-# Excluir bucket (deve estar vazio)
+# Remover bucket
 aws s3 rb s3://meu-bucket-unico
 
-# Excluir bucket e todo seu conteúdo
+# Remover bucket e todo seu conteúdo
 aws s3 rb s3://meu-bucket-unico --force</code></pre>
+                        
+                        <h3>Gerenciamento de objetos</h3>
+                        <pre><code># Listar objetos em um bucket
+aws s3 ls s3://meu-bucket
+
+# Copiar arquivo para S3
+aws s3 cp arquivo.txt s3://meu-bucket/
+
+# Copiar do S3 para local
+aws s3 cp s3://meu-bucket/arquivo.txt ./
+
+# Sincronizar diretório com bucket
+aws s3 sync ./meu-diretorio s3://meu-bucket/
+
+# Sincronizar bucket com diretório
+aws s3 sync s3://meu-bucket/ ./meu-diretorio
+
+# Remover objeto
+aws s3 rm s3://meu-bucket/arquivo.txt
+
+# Remover diretório inteiro
+aws s3 rm s3://meu-bucket/diretorio/ --recursive</code></pre>
+                        
+                        <h3>Políticas e ACLs</h3>
+                        <pre><code># Configurar ACL para um objeto
+aws s3api put-object-acl --bucket meu-bucket --key arquivo.txt --acl public-read
+
+# Obter política de bucket
+aws s3api get-bucket-policy --bucket meu-bucket
+
+# Definir política de bucket
+aws s3api put-bucket-policy --bucket meu-bucket --policy file://policy.json</code></pre>
+                    </div>
                     
-                    <h3>Operações com objetos</h3>
-                    <pre><code># Listar objetos em um bucket
-aws s3 ls s3://meu-bucket-unico
+                    <!-- Seção: RDS -->
+                    <div id="rds" class="section-content active">
+                        <h2>RDS - Relational Database Service 🗄️</h2>
+                        
+                        <h3>Gerenciamento de instâncias</h3>
+                        <pre><code># Listar instâncias RDS
+aws rds describe-db-instances
 
-# Listar objetos recursivamente
-aws s3 ls s3://meu-bucket-unico --recursive
+# Criar instância RDS
+aws rds create-db-instance \
+    --db-instance-identifier mydb \
+    --db-instance-class db.t3.micro \
+    --engine mysql \
+    --master-username admin \
+    --master-user-password senha123 \
+    --allocated-storage 20
 
-# Fazer upload de arquivos
-aws s3 cp arquivo.txt s3://meu-bucket-unico/
-aws s3 cp ./pasta s3://meu-bucket-unico/pasta --recursive
+# Modificar instância RDS
+aws rds modify-db-instance \
+    --db-instance-identifier mydb \
+    --backup-retention-period 7 \
+    --apply-immediately
 
-# Fazer download de arquivos
-aws s3 cp s3://meu-bucket-unico/arquivo.txt ./
-aws s3 cp s3://meu-bucket-unico/pasta ./ --recursive
+# Reiniciar instância RDS
+aws rds reboot-db-instance --db-instance-identifier mydb
 
-# Sincronizar diretórios
-aws s3 sync ./local-dir s3://meu-bucket-unico/remote-dir
-aws s3 sync s3://meu-bucket-unico/remote-dir ./local-dir
+# Criar snapshot
+aws rds create-db-snapshot \
+    --db-instance-identifier mydb \
+    --db-snapshot-identifier mydb-snapshot
 
-# Mover arquivos
-aws s3 mv arquivo.txt s3://meu-bucket-unico/
-aws s3 mv s3://meu-bucket-unico/arquivo.txt ./
+# Restaurar a partir de snapshot
+aws rds restore-db-instance-from-db-snapshot \
+    --db-instance-identifier mynewdb \
+    --db-snapshot-identifier mydb-snapshot</code></pre>
+                        
+                        <h3>Parâmetros e grupos de segurança</h3>
+                        <pre><code># Listar parameter groups
+aws rds describe-db-parameter-groups
 
-# Excluir objetos
-aws s3 rm s3://meu-bucket-unico/arquivo.txt
-aws s3 rm s3://meu-bucket-unico/pasta --recursive</code></pre>
+# Criar parameter group
+aws rds create-db-parameter-group \
+    --db-parameter-group-name myparamgroup \
+    --db-parameter-group-family mysql8.0 \
+    --description "Meu grupo de parâmetros"
+
+# Modificar parâmetro
+aws rds modify-db-parameter-group \
+    --db-parameter-group-name myparamgroup \
+    --parameters "ParameterName=max_connections,ParameterValue=100,ApplyMethod=immediate"
+
+# Listar security groups
+aws rds describe-db-security-groups</code></pre>
+                    </div>
                     
-                    <h2>Lambda 🔄</h2>
-                    
-                    <h3>Gerenciamento de funções</h3>
-                    <pre><code># Listar funções Lambda
+                    <!-- Seção: Lambda -->
+                    <div id="lambda" class="section-content active">
+                        <h2>Lambda - Serverless Functions ⚡</h2>
+                        
+                        <h3>Gerenciamento de funções</h3>
+                        <pre><code># Listar funções
 aws lambda list-functions
 
-# Obter informações de uma função
-aws lambda get-function --function-name MinhaFuncao
-
-# Invocar função Lambda
-aws lambda invoke \
-    --function-name MinhaFuncao \
-    --payload '{"key": "value"}' \
-    saida.json
-
-# Criar função Lambda
+# Criar função (usando arquivo ZIP)
 aws lambda create-function \
-    --function-name MinhaFuncao \
-    --runtime python3.9 \
+    --function-name minha-funcao \
+    --runtime nodejs14.x \
     --role arn:aws:iam::123456789012:role/lambda-role \
-    --handler lambda_function.handler \
-    --zip-file fileb://funcao.zip
+    --handler index.handler \
+    --zip-file fileb://function.zip
 
-# Atualizar código de função Lambda
+# Invocar função
+aws lambda invoke \
+    --function-name minha-funcao \
+    --payload '{"key": "value"}' \
+    output.txt
+
+# Atualizar código
 aws lambda update-function-code \
-    --function-name MinhaFuncao \
-    --zip-file fileb://funcao.zip
+    --function-name minha-funcao \
+    --zip-file fileb://function-updated.zip
 
-# Atualizar configuração de função Lambda
+# Configurar variável de ambiente
 aws lambda update-function-configuration \
-    --function-name MinhaFuncao \
-    --timeout 30 \
-    --memory-size 256</code></pre>
+    --function-name minha-funcao \
+    --environment "Variables={KEY=value}"</code></pre>
+                        
+                        <h3>Configurar triggers e permissões</h3>
+                        <pre><code># Adicionar permissão para API Gateway
+aws lambda add-permission \
+    --function-name minha-funcao \
+    --statement-id apigateway \
+    --action lambda:InvokeFunction \
+    --principal apigateway.amazonaws.com \
+    --source-arn "arn:aws:execute-api:us-east-1:123456789012:api-id/*/HTTP_METHOD/resource-path"
+
+# Configurar trigger S3
+aws lambda create-event-source-mapping \
+    --function-name minha-funcao \
+    --event-source-arn arn:aws:s3:::meu-bucket \
+    --enabled
+
+# Listar event source mappings
+aws lambda list-event-source-mappings</code></pre>
+                    </div>
                     
-                    <h2>IAM (Identity and Access Management) 🔐</h2>
+                    <!-- Seção: VPC e Networking -->
+                    <div id="networking" class="section-content active">
+                        <h2>VPC e Networking 🌐</h2>
+                        
+                        <h3>VPC e Subnets</h3>
+                        <pre><code># Listar VPCs
+aws ec2 describe-vpcs
+
+# Criar VPC
+aws ec2 create-vpc --cidr-block 10.0.0.0/16
+
+# Criar subnet
+aws ec2 create-subnet \
+    --vpc-id vpc-1234567890abcdef0 \
+    --cidr-block 10.0.1.0/24 \
+    --availability-zone us-east-1a
+
+# Habilitar DNS hostnames para VPC
+aws ec2 modify-vpc-attribute \
+    --vpc-id vpc-1234567890abcdef0 \
+    --enable-dns-hostnames "{\"Value\":true}"</code></pre>
+                        
+                        <h3>Internet Gateways e NAT</h3>
+                        <pre><code># Criar Internet Gateway
+aws ec2 create-internet-gateway
+
+# Anexar Internet Gateway a VPC
+aws ec2 attach-internet-gateway \
+    --internet-gateway-id igw-1234567890abcdef0 \
+    --vpc-id vpc-1234567890abcdef0
+
+# Criar NAT Gateway
+aws ec2 create-nat-gateway \
+    --subnet-id subnet-1234567890abcdef0 \
+    --allocation-id eipalloc-1234567890abcdef0</code></pre>
+                        
+                        <h3>Route Tables</h3>
+                        <pre><code># Listar route tables
+aws ec2 describe-route-tables
+
+# Criar route table
+aws ec2 create-route-table --vpc-id vpc-1234567890abcdef0
+
+# Criar rota para Internet Gateway
+aws ec2 create-route \
+    --route-table-id rtb-1234567890abcdef0 \
+    --destination-cidr-block 0.0.0.0/0 \
+    --gateway-id igw-1234567890abcdef0
+
+# Associar subnet com route table
+aws ec2 associate-route-table \
+    --route-table-id rtb-1234567890abcdef0 \
+    --subnet-id subnet-1234567890abcdef0</code></pre>
+                    </div>
                     
-                    <h3>Usuários e grupos</h3>
-                    <pre><code># Listar usuários
+                    <!-- Seção: IAM -->
+                    <div id="iam" class="section-content active">
+                        <h2>IAM - Identity and Access Management 🔐</h2>
+                        
+                        <h3>Usuários e grupos</h3>
+                        <pre><code># Listar usuários
 aws iam list-users
 
 # Criar usuário
 aws iam create-user --user-name joao
 
-# Criar chave de acesso
-aws iam create-access-key --user-name joao
+# Criar login profile (console)
+aws iam create-login-profile \
+    --user-name joao \
+    --password Senha123! \
+    --password-reset-required
 
 # Listar grupos
 aws iam list-groups
 
 # Criar grupo
-aws iam create-group --group-name Desenvolvedores
+aws iam create-group --group-name desenvolvedores
 
 # Adicionar usuário ao grupo
 aws iam add-user-to-group \
     --user-name joao \
-    --group-name Desenvolvedores</code></pre>
-                    
-                    <h3>Políticas e permissões</h3>
-                    <pre><code># Listar políticas
+    --group-name desenvolvedores</code></pre>
+                        
+                        <h3>Políticas e permissões</h3>
+                        <pre><code># Listar políticas
 aws iam list-policies
 
-# Anexar política a um usuário
+# Anexar política a usuário
 aws iam attach-user-policy \
     --user-name joao \
     --policy-arn arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
 
-# Anexar política a um grupo
+# Anexar política a grupo
 aws iam attach-group-policy \
-    --group-name Desenvolvedores \
+    --group-name desenvolvedores \
     --policy-arn arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess
 
-# Criar política personalizada
+# Criar política
 aws iam create-policy \
-    --policy-name MinhaPolítica \
-    --policy-document file://politica.json</code></pre>
+    --policy-name minha-politica \
+    --policy-document file://policy.json</code></pre>
+                        
+                        <h3>Chaves de acesso</h3>
+                        <pre><code># Criar chave de acesso
+aws iam create-access-key --user-name joao
+
+# Listar chaves de acesso
+aws iam list-access-keys --user-name joao
+
+# Desativar chave de acesso
+aws iam update-access-key \
+    --user-name joao \
+    --access-key-id AKIAIOSFODNN7EXAMPLE \
+    --status Inactive
+
+# Excluir chave de acesso
+aws iam delete-access-key \
+    --user-name joao \
+    --access-key-id AKIAIOSFODNN7EXAMPLE</code></pre>
+                    </div>
                     
-                    <h2>CloudWatch 📊</h2>
-                    
-                    <h3>Métricas e alarmes</h3>
-                    <pre><code># Listar métricas disponíveis
+                    <!-- Seção: Outros Serviços -->
+                    <div id="outras" class="section-content active">
+                        <h2>Outros Serviços AWS 🧩</h2>
+                        
+                        <h3>CloudFront</h3>
+                        <pre><code># Listar distribuições
+aws cloudfront list-distributions
+
+# Criar distribuição (básico)
+aws cloudfront create-distribution --distribution-config file://dist-config.json
+
+# Criar invalidação
+aws cloudfront create-invalidation \
+    --distribution-id EDFDVBD6EXAMPLE \
+    --paths "/*"</code></pre>
+                        
+                        <h3>Elastic Beanstalk</h3>
+                        <pre><code># Listar aplicações
+aws elasticbeanstalk describe-applications
+
+# Criar aplicação
+aws elasticbeanstalk create-application \
+    --application-name minha-app \
+    --description "Minha aplicação"
+
+# Criar ambiente
+aws elasticbeanstalk create-environment \
+    --application-name minha-app \
+    --environment-name minha-app-env \
+    --solution-stack-name "64bit Amazon Linux 2 v3.4.1 running Python 3.8"
+
+# Implantar nova versão
+aws elasticbeanstalk create-application-version \
+    --application-name minha-app \
+    --version-label v1 \
+    --source-bundle S3Bucket=my-bucket,S3Key=app.zip</code></pre>
+                        
+                        <h3>CloudWatch</h3>
+                        <pre><code># Listar métricas
 aws cloudwatch list-metrics
 
-# Listar métricas para um namespace específico
-aws cloudwatch list-metrics --namespace AWS/EC2
-
-# Obter dados de métrica
-aws cloudwatch get-metric-data \
-    --metric-data-queries file://metrica-query.json \
+# Obter estatísticas da métrica
+aws cloudwatch get-metric-statistics \
+    --namespace AWS/EC2 \
+    --metric-name CPUUtilization \
+    --dimensions Name=InstanceId,Value=i-1234567890abcdef0 \
     --start-time 2023-01-01T00:00:00Z \
-    --end-time 2023-01-02T00:00:00Z
+    --end-time 2023-01-02T00:00:00Z \
+    --period 3600 \
+    --statistics Average
 
 # Criar alarme
 aws cloudwatch put-metric-alarm \
-    --alarm-name cpu-utilization \
-    --alarm-description "Alarme quando CPU excede 70%" \
+    --alarm-name cpu-mon \
+    --alarm-description "Alarm when CPU exceeds 70%" \
     --metric-name CPUUtilization \
     --namespace AWS/EC2 \
     --statistic Average \
     --period 300 \
     --threshold 70 \
     --comparison-operator GreaterThanThreshold \
-    --dimensions "Name=InstanceId,Value=i-1234567890abcdef0" \
+    --dimensions Name=InstanceId,Value=i-1234567890abcdef0 \
     --evaluation-periods 2 \
-    --alarm-actions arn:aws:sns:us-east-1:123456789012:my-topic</code></pre>
-                    
-                    <h3>Logs</h3>
-                    <pre><code># Listar grupos de logs
-aws logs describe-log-groups
-
-# Listar streams de logs
-aws logs describe-log-streams \
-    --log-group-name /aws/lambda/MinhaFuncao
-
-# Obter eventos de log
-aws logs get-log-events \
-    --log-group-name /aws/lambda/MinhaFuncao \
-    --log-stream-name 2023/06/01/[$LATEST]12345678
-
-# Criar filtro de métricas
-aws logs put-metric-filter \
-    --log-group-name /aws/lambda/MinhaFuncao \
-    --filter-name ErrorCount \
-    --filter-pattern "ERROR" \
-    --metric-transformations \
-        metricName=ErrorCount,metricNamespace=MyApp,metricValue=1</code></pre>
-                    
-                    <h2>RDS (Relational Database Service) 🗄️</h2>
-                    
-                    <h3>Gerenciar instâncias de banco de dados</h3>
-                    <pre><code># Listar instâncias RDS
-aws rds describe-db-instances
-
-# Criar instância RDS
-aws rds create-db-instance \
-    --db-instance-identifier meudb \
-    --db-instance-class db.t3.micro \
-    --engine mysql \
-    --master-username admin \
-    --master-user-password Senha123! \
-    --allocated-storage 20
-
-# Modificar instância RDS
-aws rds modify-db-instance \
-    --db-instance-identifier meudb \
-    --backup-retention-period 7 \
-    --apply-immediately
-
-# Criar snapshot
-aws rds create-db-snapshot \
-    --db-snapshot-identifier meudb-snapshot \
-    --db-instance-identifier meudb
-
-# Restaurar a partir de snapshot
-aws rds restore-db-instance-from-db-snapshot \
-    --db-instance-identifier meudb-restored \
-    --db-snapshot-identifier meudb-snapshot</code></pre>
-                    
-                    <h2>ECS (Elastic Container Service) 🐳</h2>
-                    
-                    <h3>Gerenciamento de clusters e serviços</h3>
-                    <pre><code># Listar clusters
-aws ecs list-clusters
-
-# Criar cluster
-aws ecs create-cluster --cluster-name meu-cluster
-
-# Listar definições de tarefas
-aws ecs list-task-definitions
-
-# Registrar definição de tarefa
-aws ecs register-task-definition \
-    --cli-input-json file://task-definition.json
-
-# Listar serviços
-aws ecs list-services --cluster meu-cluster
-
-# Criar serviço
-aws ecs create-service \
-    --cluster meu-cluster \
-    --service-name meu-servico \
-    --task-definition minha-tarefa:1 \
-    --desired-count 2
-
-# Atualizar serviço
-aws ecs update-service \
-    --cluster meu-cluster \
-    --service meu-servico \
-    --task-definition minha-tarefa:2 \
-    --desired-count 3</code></pre>
-                    
-                    <h2>CloudFormation 🏗️</h2>
-                    
-                    <h3>Gerenciamento de stacks</h3>
-                    <pre><code># Listar stacks
-aws cloudformation list-stacks
-
-# Criar stack
-aws cloudformation create-stack \
-    --stack-name minha-stack \
-    --template-body file://template.yaml \
-    --parameters ParameterKey=KeyName,ParameterValue=minha-chave
-
-# Atualizar stack
-aws cloudformation update-stack \
-    --stack-name minha-stack \
-    --template-body file://template-updated.yaml
-
-# Descrever recursos da stack
-aws cloudformation describe-stack-resources \
-    --stack-name minha-stack
-
-# Excluir stack
-aws cloudformation delete-stack \
-    --stack-name minha-stack</code></pre>
-                    
-                    <h2>Dicas Úteis 💡</h2>
-                    
-                    <ol>
-                        <li>Use <code>--query</code> para filtrar e formatar saídas JSON:</li>
-                    </ol>
-                    
-                    <pre><code># Exemplo com query
-aws ec2 describe-instances \
-    --query "Reservations[*].Instances[*].{ID:InstanceId,Name:Tags[?Key=='Name']|[0].Value}" \
-    --output table</code></pre>
-                    
-                    <ol start="2">
-                        <li>Escolha entre diferentes formatos de saída:</li>
-                    </ol>
-                    
-                    <pre><code># Formatos disponíveis
-aws ec2 describe-instances --output json
-aws ec2 describe-instances --output yaml
-aws ec2 describe-instances --output text
-aws ec2 describe-instances --output table</code></pre>
-                    
-                    <ol start="3">
-                        <li>Utilize perfis para trabalhar com múltiplas contas:</li>
-                    </ol>
-                    
-                    <pre><code># Usando perfil específico
-aws s3 ls --profile cliente1
-aws ec2 describe-instances --profile desenvolvimento</code></pre>
-                    
-                    <ol start="4">
-                        <li>Ative o comando de autocompletar:</li>
-                    </ol>
-                    
-                    <pre><code># Bash
-complete -C aws_completer aws
-
-# Adicione ao .bashrc para persistir
-echo "complete -C aws_completer aws" >> ~/.bashrc</code></pre>
-                    
-                    <ol start="5">
-                        <li>Use o parâmetro <code>--dry-run</code> para simular comandos sem executá-los:</li>
-                    </ol>
-                    
-                    <pre><code># Exemplo com dry-run
-aws ec2 start-instances --instance-ids i-1234567890abcdef0 --dry-run</code></pre>
+    --alarm-actions arn:aws:sns:us-east-1:123456789012:MyTopic</code></pre>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="section-filter.js"></script>
 </body>
 </html> 
