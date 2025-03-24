@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go - DevTipsBR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container-fluid bg-modern min-vh-100 py-4">
+        <div class="container">
+            <a href="index.html" class="btn btn-secondary mb-4">
+                <i class="bi bi-arrow-left"></i> Voltar
+            </a>
+            
+            <div class="content-card">
+                <div class="content-header">
+                    <h1>
+                        <img src="https://go.dev/blog/go-brand/Go-Logo/PNG/Go-Logo_Blue.png" alt="Go" style="width: 40px; height: auto;" class="me-2">
+                        Go (Golang) - Comandos Essenciais 🚀
+                    </h1>
+                </div>
+                
+                <div class="content-body">
+                    <h2>Instalação e Configuração 🛠️</h2>
+                    
+                    <h3>Instalação</h3>
+                    <pre><code># Download da versão oficial (https://go.dev/dl/)
+# Windows: Usar instalador MSI
+# Linux/MacOS:
+
+# Linux (usando apt)
+sudo apt update
+sudo apt install golang-go
+
+# MacOS (usando Homebrew)
+brew install go
+
+# Verificar instalação
+go version</code></pre>
+                    
+                    <h3>Configuração do ambiente</h3>
+                    <pre><code># Variáveis de ambiente (adicionar ao .bashrc, .zshrc ou perfil do Windows)
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
+
+# Verificar configuração
+go env</code></pre>
+                    
+                    <h2>Criar e Iniciar Projetos 🏗️</h2>
+                    
+                    <h3>Inicializar um módulo</h3>
+                    <pre><code># Criar diretório para o projeto
+mkdir meu-projeto
+cd meu-projeto
+
+# Inicializar um módulo Go
+go mod init github.com/seuusuario/meu-projeto
+
+# Editar o arquivo go.mod manualmente
+# Ele rastreia dependências e define o nome do módulo</code></pre>
+                    
+                    <h3>Gerenciamento de dependências</h3>
+                    <pre><code># Adicionar uma dependência
+go get github.com/pacote/desejado
+
+# Adicionar versão específica
+go get github.com/pacote/desejado@v1.2.3
+
+# Atualizar todas as dependências
+go get -u ./...
+
+# Remover dependências não utilizadas
+go mod tidy
+
+# Verificar dependências
+go list -m all</code></pre>
+                    
+                    <h2>Comandos Básicos 💻</h2>
+                    
+                    <h3>Compilação e execução</h3>
+                    <pre><code># Compilar e executar
+go run main.go
+
+# Compilar um pacote ou programa
+go build
+
+# Compilar para um arquivo específico
+go build -o meuapp
+
+# Compilar para outra plataforma
+GOOS=windows GOARCH=amd64 go build -o app.exe
+
+# Instalar o pacote atual
+go install</code></pre>
+                    
+                    <h3>Testes</h3>
+                    <pre><code># Executar todos os testes
+go test ./...
+
+# Executar testes com cobertura
+go test -cover ./...
+
+# Gerar relatório de cobertura
+go test -coverprofile=coverage.out ./...
+go tool cover -html=coverage.out
+
+# Executar testes com benchmark
+go test -bench=.</code></pre>
+                    
+                    <h2>Ferramentas Úteis 🧰</h2>
+                    
+                    <h3>Formatação e linting</h3>
+                    <pre><code># Formatar código (gofmt)
+gofmt -w arquivo.go
+
+# Formatar diretório inteiro
+gofmt -w .
+
+# Análise estática (Go Vet)
+go vet ./...
+
+# Instalar e usar golint
+go install golang.org/x/lint/golint@latest
+golint ./...</code></pre>
+                    
+                    <h3>Documentação</h3>
+                    <pre><code># Visualizar documentação local
+go doc fmt.Println
+
+# Iniciar servidor de documentação
+godoc -http=:6060
+
+# Gerar documentação em HTML
+go doc -all -html ./...</code></pre>
+                    
+                    <h2>Sintaxe Básica de Go 📝</h2>
+                    
+                    <h3>Estrutura básica de um programa</h3>
+                    <pre><code>// main.go
+package main
+
+import (
+    "fmt"
+)
+
+func main() {
+    fmt.Println("Olá, Mundo!")
+}</code></pre>
+                    
+                    <h3>Tipos de dados fundamentais</h3>
+                    <pre><code>// Declaração de variáveis
+var nome string = "Go"
+idade := 13  // Inferência de tipo
+const PI = 3.14159
+
+// Tipos básicos
+var (
+    inteiro    int     = 42
+    flutuante  float64 = 3.14
+    booleano   bool    = true
+    texto      string  = "texto"
+    b          byte    = 'a'
+    r          rune    = '世'
+)</code></pre>
+                    
+                    <h3>Estruturas de controle</h3>
+                    <pre><code>// Condicionais
+if x > 0 {
+    // código
+} else if x < 0 {
+    // código
+} else {
+    // código
+}
+
+// Switch
+switch os := runtime.GOOS; os {
+case "darwin":
+    fmt.Println("MacOS")
+case "linux":
+    fmt.Println("Linux")
+default:
+    fmt.Printf("%s.\n", os)
+}
+
+// Loops
+for i := 0; i < 10; i++ {
+    fmt.Println(i)
+}
+
+// Equivalente a while
+for condicao {
+    // código
+}
+
+// Loop infinito
+for {
+    // código
+}</code></pre>
+                    
+                    <h3>Coleções de dados</h3>
+                    <pre><code>// Arrays (tamanho fixo)
+var arr [5]int = [5]int{1, 2, 3, 4, 5}
+
+// Slices (dinâmicos)
+slice := []int{1, 2, 3}
+slice = append(slice, 4, 5)
+
+// Maps
+mapa := map[string]int{
+    "um": 1,
+    "dois": 2,
+}
+mapa["três"] = 3</code></pre>
+                    
+                    <h3>Funções</h3>
+                    <pre><code>// Função básica
+func soma(a, b int) int {
+    return a + b
+}
+
+// Múltiplos retornos
+func divMod(a, b int) (int, int) {
+    return a / b, a % b
+}
+
+// Retornos nomeados
+func retornoNomeado() (x, y int) {
+    x = 1
+    y = 2
+    return  // retorna x e y
+}
+
+// Funções como valores
+f := func(x int) int {
+    return x * x
+}
+</code></pre>
+                    
+                    <h3>Structs e métodos</h3>
+                    <pre><code>// Definição de struct
+type Pessoa struct {
+    Nome  string
+    Idade int
+}
+
+// Métodos para structs
+func (p Pessoa) Apresentar() string {
+    return fmt.Sprintf("Olá, meu nome é %s e tenho %d anos", p.Nome, p.Idade)
+}
+
+// Método com ponteiro (para modificar o receptor)
+func (p *Pessoa) Envelhecer() {
+    p.Idade++
+}</code></pre>
+                    
+                    <h3>Interfaces</h3>
+                    <pre><code>// Definição de interface
+type Saudador interface {
+    Saudar() string
+}
+
+// Implementação implícita
+type Brasileiro struct {
+    Nome string
+}
+
+func (b Brasileiro) Saudar() string {
+    return "Olá, " + b.Nome + "!"
+}
+
+// Uso de interface
+func DizerOi(s Saudador) {
+    fmt.Println(s.Saudar())
+}</code></pre>
+                    
+                    <h2>Dicas Úteis 💡</h2>
+                    
+                    <ol>
+                        <li>Use <code>defer</code> para garantir que recursos sejam liberados (ex: <code>defer file.Close()</code>)</li>
+                        <li>Prefira composição (embedding) a herança, Go não tem herança de classes</li>
+                        <li>Use <code>go fmt</code> regularmente para manter o código padronizado</li>
+                        <li>Aproveite o paralelismo com goroutines e channels</li>
+                        <li>Trate erros explicitamente em vez de usar exceções</li>
+                        <li>Projete interfaces pequenas e focadas</li>
+                        <li>Use ponteiros com sabedoria - apenas quando precisar modificar ou evitar cópias grandes</li>
+                    </ol>
+                    
+                    <h3>Um exemplo de concorrência</h3>
+                    <pre><code>// Goroutines e channels
+func main() {
+    // Canal para comunicação
+    ch := make(chan string)
+    
+    // Inicia goroutine
+    go func() {
+        ch <- "Mensagem da goroutine"
+    }()
+    
+    // Recebe do canal
+    msg := <-ch
+    fmt.Println(msg)
+}</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
