@@ -1,17 +1,18 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>.NET - DevTipsBR</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="section-filter.css">
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>.NET - DevTipsBR</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
+<link href="section-filter.css" rel="stylesheet"/>
+<style>
         .comando-container {
             background-color: #f8f9fa;
             border-radius: 8px;
@@ -58,601 +59,583 @@
     </style>
 </head>
 <body>
-    <div class="container-fluid bg-modern min-vh-100 py-4">
-        <div class="container">
-            <a href="index.html" class="btn btn-secondary mb-4">
-                <i class="bi bi-arrow-left"></i> Voltar
+<div class="container-fluid bg-modern min-vh-100 py-4">
+<div class="container">
+<a class="btn btn-secondary mb-4" href="index.html">
+<i class="bi bi-arrow-left"></i> Voltar
             </a>
-            
-            <div class="content-card">
-                <div class="content-header">
-                    <h1>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ee/.NET_Core_Logo.svg" alt=".NET" style="width: 40px; height: auto;" class="me-2">
+<div class="content-card">
+<div class="content-header">
+<h1>
+<img alt=".NET" class="me-2" src="https://upload.wikimedia.org/wikipedia/commons/e/ee/.NET_Core_Logo.svg" style="width: 40px; height: auto;"/>
                         .NET - Comandos Essenciais 📊
                     </h1>
-                </div>
-                
-                <div class="filter-box">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-grow-1">
-                            <label for="sectionSelector" class="form-label">Selecione uma seção:</label>
-                            <select class="form-select" id="sectionSelector">
-                                <option value="all">Todas as seções</option>
-                                <option value="cli">CLI Básico</option>
-                                <option value="projetos">Projetos</option>
-                                <option value="nuget">NuGet</option>
-                                <option value="entidades">Entity Framework</option>
-                                <option value="build">Build e Publicação</option>
-                                <option value="testes">Testes</option>
-                                <option value="ferramentas">Ferramentas</option>
-                                <option value="solucoes">Soluções</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="content-body">
-                    <!-- Seção: CLI Básico -->
-                    <div id="cli" class="section-content active">
-                        <h2>CLI Básico 🛠️</h2>
-                        
-                        <h3>Informações e Ajuda</h3>
-                        <div class="comandos-grid">
-                            <div class="comando-container">
-                                <div class="comando-descricao">Verificar versão do .NET</div>
-                                <pre><code>dotnet --version</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Verificar SDKs instalados</div>
-                                <pre><code>dotnet --list-sdks</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Verificar runtimes instalados</div>
-                                <pre><code>dotnet --list-runtimes</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Obter ajuda geral</div>
-                                <pre><code>dotnet --help</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Obter ajuda para comando específico</div>
-                                <pre><code>dotnet [comando] --help</code></pre>
-                            </div>
-                        </div>
-                        
-                        <h3>Templates</h3>
-                        <div class="comandos-grid">
-                            <div class="comando-container">
-                                <div class="comando-descricao">Listar todos os templates disponíveis</div>
-                                <pre><code>dotnet new --list</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Buscar templates específicos</div>
-                                <pre><code>dotnet new --list | findstr web</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Instalar novos templates</div>
-                                <pre><code>dotnet new install Microsoft.DotNet.Web.Spa.ProjectTemplates</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Atualizar templates</div>
-                                <pre><code>dotnet new update</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Desinstalar templates</div>
-                                <pre><code>dotnet new uninstall [ID-do-template]</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Seção: Projetos -->
-                    <div id="projetos" class="section-content active">
-                        <h2>Projetos 📂</h2>
-                        
-                        <h3>Criar Projetos</h3>
-                        <div class="comandos-grid">
-                            <div class="comando-container">
-                                <div class="comando-descricao">Criar aplicação console</div>
-                                <pre><code>dotnet new console -o MeuApp</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Criar aplicação web MVC</div>
-                                <pre><code>dotnet new mvc -o MeuAppMVC</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Criar API web</div>
-                                <pre><code>dotnet new webapi -o MinhaAPI</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Criar aplicação Blazor Server</div>
-                                <pre><code>dotnet new blazorserver -o AppBlazor</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Criar aplicação Blazor WebAssembly</div>
-                                <pre><code>dotnet new blazorwasm -o AppBlazorWasm</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Criar projeto de biblioteca</div>
-                                <pre><code>dotnet new classlib -o MinhaLib</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Criar projeto com namespace específico</div>
-                                <pre><code>dotnet new console -o MeuApp -n MeuNamespace</code></pre>
-                            </div>
-                        </div>
-                        
-                        <h3>Executar e Gerenciar</h3>
-                        <div class="comandos-grid">
-                            <div class="comando-container">
-                                <div class="comando-descricao">Compilar projeto</div>
-                                <pre><code>dotnet build</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Executar aplicação</div>
-                                <pre><code>dotnet run</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Executar com configuração específica</div>
-                                <pre><code>dotnet run --configuration Release</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Executar com argumentos</div>
-                                <pre><code>dotnet run -- arg1 arg2</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Limpar artefatos de compilação</div>
-                                <pre><code>dotnet clean</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Restaurar dependências</div>
-                                <pre><code>dotnet restore</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Seção: NuGet -->
-                    <div id="nuget" class="section-content active">
-                        <h2>NuGet 📦</h2>
-                        
-                        <h3>Gerenciamento de Pacotes</h3>
-                        <div class="comandos-grid">
-                            <div class="comando-container">
-                                <div class="comando-descricao">Adicionar pacote ao projeto</div>
-                                <pre><code>dotnet add package Newtonsoft.Json</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Adicionar pacote com versão específica</div>
-                                <pre><code>dotnet add package Microsoft.EntityFrameworkCore --version 6.0.0</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Remover pacote</div>
-                                <pre><code>dotnet remove package Newtonsoft.Json</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Listar pacotes do projeto</div>
-                                <pre><code>dotnet list package</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Listar pacotes desatualizados</div>
-                                <pre><code>dotnet list package --outdated</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Verificar por vulnerabilidades</div>
-                                <pre><code>dotnet list package --vulnerable</code></pre>
-                            </div>
-                        </div>
-                        
-                        <h3>Fontes de Pacotes</h3>
-                        <div class="comandos-grid">
-                            <div class="comando-container">
-                                <div class="comando-descricao">Listar fontes de pacotes</div>
-                                <pre><code>dotnet nuget list source</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Adicionar fonte de pacotes</div>
-                                <pre><code>dotnet nuget add source https://api.nuget.org/v3/index.json -n "nuget.org"</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Habilitar fonte</div>
-                                <pre><code>dotnet nuget enable source nuget.org</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Desabilitar fonte</div>
-                                <pre><code>dotnet nuget disable source nuget.org</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Remover fonte</div>
-                                <pre><code>dotnet nuget remove source nuget.org</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Limpar cache do NuGet</div>
-                                <pre><code>dotnet nuget locals all --clear</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Seção: Entity Framework -->
-                    <div id="entidades" class="section-content active">
-                        <h2>Entity Framework Core 🗃️</h2>
-                        
-                        <h3>Instalação das Ferramentas</h3>
-                        <div class="comandos-grid">
-                            <div class="comando-container">
-                                <div class="comando-descricao">Instalar a ferramenta EF Core globalmente</div>
-                                <pre><code>dotnet tool install --global dotnet-ef</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Atualizar a ferramenta EF Core</div>
-                                <pre><code>dotnet tool update --global dotnet-ef</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Verificar versão da ferramenta</div>
-                                <pre><code>dotnet ef --version</code></pre>
-                            </div>
-                        </div>
-                        
-                        <h3>Migrações</h3>
-                        <div class="comandos-grid">
-                            <div class="comando-container">
-                                <div class="comando-descricao">Adicionar migração</div>
-                                <pre><code>dotnet ef migrations add NomeDaMigracao</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Remover última migração</div>
-                                <pre><code>dotnet ef migrations remove</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Listar migrações</div>
-                                <pre><code>dotnet ef migrations list</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Gerar script SQL</div>
-                                <pre><code>dotnet ef migrations script</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Gerar script SQL de uma migração específica para outra</div>
-                                <pre><code>dotnet ef migrations script MigracaoInicial MigracaoFinal</code></pre>
-                            </div>
-                        </div>
-                        
-                        <h3>Banco de Dados</h3>
-                        <div class="comandos-grid">
-                            <div class="comando-container">
-                                <div class="comando-descricao">Aplicar migrações ao banco de dados</div>
-                                <pre><code>dotnet ef database update</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Aplicar uma migração específica</div>
-                                <pre><code>dotnet ef database update NomeDaMigracao</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Remover todas as migrações (drop database)</div>
-                                <pre><code>dotnet ef database drop</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Criar a partir do modelo atual (sem histórico)</div>
-                                <pre><code>dotnet ef database update 0</code></pre>
-                            </div>
-                        </div>
-                        
-                        <h3>Engenharia Reversa</h3>
-                        <div class="comandos-grid">
-                            <div class="comando-container">
-                                <div class="comando-descricao">Gerar modelos a partir de banco existente</div>
-                                <pre><code>dotnet ef dbcontext scaffold \
+</div>
+<div class="filter-box">
+<div class="d-flex align-items-center">
+<div class="flex-grow-1">
+<label class="form-label" for="sectionSelector">Selecione uma seção:</label>
+<select class="form-select" id="sectionSelector">
+<option value="all">Todas as seções</option>
+<option value="cli">CLI Básico</option>
+<option value="projetos">Projetos</option>
+<option value="nuget">NuGet</option>
+<option value="entidades">Entity Framework</option>
+<option value="build">Build e Publicação</option>
+<option value="testes">Testes</option>
+<option value="ferramentas">Ferramentas</option>
+<option value="solucoes">Soluções</option>
+</select>
+</div>
+</div>
+</div>
+<div class="content-body">
+<!-- Seção: CLI Básico -->
+<div class="section-content active" id="cli">
+<h2>CLI Básico 🛠️</h2>
+<h3>Informações e Ajuda</h3>
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">Verificar versão do .NET</div>
+<pre><code>dotnet --version</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Verificar SDKs instalados</div>
+<pre><code>dotnet --list-sdks</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Verificar runtimes instalados</div>
+<pre><code>dotnet --list-runtimes</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Obter ajuda geral</div>
+<pre><code>dotnet --help</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Obter ajuda para comando específico</div>
+<pre><code>dotnet [comando] --help</code></pre>
+</div>
+</div>
+<h3>Templates</h3>
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">Listar todos os templates disponíveis</div>
+<pre><code>dotnet new --list</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Buscar templates específicos</div>
+<pre><code>dotnet new --list | findstr web</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Instalar novos templates</div>
+<pre><code>dotnet new install Microsoft.DotNet.Web.Spa.ProjectTemplates</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Atualizar templates</div>
+<pre><code>dotnet new update</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Desinstalar templates</div>
+<pre><code>dotnet new uninstall [ID-do-template]</code></pre>
+</div>
+</div>
+</div>
+<!-- Seção: Projetos -->
+<div class="section-content active" id="projetos">
+<h2>Projetos 📂</h2>
+<h3>Criar Projetos</h3>
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">Criar aplicação console</div>
+<pre><code>dotnet new console -o MeuApp</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Criar aplicação web MVC</div>
+<pre><code>dotnet new mvc -o MeuAppMVC</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Criar API web</div>
+<pre><code>dotnet new webapi -o MinhaAPI</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Criar aplicação Blazor Server</div>
+<pre><code>dotnet new blazorserver -o AppBlazor</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Criar aplicação Blazor WebAssembly</div>
+<pre><code>dotnet new blazorwasm -o AppBlazorWasm</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Criar projeto de biblioteca</div>
+<pre><code>dotnet new classlib -o MinhaLib</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Criar projeto com namespace específico</div>
+<pre><code>dotnet new console -o MeuApp -n MeuNamespace</code></pre>
+</div>
+</div>
+<h3>Executar e Gerenciar</h3>
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">Compilar projeto</div>
+<pre><code>dotnet build</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Executar aplicação</div>
+<pre><code>dotnet run</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Executar com configuração específica</div>
+<pre><code>dotnet run --configuration Release</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Executar com argumentos</div>
+<pre><code>dotnet run -- arg1 arg2</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Limpar artefatos de compilação</div>
+<pre><code>dotnet clean</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Restaurar dependências</div>
+<pre><code>dotnet restore</code></pre>
+</div>
+</div>
+</div>
+<!-- Seção: NuGet -->
+<div class="section-content active" id="nuget">
+<h2>NuGet 📦</h2>
+<h3>Gerenciamento de Pacotes</h3>
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">Adicionar pacote ao projeto</div>
+<pre><code>dotnet add package Newtonsoft.Json</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Adicionar pacote com versão específica</div>
+<pre><code>dotnet add package Microsoft.EntityFrameworkCore --version 6.0.0</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Remover pacote</div>
+<pre><code>dotnet remove package Newtonsoft.Json</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Listar pacotes do projeto</div>
+<pre><code>dotnet list package</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Listar pacotes desatualizados</div>
+<pre><code>dotnet list package --outdated</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Verificar por vulnerabilidades</div>
+<pre><code>dotnet list package --vulnerable</code></pre>
+</div>
+</div>
+<h3>Fontes de Pacotes</h3>
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">Listar fontes de pacotes</div>
+<pre><code>dotnet nuget list source</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Adicionar fonte de pacotes</div>
+<pre><code>dotnet nuget add source https://api.nuget.org/v3/index.json -n "nuget.org"</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Habilitar fonte</div>
+<pre><code>dotnet nuget enable source nuget.org</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Desabilitar fonte</div>
+<pre><code>dotnet nuget disable source nuget.org</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Remover fonte</div>
+<pre><code>dotnet nuget remove source nuget.org</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Limpar cache do NuGet</div>
+<pre><code>dotnet nuget locals all --clear</code></pre>
+</div>
+</div>
+<h3>📦 Como Criar e Usar Pacotes NuGet Locais</h3>
+<h4>🧱 Parte 1 — Projeto que será o pacote</h4>
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">1. Configure o .csproj para gerar pacote automaticamente</div>
+<pre><code>&lt;GeneratePackageOnBuild&gt;true&lt;/GeneratePackageOnBuild&gt;
+&lt;Version&gt;1.0.0&lt;/Version&gt;
+&lt;PackageId&gt;Projeto.Core&lt;/PackageId&gt;</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">2. Gere o pacote NuGet (.nupkg)</div>
+<pre><code>dotnet build -c Release</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">3. Crie a pasta local onde seus pacotes ficarão salvos</div>
+<pre><code>mkdir C:\Dev\LocalNugets</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">4. Copie o pacote gerado para a pasta local</div>
+<pre><code>copy .\bin\Release\Projeto.Core.1.0.0.nupkg C:\Dev\LocalNugets</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">5. Adicione a pasta como uma fonte NuGet</div>
+<pre><code>dotnet nuget add source "C:\Dev\LocalNugets" --name LocalNugets</code></pre>
+</div>
+</div>
+<h4>🔧 Parte 2 — Projeto que vai usar o pacote</h4>
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">1. Referencie o pacote no .csproj</div>
+<pre><code>&lt;PackageReference Include="Projeto.Core" Version="1.0.0" /&gt;</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">2. Restaure os pacotes</div>
+<pre><code>dotnet restore</code></pre>
+</div>
+</div>
+<h4>🔁 Atualizações futuras</h4>
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">1. Atualize a versão no projeto pacote</div>
+<pre><code>&lt;Version&gt;1.0.1&lt;/Version&gt;</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">2. Compile e copie novamente para a pasta</div>
+<pre><code>dotnet build -c Release
+copy .\bin\Release\Projeto.Core.1.0.1.nupkg C:\Dev\LocalNugets</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">3. Atualize o .csproj consumidor para nova versão</div>
+<pre><code>&lt;PackageReference Include="Projeto.Core" Version="1.0.1" /&gt;</code></pre>
+</div>
+</div>
+
+<!-- Seção: NuGet (adicional) -->
+<!-- REMOVIDO BLOCO DUPLICADO -->
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">Definir versão no .csproj</div>
+<pre><code>&lt;Version&gt;1.0.0&lt;/Version&gt;</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Gerar pacote NuGet automaticamente</div>
+<pre><code>dotnet build -c Release</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Adicionar pasta como fonte NuGet</div>
+<pre><code>dotnet nuget add source "C:\Dev\LocalNugets" --name LocalNugets</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Copiar pacote gerado para a pasta</div>
+<pre><code>copy .\bin\Release\Projeto.Core.1.0.0.nupkg C:\Dev\LocalNugets\</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Referenciar pacote no .csproj</div>
+<pre><code>&lt;PackageReference Include="Projeto.Core" Version="1.0.0" /&gt;</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Atualizar versão no .csproj quando houver mudanças</div>
+<pre><code>&lt;Version&gt;1.0.1&lt;/Version&gt;</code></pre>
+</div>
+</div>
+</div>
+<!-- Seção: Entity Framework -->
+<div class="section-content active" id="entidades">
+<h2>Entity Framework Core 🗃️</h2>
+<h3>Instalação das Ferramentas</h3>
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">Instalar a ferramenta EF Core globalmente</div>
+<pre><code>dotnet tool install --global dotnet-ef</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Atualizar a ferramenta EF Core</div>
+<pre><code>dotnet tool update --global dotnet-ef</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Verificar versão da ferramenta</div>
+<pre><code>dotnet ef --version</code></pre>
+</div>
+</div>
+<h3>Migrações</h3>
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">Adicionar migração</div>
+<pre><code>dotnet ef migrations add NomeDaMigracao</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Remover última migração</div>
+<pre><code>dotnet ef migrations remove</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Listar migrações</div>
+<pre><code>dotnet ef migrations list</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Gerar script SQL</div>
+<pre><code>dotnet ef migrations script</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Gerar script SQL de uma migração específica para outra</div>
+<pre><code>dotnet ef migrations script MigracaoInicial MigracaoFinal</code></pre>
+</div>
+</div>
+<h3>Banco de Dados</h3>
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">Aplicar migrações ao banco de dados</div>
+<pre><code>dotnet ef database update</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Aplicar uma migração específica</div>
+<pre><code>dotnet ef database update NomeDaMigracao</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Remover todas as migrações (drop database)</div>
+<pre><code>dotnet ef database drop</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Criar a partir do modelo atual (sem histórico)</div>
+<pre><code>dotnet ef database update 0</code></pre>
+</div>
+</div>
+<h3>Engenharia Reversa</h3>
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">Gerar modelos a partir de banco existente</div>
+<pre><code>dotnet ef dbcontext scaffold \
 "Server=.;Database=Northwind;Trusted_Connection=True;" \
 Microsoft.EntityFrameworkCore.SqlServer</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Gerar modelos para tabelas específicas</div>
-                                <pre><code>dotnet ef dbcontext scaffold \
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Gerar modelos para tabelas específicas</div>
+<pre><code>dotnet ef dbcontext scaffold \
 "ConnString" Microsoft.EntityFrameworkCore.SqlServer \
 --table Customers --table Orders</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Seção: Build e Publicação -->
-                    <div id="build" class="section-content active">
-                        <h2>Build e Publicação 🚀</h2>
-                        
-                        <h3>Compilação</h3>
-                        <div class="comandos-grid">
-                            <div class="comando-container">
-                                <div class="comando-descricao">Compilar projeto</div>
-                                <pre><code>dotnet build</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Compilar com configuração específica</div>
-                                <pre><code>dotnet build --configuration Release</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Compilar para versão específica do framework</div>
-                                <pre><code>dotnet build --framework net6.0</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Compilar com detalhamento</div>
-                                <pre><code>dotnet build --verbosity detailed</code></pre>
-                            </div>
-                        </div>
-                        
-                        <h3>Publicação</h3>
-                        <div class="comandos-grid">
-                            <div class="comando-container">
-                                <div class="comando-descricao">Publicar aplicação</div>
-                                <pre><code>dotnet publish</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Publicar com configuração Release</div>
-                                <pre><code>dotnet publish --configuration Release</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Publicar para pasta específica</div>
-                                <pre><code>dotnet publish --output ./publish</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Publicar como autocontido (sem necessidade de runtime instalado)</div>
-                                <pre><code>dotnet publish --self-contained \
+</div>
+</div>
+</div>
+<!-- Seção: Build e Publicação -->
+<div class="section-content active" id="build">
+<h2>Build e Publicação 🚀</h2>
+<h3>Compilação</h3>
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">Compilar projeto</div>
+<pre><code>dotnet build</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Compilar com configuração específica</div>
+<pre><code>dotnet build --configuration Release</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Compilar para versão específica do framework</div>
+<pre><code>dotnet build --framework net6.0</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Compilar com detalhamento</div>
+<pre><code>dotnet build --verbosity detailed</code></pre>
+</div>
+</div>
+<h3>Publicação</h3>
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">Publicar aplicação</div>
+<pre><code>dotnet publish</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Publicar com configuração Release</div>
+<pre><code>dotnet publish --configuration Release</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Publicar para pasta específica</div>
+<pre><code>dotnet publish --output ./publish</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Publicar como autocontido (sem necessidade de runtime instalado)</div>
+<pre><code>dotnet publish --self-contained \
 --runtime win-x64</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Publicar como executável único (trimado)</div>
-                                <pre><code>dotnet publish -r win-x64 \
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Publicar como executável único (trimado)</div>
+<pre><code>dotnet publish -r win-x64 \
 -p:PublishSingleFile=true \
 -p:PublishTrimmed=true \
 --self-contained</code></pre>
-                            </div>
-                        </div>
-                        
-                        <h3>Empacotamento</h3>
-                        <div class="comandos-grid">
-                            <div class="comando-container">
-                                <div class="comando-descricao">Empacotar projeto como NuGet</div>
-                                <pre><code>dotnet pack</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Empacotar com configuração Release</div>
-                                <pre><code>dotnet pack --configuration Release</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Empacotar com versão específica</div>
-                                <pre><code>dotnet pack -p:PackageVersion=1.0.0</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Seção: Testes -->
-                    <div id="testes" class="section-content active">
-                        <h2>Testes 🧪</h2>
-                        
-                        <h3>Criar Projetos de Teste</h3>
-                        <div class="comandos-grid">
-                            <div class="comando-container">
-                                <div class="comando-descricao">Criar projeto de teste xUnit</div>
-                                <pre><code>dotnet new xunit -o MeusProjeto.Tests</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Criar projeto de teste NUnit</div>
-                                <pre><code>dotnet new nunit -o MeusProjeto.Tests</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Criar projeto de teste MSTest</div>
-                                <pre><code>dotnet new mstest -o MeusProjeto.Tests</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Adicionar referência ao projeto a ser testado</div>
-                                <pre><code>dotnet add MeusProjeto.Tests/MeusProjeto.Tests.csproj \
+</div>
+</div>
+<h3>Empacotamento</h3>
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">Empacotar projeto como NuGet</div>
+<pre><code>dotnet pack</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Empacotar com configuração Release</div>
+<pre><code>dotnet pack --configuration Release</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Empacotar com versão específica</div>
+<pre><code>dotnet pack -p:PackageVersion=1.0.0</code></pre>
+</div>
+</div>
+</div>
+<!-- Seção: Testes -->
+<div class="section-content active" id="testes">
+<h2>Testes 🧪</h2>
+<h3>Criar Projetos de Teste</h3>
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">Criar projeto de teste xUnit</div>
+<pre><code>dotnet new xunit -o MeusProjeto.Tests</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Criar projeto de teste NUnit</div>
+<pre><code>dotnet new nunit -o MeusProjeto.Tests</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Criar projeto de teste MSTest</div>
+<pre><code>dotnet new mstest -o MeusProjeto.Tests</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Adicionar referência ao projeto a ser testado</div>
+<pre><code>dotnet add MeusProjeto.Tests/MeusProjeto.Tests.csproj \
 reference MeusProjeto/MeusProjeto.csproj</code></pre>
-                            </div>
-                        </div>
-                        
-                        <h3>Executar Testes</h3>
-                        <div class="comandos-grid">
-                            <div class="comando-container">
-                                <div class="comando-descricao">Executar todos os testes</div>
-                                <pre><code>dotnet test</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Executar testes com configuração específica</div>
-                                <pre><code>dotnet test --configuration Release</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Executar testes que correspondem a um filtro por nome</div>
-                                <pre><code>dotnet test --filter "FullyQualifiedName~NomeDoMeuTeste"</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Executar testes por categoria</div>
-                                <pre><code>dotnet test --filter "Category=IntegrationTest"</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Executar testes com detalhamento</div>
-                                <pre><code>dotnet test --verbosity normal</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Coletar cobertura de código</div>
-                                <pre><code>dotnet test --collect:"XPlat Code Coverage"</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Seção: Ferramentas -->
-                    <div id="ferramentas" class="section-content active">
-                        <h2>Ferramentas 🧰</h2>
-                        
-                        <h3>Gerenciador de Ferramentas</h3>
-                        <div class="comandos-grid">
-                            <div class="comando-container">
-                                <div class="comando-descricao">Listar ferramentas instaladas</div>
-                                <pre><code>dotnet tool list --global</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Instalar ferramenta</div>
-                                <pre><code>dotnet tool install --global dotnet-ef</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Atualizar ferramenta</div>
-                                <pre><code>dotnet tool update --global dotnet-ef</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Desinstalar ferramenta</div>
-                                <pre><code>dotnet tool uninstall --global dotnet-ef</code></pre>
-                            </div>
-                        </div>
-                        
-                        <h3>Ferramentas Úteis</h3>
-                        <div class="comandos-grid">
-                            <div class="comando-container">
-                                <div class="comando-descricao">Instalar ferramenta de cobertura de código</div>
-                                <pre><code>dotnet tool install --global dotnet-reportgenerator-globaltool</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Gerar relatório de cobertura de código</div>
-                                <pre><code>reportgenerator \
+</div>
+</div>
+<h3>Executar Testes</h3>
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">Executar todos os testes</div>
+<pre><code>dotnet test</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Executar testes com configuração específica</div>
+<pre><code>dotnet test --configuration Release</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Executar testes que correspondem a um filtro por nome</div>
+<pre><code>dotnet test --filter "FullyQualifiedName~NomeDoMeuTeste"</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Executar testes por categoria</div>
+<pre><code>dotnet test --filter "Category=IntegrationTest"</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Executar testes com detalhamento</div>
+<pre><code>dotnet test --verbosity normal</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Coletar cobertura de código</div>
+<pre><code>dotnet test --collect:"XPlat Code Coverage"</code></pre>
+</div>
+</div>
+</div>
+<!-- Seção: Ferramentas -->
+<div class="section-content active" id="ferramentas">
+<h2>Ferramentas 🧰</h2>
+<h3>Gerenciador de Ferramentas</h3>
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">Listar ferramentas instaladas</div>
+<pre><code>dotnet tool list --global</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Instalar ferramenta</div>
+<pre><code>dotnet tool install --global dotnet-ef</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Atualizar ferramenta</div>
+<pre><code>dotnet tool update --global dotnet-ef</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Desinstalar ferramenta</div>
+<pre><code>dotnet tool uninstall --global dotnet-ef</code></pre>
+</div>
+</div>
+<h3>Ferramentas Úteis</h3>
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">Instalar ferramenta de cobertura de código</div>
+<pre><code>dotnet tool install --global dotnet-reportgenerator-globaltool</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Gerar relatório de cobertura de código</div>
+<pre><code>reportgenerator \
 -reports:"./coverage.cobertura.xml" \
 -targetdir:"coveragereport" \
 -reporttypes:Html</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Instalar ferramenta de formatação de código</div>
-                                <pre><code>dotnet tool install --global dotnet-format</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Formatar código</div>
-                                <pre><code>dotnet format</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Instalar ferramenta de certificados HTTPS</div>
-                                <pre><code>dotnet tool install --global dotnet-dev-certs</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Confiar em certificados de desenvolvimento</div>
-                                <pre><code>dotnet dev-certs https --trust</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Seção: Soluções -->
-                    <div id="solucoes" class="section-content active">
-                        <h2>Soluções 🗂️</h2>
-                        
-                        <h3>Criação e Gerenciamento</h3>
-                        <div class="comandos-grid">
-                            <div class="comando-container">
-                                <div class="comando-descricao">Criar nova solução</div>
-                                <pre><code>dotnet new sln -o MinhaSolucao</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Adicionar projeto à solução</div>
-                                <pre><code>dotnet sln MinhaSolucao.sln add MeuProjeto/MeuProjeto.csproj</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Adicionar múltiplos projetos</div>
-                                <pre><code>dotnet sln MinhaSolucao.sln add **/*.csproj</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Remover projeto da solução</div>
-                                <pre><code>dotnet sln MinhaSolucao.sln remove MeuProjeto/MeuProjeto.csproj</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Listar projetos na solução</div>
-                                <pre><code>dotnet sln MinhaSolucao.sln list</code></pre>
-                            </div>
-                        </div>
-                        
-                        <h3>Referências entre Projetos</h3>
-                        <div class="comandos-grid">
-                            <div class="comando-container">
-                                <div class="comando-descricao">Adicionar referência a outro projeto</div>
-                                <pre><code>dotnet add MeuProjeto/MeuProjeto.csproj \
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Instalar ferramenta de formatação de código</div>
+<pre><code>dotnet tool install --global dotnet-format</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Formatar código</div>
+<pre><code>dotnet format</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Instalar ferramenta de certificados HTTPS</div>
+<pre><code>dotnet tool install --global dotnet-dev-certs</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Confiar em certificados de desenvolvimento</div>
+<pre><code>dotnet dev-certs https --trust</code></pre>
+</div>
+</div>
+</div>
+<!-- Seção: Soluções -->
+<div class="section-content active" id="solucoes">
+<h2>Soluções 🗂️</h2>
+<h3>Criação e Gerenciamento</h3>
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">Criar nova solução</div>
+<pre><code>dotnet new sln -o MinhaSolucao</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Adicionar projeto à solução</div>
+<pre><code>dotnet sln MinhaSolucao.sln add MeuProjeto/MeuProjeto.csproj</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Adicionar múltiplos projetos</div>
+<pre><code>dotnet sln MinhaSolucao.sln add **/*.csproj</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Remover projeto da solução</div>
+<pre><code>dotnet sln MinhaSolucao.sln remove MeuProjeto/MeuProjeto.csproj</code></pre>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Listar projetos na solução</div>
+<pre><code>dotnet sln MinhaSolucao.sln list</code></pre>
+</div>
+</div>
+<h3>Referências entre Projetos</h3>
+<div class="comandos-grid">
+<div class="comando-container">
+<div class="comando-descricao">Adicionar referência a outro projeto</div>
+<pre><code>dotnet add MeuProjeto/MeuProjeto.csproj \
 reference Biblioteca/Biblioteca.csproj</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Remover referência a outro projeto</div>
-                                <pre><code>dotnet remove MeuProjeto/MeuProjeto.csproj \
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Remover referência a outro projeto</div>
+<pre><code>dotnet remove MeuProjeto/MeuProjeto.csproj \
 reference Biblioteca/Biblioteca.csproj</code></pre>
-                            </div>
-                            
-                            <div class="comando-container">
-                                <div class="comando-descricao">Listar referências de um projeto</div>
-                                <pre><code>dotnet list MeuProjeto/MeuProjeto.csproj reference</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="section-filter.js"></script>
+</div>
+<div class="comando-container">
+<div class="comando-descricao">Listar referências de um projeto</div>
+<pre><code>dotnet list MeuProjeto/MeuProjeto.csproj reference</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="section-filter.js"></script>
 </body>
 </html> 
