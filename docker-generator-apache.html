@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Generator - Apache HTTP Server | DevTipsBR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="docker-generator.css">
+</head>
+<body>
+    <div class="container-fluid bg-modern min-vh-100 py-5">
+        <div class="container">
+            <div class="content-card">
+                <div class="content-header d-flex justify-content-between align-items-center">
+                    <div>
+                        <h1><i class="bi bi-server me-2"></i>Apache HTTP Server - Docker Generator</h1>
+                        <p class="mb-0 text-muted">Configure os parâmetros e gere o comando Docker pronto para uso</p>
+                    </div>
+                    <a href="index.html" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left me-1"></i> Voltar
+                    </a>
+                </div>
+
+                <div class="content-body py-3">
+                    <!-- Formulário de Configuração -->
+                    <div class="generator-form">
+                        <h2 class="mb-3"><i class="bi bi-sliders me-2"></i>Parâmetros de Configuração</h2>
+
+                        <form id="apacheForm">
+                            <div class="row g-3">
+                                <!-- HTTP PORT -->
+                                <div class="col-md-6">
+                                    <div class="param-group">
+                                        <label for="httpPort" class="form-label param-label mb-1">
+                                            <i class="bi bi-hdd-network me-1"></i>Porta HTTP
+                                            <span class="optional-badge">Opcional</span>
+                                        </label>
+                                        <div class="param-description">
+                                            Porta HTTP no host (padrão: 8080)
+                                        </div>
+                                        <input type="number" class="form-control form-control-sm" id="httpPort" placeholder="8080" value="8080">
+                                    </div>
+                                </div>
+
+                                <!-- HTTPS PORT -->
+                                <div class="col-md-6">
+                                    <div class="param-group">
+                                        <label for="httpsPort" class="form-label param-label mb-1">
+                                            <i class="bi bi-shield-lock me-1"></i>Porta HTTPS
+                                            <span class="optional-badge">Opcional</span>
+                                        </label>
+                                        <div class="param-description">
+                                            Porta HTTPS no host (padrão: 8443)
+                                        </div>
+                                        <input type="number" class="form-control form-control-sm" id="httpsPort" placeholder="8443" value="8443">
+                                    </div>
+                                </div>
+
+                                <!-- DOCUMENT ROOT -->
+                                <div class="col-md-6">
+                                    <div class="param-group">
+                                        <label for="documentRoot" class="form-label param-label mb-1">
+                                            <i class="bi bi-folder me-1"></i>Pasta Local (Document Root)
+                                            <span class="optional-badge">Opcional</span>
+                                        </label>
+                                        <div class="param-description">
+                                            Caminho local para servir arquivos HTML/PHP
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" id="documentRoot" placeholder="Ex: ./public-html ou C:\www">
+                                    </div>
+                                </div>
+
+                                <!-- CONTAINER NAME -->
+                                <div class="col-md-6">
+                                    <div class="param-group">
+                                        <label for="containerName" class="form-label param-label mb-1">
+                                            <i class="bi bi-tag me-1"></i>Nome do Contêiner
+                                            <span class="optional-badge">Opcional</span>
+                                        </label>
+                                        <div class="param-description">
+                                            Nome único para identificar o contêiner
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" id="containerName" placeholder="Ex: apache-server" value="apache-server">
+                                    </div>
+                                </div>
+
+                                <!-- HOSTNAME -->
+                                <div class="col-md-6">
+                                    <div class="param-group">
+                                        <label for="hostname" class="form-label param-label mb-1">
+                                            <i class="bi bi-pc-display me-1"></i>Hostname
+                                            <span class="optional-badge">Opcional</span>
+                                        </label>
+                                        <div class="param-description">
+                                            Hostname personalizado do contêiner
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" id="hostname" placeholder="Ex: apache-web">
+                                    </div>
+                                </div>
+
+                                <!-- SERVER NAME -->
+                                <div class="col-md-6">
+                                    <div class="param-group">
+                                        <label for="serverName" class="form-label param-label mb-1">
+                                            <i class="bi bi-globe me-1"></i>Server Name
+                                            <span class="optional-badge">Opcional</span>
+                                        </label>
+                                        <div class="param-description">
+                                            Nome do servidor Apache (variável APACHE_SERVER_NAME)
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" id="serverName" placeholder="Ex: localhost ou meusite.local">
+                                    </div>
+                                </div>
+
+                                <!-- APACHE VERSION -->
+                                <div class="col-md-12">
+                                    <div class="param-group">
+                                        <label for="version" class="form-label param-label mb-1">
+                                            <i class="bi bi-box me-1"></i>Versão do Apache
+                                            <span class="optional-badge">Opcional</span>
+                                        </label>
+                                        <div class="param-description">
+                                            Escolha a versão do Apache HTTP Server
+                                        </div>
+                                        <select class="form-select form-select-sm" id="version">
+                                            <option value="latest" selected>Latest (mais recente)</option>
+                                            <option value="2.4">Apache 2.4</option>
+                                            <option value="2.4-alpine">Apache 2.4 Alpine (leve)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Botão Gerar -->
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-primary generate-btn">
+                                    <i class="bi bi-gear-fill me-2"></i>Gerar Comando Docker
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Resultado -->
+                    <div id="resultSection" class="result-section mt-3" style="display: none;">
+                        <h2 class="mb-2"><i class="bi bi-terminal me-2"></i>Comando Gerado</h2>
+
+                        <div class="command-output">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-success">
+                                    <i class="bi bi-check-circle me-1"></i>Pronto para uso
+                                </span>
+                                <button class="btn btn-sm btn-outline-light" id="copyBtn">
+                                    <i class="bi bi-clipboard me-1"></i>Copiar
+                                </button>
+                            </div>
+                            <pre><code id="dockerCommand"></code></pre>
+                        </div>
+
+                        <!-- Instruções -->
+                        <div class="instructions mt-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 class="mb-2"><i class="bi bi-list-check me-2"></i>Como usar</h3>
+                                    <ol class="small">
+                                        <li>Copie o comando acima</li>
+                                        <li>Abra seu terminal</li>
+                                        <li>Cole e execute o comando</li>
+                                        <li>Aguarde o download da imagem</li>
+                                        <li>Apache estará pronto!</li>
+                                    </ol>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3 class="mb-2"><i class="bi bi-plug me-2"></i>Como acessar</h3>
+                                    <div class="connection-info">
+                                        <p class="mb-1 small"><strong>HTTP:</strong> <code>http://localhost:<span id="displayHttpPort">8080</span></code></p>
+                                        <p class="mb-1 small"><strong>HTTPS:</strong> <code>https://localhost:<span id="displayHttpsPort">8443</span></code></p>
+                                        <p class="mb-2 small" id="documentRootInfo" style="display: none;">
+                                            <strong>Document Root:</strong> <code id="displayDocRoot"></code>
+                                        </p>
+                                        <p class="mb-0 small text-muted">
+                                            <i class="bi bi-info-circle me-1"></i>Acesse pelo navegador usando as URLs acima
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="docker-generator-apache.js"></script>
+</body>
+</html>

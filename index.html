@@ -23,8 +23,30 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="row g-4">
+
+                <!-- Tabs Navigation -->
+                <ul class="nav nav-tabs nav-fill mb-4" id="mainTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="dicas-tab" data-bs-toggle="tab" data-bs-target="#dicas" type="button" role="tab" aria-controls="dicas" aria-selected="true">
+                            <i class="bi bi-lightbulb-fill me-2"></i>Dicas de Tecnologias
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="generator-tab" data-bs-toggle="tab" data-bs-target="#generator" type="button" role="tab" aria-controls="generator" aria-selected="false">
+                            <i class="bi bi-gear-fill me-2"></i>Docker Generator
+                        </button>
+                    </li>
+                </ul>
+
+                <!-- Tabs Content -->
+                <div class="tab-content" id="mainTabsContent">
+                    <!-- Tab: Dicas de Tecnologias -->
+                    <div class="tab-pane fade show active" id="dicas" role="tabpanel" aria-labelledby="dicas-tab">
+                        <div class="mb-4">
+                            <p class="text-muted mb-4">Comandos e dicas práticas para diversas tecnologias</p>
+                        </div>
+
+                        <div class="row g-4">
                     <div class="col-md-4 col-lg-2 mb-3">
                         <a href="docker.html" class="text-decoration-none">
                             <div class="tech-card">
@@ -179,6 +201,64 @@
                                 </div>
                             </div>
                         </a>
+                    </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Docker Generator -->
+                    <div class="tab-pane fade" id="generator" role="tabpanel" aria-labelledby="generator-tab">
+                        <div class="mb-4">
+                            <p class="text-muted mb-4">Configure e gere comandos Docker prontos para uso</p>
+                        </div>
+
+                        <div class="row g-4">
+                            <div class="col-md-4 col-lg-2 mb-3">
+                                <a href="docker-generator-sqlserver.html" class="text-decoration-none">
+                                    <div class="tech-card generator-card">
+                                        <div class="card-body text-center">
+                                            <i class="bi bi-database-fill-gear tech-icon-bootstrap mb-2"></i>
+                                            <h3>SQL Server 2022</h3>
+                                            <p class="small">Configure container SQL Server com parâmetros personalizados</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-md-4 col-lg-2 mb-3">
+                                <a href="docker-generator-postgresql.html" class="text-decoration-none">
+                                    <div class="tech-card generator-card">
+                                        <div class="card-body text-center">
+                                            <i class="bi bi-database-fill tech-icon-bootstrap mb-2"></i>
+                                            <h3>PostgreSQL</h3>
+                                            <p class="small">Configure container PostgreSQL com parâmetros personalizados</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-md-4 col-lg-2 mb-3">
+                                <a href="docker-generator-apache.html" class="text-decoration-none">
+                                    <div class="tech-card generator-card">
+                                        <div class="card-body text-center">
+                                            <i class="bi bi-server tech-icon-bootstrap mb-2"></i>
+                                            <h3>Apache HTTP</h3>
+                                            <p class="small">Configure container Apache HTTP Server com parâmetros personalizados</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-md-4 col-lg-2 mb-3">
+                                <div class="tech-card generator-card coming-soon">
+                                    <div class="card-body text-center">
+                                        <i class="bi bi-database tech-icon-bootstrap mb-2"></i>
+                                        <h3>MySQL</h3>
+                                        <p class="small">Em breve</p>
+                                        <span class="badge bg-secondary">Em desenvolvimento</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

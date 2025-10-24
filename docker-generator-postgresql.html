@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Generator - PostgreSQL | DevTipsBR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="docker-generator.css">
+</head>
+<body>
+    <div class="container-fluid bg-modern min-vh-100 py-5">
+        <div class="container">
+            <div class="content-card">
+                <div class="content-header d-flex justify-content-between align-items-center">
+                    <div>
+                        <h1><i class="bi bi-database-fill me-2"></i>PostgreSQL - Docker Generator</h1>
+                        <p class="mb-0 text-muted">Configure os parâmetros e gere o comando Docker pronto para uso</p>
+                    </div>
+                    <a href="index.html" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left me-1"></i> Voltar
+                    </a>
+                </div>
+
+                <div class="content-body py-3">
+                    <!-- Formulário de Configuração -->
+                    <div class="generator-form">
+                        <h2 class="mb-3"><i class="bi bi-sliders me-2"></i>Parâmetros de Configuração</h2>
+
+                        <form id="postgresForm">
+                            <div class="row g-3">
+                                <!-- DATABASE NAME -->
+                                <div class="col-md-6">
+                                    <div class="param-group">
+                                        <label for="dbName" class="form-label param-label mb-1">
+                                            <i class="bi bi-database me-1"></i>Nome do Banco
+                                            <span class="optional-badge">Opcional</span>
+                                        </label>
+                                        <div class="param-description">
+                                            Nome do banco de dados inicial (padrão: postgres)
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" id="dbName" placeholder="Ex: meudb" value="postgres">
+                                    </div>
+                                </div>
+
+                                <!-- POSTGRES PASSWORD -->
+                                <div class="col-md-6">
+                                    <div class="param-group">
+                                        <label for="postgresPassword" class="form-label param-label mb-1">
+                                            <i class="bi bi-shield-lock me-1"></i>Senha do Postgres
+                                            <span class="required-badge">Obrigatório</span>
+                                        </label>
+                                        <div class="param-description">
+                                            Senha do superusuário postgres
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" id="postgresPassword" placeholder="Ex: MinhasenhaForte123" required>
+                                        <div class="password-strength mt-1" id="passwordStrength"></div>
+                                    </div>
+                                </div>
+
+                                <!-- POSTGRES USER -->
+                                <div class="col-md-6">
+                                    <div class="param-group">
+                                        <label for="postgresUser" class="form-label param-label mb-1">
+                                            <i class="bi bi-person me-1"></i>Usuário
+                                            <span class="optional-badge">Opcional</span>
+                                        </label>
+                                        <div class="param-description">
+                                            Nome do usuário customizado (padrão: postgres)
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" id="postgresUser" placeholder="Ex: admin" value="postgres">
+                                    </div>
+                                </div>
+
+                                <!-- PORT -->
+                                <div class="col-md-6">
+                                    <div class="param-group">
+                                        <label for="hostPort" class="form-label param-label mb-1">
+                                            <i class="bi bi-hdd-network me-1"></i>Porta no Host
+                                            <span class="optional-badge">Opcional</span>
+                                        </label>
+                                        <div class="param-description">
+                                            Porta TCP para conexão (padrão: 5432)
+                                        </div>
+                                        <input type="number" class="form-control form-control-sm" id="hostPort" placeholder="5432" value="5432">
+                                    </div>
+                                </div>
+
+                                <!-- CONTAINER NAME -->
+                                <div class="col-md-6">
+                                    <div class="param-group">
+                                        <label for="containerName" class="form-label param-label mb-1">
+                                            <i class="bi bi-tag me-1"></i>Nome do Contêiner
+                                            <span class="optional-badge">Opcional</span>
+                                        </label>
+                                        <div class="param-description">
+                                            Nome único para identificar o contêiner
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" id="containerName" placeholder="Ex: postgres-dev" value="postgres-dev">
+                                    </div>
+                                </div>
+
+                                <!-- HOSTNAME -->
+                                <div class="col-md-6">
+                                    <div class="param-group">
+                                        <label for="hostname" class="form-label param-label mb-1">
+                                            <i class="bi bi-pc-display me-1"></i>Hostname
+                                            <span class="optional-badge">Opcional</span>
+                                        </label>
+                                        <div class="param-description">
+                                            Hostname personalizado do contêiner
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" id="hostname" placeholder="Ex: postgres-server">
+                                    </div>
+                                </div>
+
+                                <!-- POSTGRES VERSION -->
+                                <div class="col-md-12">
+                                    <div class="param-group">
+                                        <label for="version" class="form-label param-label mb-1">
+                                            <i class="bi bi-box me-1"></i>Versão do PostgreSQL
+                                            <span class="optional-badge">Opcional</span>
+                                        </label>
+                                        <div class="param-description">
+                                            Escolha a versão do PostgreSQL (padrão: latest)
+                                        </div>
+                                        <select class="form-select form-select-sm" id="version">
+                                            <option value="latest" selected>Latest (mais recente)</option>
+                                            <option value="16">PostgreSQL 16</option>
+                                            <option value="15">PostgreSQL 15</option>
+                                            <option value="14">PostgreSQL 14</option>
+                                            <option value="13">PostgreSQL 13</option>
+                                            <option value="12">PostgreSQL 12</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Botão Gerar -->
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-primary generate-btn">
+                                    <i class="bi bi-gear-fill me-2"></i>Gerar Comando Docker
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Resultado -->
+                    <div id="resultSection" class="result-section mt-3" style="display: none;">
+                        <h2 class="mb-2"><i class="bi bi-terminal me-2"></i>Comando Gerado</h2>
+
+                        <div class="command-output">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-success">
+                                    <i class="bi bi-check-circle me-1"></i>Pronto para uso
+                                </span>
+                                <button class="btn btn-sm btn-outline-light" id="copyBtn">
+                                    <i class="bi bi-clipboard me-1"></i>Copiar
+                                </button>
+                            </div>
+                            <pre><code id="dockerCommand"></code></pre>
+                        </div>
+
+                        <!-- Instruções -->
+                        <div class="instructions mt-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 class="mb-2"><i class="bi bi-list-check me-2"></i>Como usar</h3>
+                                    <ol class="small">
+                                        <li>Copie o comando acima</li>
+                                        <li>Abra seu terminal</li>
+                                        <li>Cole e execute o comando</li>
+                                        <li>Aguarde o download da imagem</li>
+                                        <li>PostgreSQL estará pronto!</li>
+                                    </ol>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3 class="mb-2"><i class="bi bi-plug me-2"></i>Como conectar</h3>
+                                    <div class="connection-info">
+                                        <p class="mb-1 small"><strong>Host:</strong> <code>localhost</code></p>
+                                        <p class="mb-1 small"><strong>Porta:</strong> <code id="displayPort">5432</code></p>
+                                        <p class="mb-1 small"><strong>Usuário:</strong> <code id="displayUser">postgres</code></p>
+                                        <p class="mb-1 small"><strong>Senha:</strong> <code id="displayPassword">***</code></p>
+                                        <p class="mb-1 small"><strong>Banco:</strong> <code id="displayDb">postgres</code></p>
+                                        <p class="mb-1 small"><strong>String de Conexão:</strong></p>
+                                        <pre class="small"><code id="connectionString"></code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="docker-generator-postgresql.js"></script>
+</body>
+</html>

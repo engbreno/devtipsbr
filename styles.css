@@ -316,4 +316,104 @@ pre code {
 
 .r-letter {
     color: #ffdf00; /* Amarelo */
+}
+
+/* Seção de Títulos */
+.section-title {
+    font-weight: 600;
+    color: #2d3748;
+    font-size: 1.5rem;
+}
+
+/* Ícones Bootstrap para cards */
+.tech-icon-bootstrap {
+    font-size: 2.5rem;
+    color: #3b82f6;
+}
+
+/* Cards do Generator */
+.generator-card {
+    border: 2px solid #3b82f6;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
+}
+
+.generator-card:hover {
+    border-color: #2563eb;
+    background: linear-gradient(135deg, #ffffff 0%, #dbeafe 100%);
+}
+
+.generator-card .tech-icon-bootstrap {
+    color: #2563eb;
+}
+
+/* Cards "Em breve" */
+.coming-soon {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.coming-soon .tech-icon-bootstrap {
+    color: #9ca3af;
+}
+
+/* Tabs Navigation */
+.nav-tabs {
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.nav-tabs .nav-link {
+    color: #64748b;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.875rem 1.5rem;
+    border: none;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.nav-tabs .nav-link:hover {
+    color: #3b82f6;
+    border-bottom-color: #93c5fd;
+    background: #f8fafc;
+}
+
+.nav-tabs .nav-link.active {
+    color: #3b82f6;
+    background: #f0f7ff;
+    border-bottom: 3px solid #3b82f6;
+    font-weight: 700;
+}
+
+.nav-tabs .nav-link i {
+    font-size: 1.2rem;
+}
+
+/* Tab Content */
+.tab-content {
+    animation: fadeInTab 0.4s ease;
+}
+
+@keyframes fadeInTab {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsividade para Tabs */
+@media (max-width: 768px) {
+    .nav-tabs .nav-link {
+        font-size: 0.95rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .nav-tabs .nav-link i {
+        font-size: 1rem;
+    }
 } 

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git config -l)",
+      "Bash(awk '{print $9, $5}')"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

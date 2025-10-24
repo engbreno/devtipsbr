@@ -1,0 +1,296 @@
+/* Docker Generator Styles */
+
+/* Formulário de configuração */
+.generator-form {
+    background: #f8fafc;
+    padding: 1.25rem;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+/* Grupos de parâmetros */
+.param-group {
+    background: white;
+    padding: 0.875rem;
+    border-radius: 6px;
+    border-left: 3px solid #3b82f6;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.param-group:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    border-left-color: #2563eb;
+}
+
+/* Labels dos parâmetros */
+.param-label {
+    font-weight: 600;
+    color: #2d3748;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* Descrição dos parâmetros */
+.param-description {
+    background: #f0f7ff;
+    padding: 0.4rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: #475569;
+    margin-bottom: 0.5rem;
+    border-left: 2px solid #3b82f6;
+}
+
+/* Badges */
+.required-badge {
+    background: #dc2626;
+    color: white;
+    font-size: 0.65rem;
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+.optional-badge {
+    background: #64748b;
+    color: white;
+    font-size: 0.65rem;
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+/* Inputs */
+.param-group .form-control,
+.param-group .form-select {
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    padding: 0.5rem;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+}
+
+.param-group .form-control:focus,
+.param-group .form-select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+/* Validação de senha */
+.password-strength {
+    padding: 0.35rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.password-strength.weak {
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+.password-strength.medium {
+    background: #fffbeb;
+    color: #d97706;
+    border: 1px solid #fde68a;
+}
+
+.password-strength.strong {
+    background: #f0fdf4;
+    color: #16a34a;
+    border: 1px solid #bbf7d0;
+}
+
+/* Botão Gerar */
+.generate-btn {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border: none;
+    padding: 0.75rem 2.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 6px;
+    box-shadow: 0 3px 10px rgba(59, 130, 246, 0.3);
+    transition: all 0.3s ease;
+}
+
+.generate-btn:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    transform: translateY(-2px);
+}
+
+.generate-btn:active {
+    transform: translateY(0);
+}
+
+/* Seção de Resultado */
+.result-section {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Output do comando */
+.command-output {
+    background: #1e293b;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.command-output pre {
+    margin: 0;
+    background: transparent;
+    color: #e2e8f0;
+    padding: 0.75rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    max-height: 300px;
+}
+
+.command-output code {
+    color: #e2e8f0;
+    background: transparent;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* Botão copiar */
+#copyBtn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+#copyBtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+#copyBtn.copied {
+    background: #16a34a;
+    border-color: #16a34a;
+}
+
+/* Instruções */
+.instructions {
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.instructions h3 {
+    color: #2d3748;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.instructions ol {
+    padding-left: 1.25rem;
+    margin-bottom: 0;
+}
+
+.instructions ol li {
+    margin-bottom: 0.25rem;
+    color: #475569;
+    line-height: 1.4;
+}
+
+/* Informações de conexão */
+.connection-info {
+    background: white;
+    padding: 0.75rem;
+    border-radius: 6px;
+    border-left: 3px solid #10b981;
+}
+
+.connection-info p {
+    color: #334155;
+}
+
+.connection-info strong {
+    color: #1e293b;
+    font-weight: 600;
+}
+
+.connection-info code {
+    background: #f1f5f9;
+    padding: 0.15rem 0.35rem;
+    border-radius: 3px;
+    color: #0f172a;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.8rem;
+}
+
+.connection-info pre {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 0.5rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin-top: 0.25rem;
+    margin-bottom: 0;
+}
+
+.connection-info pre code {
+    background: transparent;
+    color: #e2e8f0;
+    padding: 0;
+    font-size: 0.75rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .generator-form {
+        padding: 0.875rem;
+    }
+
+    .param-group {
+        padding: 0.75rem;
+    }
+
+    .generate-btn {
+        padding: 0.75rem 2rem;
+        font-size: 0.95rem;
+        width: 100%;
+    }
+
+    .command-output pre {
+        font-size: 0.75rem;
+    }
+
+    .param-label {
+        font-size: 0.85rem;
+        flex-wrap: wrap;
+    }
+
+    .required-badge,
+    .optional-badge {
+        margin-left: 0;
+        margin-top: 0.25rem;
+    }
+
+    .content-body {
+        padding: 1rem !important;
+    }
+}
